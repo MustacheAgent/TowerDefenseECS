@@ -16,11 +16,13 @@ namespace Assets.Scripts.Factories
         public void Spawn(SpawnPrefabComponent spawnData)
         {
             GameObject gameObject = Instantiate(spawnData.Prefab, spawnData.Position, spawnData.Rotation, spawnData.Parent);
+            /*
             var monoEntity = gameObject.GetComponent<MonoEntity>();
             if (monoEntity == null)
                 return;
             EcsEntity ecsEntity = _world.NewEntity();
             monoEntity.Make(ref ecsEntity);
+            */
         }
     }
 }
