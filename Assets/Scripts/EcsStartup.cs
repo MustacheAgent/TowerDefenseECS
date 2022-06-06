@@ -9,7 +9,6 @@ namespace Assets.Scripts
     {
         EcsWorld _world;
         EcsSystems _systems;
-        SceneData _sceneData;
 
         void Start () 
         {
@@ -44,7 +43,7 @@ namespace Assets.Scripts
         {
             _systems
                 .Add(new KeyInputSystem())
-                .Add(new SpawnSystem());
+                .Add(new MoveSystem());
         }
 
         void AddOneFrames()
@@ -54,8 +53,7 @@ namespace Assets.Scripts
 
         void AddInjects()
         {
-            _systems
-                .Inject(_sceneData);
+            //_systems.Inject(_sceneData);
         }
 
         void Update () 

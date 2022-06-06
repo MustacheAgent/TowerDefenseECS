@@ -1,15 +1,10 @@
 ﻿using Assets.Scripts.Components;
 using Assets.Scripts.Factories;
 using Leopotam.Ecs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assets.Scripts.Systems
 {
-	public class SpawnSystem : IEcsPreInitSystem, IEcsRunSystem
+    public class SpawnSystem : IEcsPreInitSystem, IEcsRunSystem
 	{
 		private EcsWorld _world;
 		private SceneData _sceneData;

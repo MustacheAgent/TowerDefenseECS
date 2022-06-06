@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Components
 {
+    [Serializable]
     public struct SpawnPrefabComponent
     {
         public GameObject Prefab;

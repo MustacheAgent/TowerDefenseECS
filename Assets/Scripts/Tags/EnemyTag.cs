@@ -1,7 +1,4 @@
 ﻿namespace Assets.Scripts.Tags
 {
-    public struct EnemyTag
-    {
-
-    }
+    public struct EnemyTag { }
 }
