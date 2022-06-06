@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Components;
+﻿using Components;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Assets.Scripts.Factories
+namespace Factories
 {
     public class PrefabFactory : MonoBehaviour
     {

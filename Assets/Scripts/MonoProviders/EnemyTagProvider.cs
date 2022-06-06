@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Tags;
+﻿using Tags;
 using Voody.UniLeo;
 
 namespace Assets.Scripts.MonoProviders

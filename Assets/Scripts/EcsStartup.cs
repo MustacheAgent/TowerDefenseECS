@@ -1,5 +1,5 @@
-using Assets.Scripts.Systems;
 using Leopotam.Ecs;
+using Systems;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -53,7 +53,7 @@ namespace Assets.Scripts
 
         void AddInjects()
         {
-            //_systems.Inject(_sceneData);
+            
         }
 
         void Update () 

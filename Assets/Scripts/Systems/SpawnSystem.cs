@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Components;
-using Assets.Scripts.Factories;
+﻿using Components;
+using Factories;
 using Leopotam.Ecs;
 
-namespace Assets.Scripts.Systems
+namespace Systems
 {
     public class SpawnSystem : IEcsPreInitSystem, IEcsRunSystem
 	{

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Factories
+namespace Factories
 {
 	public abstract class GameObjectFactory : ScriptableObject
 	{

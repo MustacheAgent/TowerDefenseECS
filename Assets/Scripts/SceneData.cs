@@ -1,10 +1,7 @@
-﻿using Assets.Scripts.Factories;
+﻿using Factories;
 using UnityEngine;
 
-namespace Assets.Scripts
+public class SceneData : MonoBehaviour
 {
-    public class SceneData : MonoBehaviour
-	{
-		public PrefabFactory Factory;
-	}
+	public PrefabFactory Factory;
 }

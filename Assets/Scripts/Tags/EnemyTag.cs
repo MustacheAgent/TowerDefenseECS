@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.Tags
+﻿using Leopotam.Ecs;
+
+namespace Tags
 {
-    public struct EnemyTag { }
+    public struct EnemyTag : IEcsIgnoreInFilter { }
 }

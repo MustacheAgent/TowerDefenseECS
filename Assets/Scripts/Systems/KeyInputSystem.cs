@@ -1,7 +1,7 @@
 ﻿using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Assets.Scripts.Systems
+namespace Systems
 {
     public class KeyInputSystem : IEcsRunSystem
     {
