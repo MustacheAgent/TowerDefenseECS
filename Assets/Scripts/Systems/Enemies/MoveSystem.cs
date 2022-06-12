@@ -3,13 +3,12 @@ using Leopotam.Ecs;
 using Tags;
 using UnityEngine;
 
-namespace Systems
+namespace Systems.Enemies
 {
     sealed class MoveSystem : IEcsRunSystem 
     {
-        readonly EcsWorld _world = null;
-        EcsFilter<PositionComponent, MoveComponent> filter = null;
-        EcsFilter<PositionComponent, DestinationTag> tileFilter = null;
+        readonly EcsFilter<PositionComponent, MoveComponent> filter = null;
+        readonly EcsFilter<PositionComponent, DestinationTag> tileFilter = null;
         
         void IEcsRunSystem.Run() 
         {

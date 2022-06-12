@@ -1,5 +1,6 @@
 using Leopotam.Ecs;
 using Systems;
+using Systems.Enemies;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -42,7 +43,7 @@ namespace Assets.Scripts
         void AddSystems()
         {
             _systems
-                .Add(new KeyInputSystem())
+                .Add(new PlayerInputSystem())
                 .Add(new MoveSystem());
         }
 
