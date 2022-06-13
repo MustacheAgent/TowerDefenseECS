@@ -1,6 +1,5 @@
 using Leopotam.Ecs;
-using Systems;
-using Systems.Enemies;
+using Systems.Core;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -10,6 +9,9 @@ namespace Assets.Scripts
     {
         EcsWorld _world;
         EcsSystems _systems;
+
+        [SerializeField]
+        PlayerInputData _inputData;
 
         void Start () 
         {
@@ -44,6 +46,7 @@ namespace Assets.Scripts
         {
             _systems
                 .Add(new PlayerInputSystem())
+                .Add(new CameraMoveSystem())
                 .Add(new MoveSystem());
         }
 
@@ -54,7 +57,8 @@ namespace Assets.Scripts
 
         void AddInjects()
         {
-            
+            _systems.Inject(
+                _inputData);
         }
 
         void Update () 

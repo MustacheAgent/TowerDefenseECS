@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Components
+namespace Components.Core
 {
     [Serializable]
     public struct MoveComponent

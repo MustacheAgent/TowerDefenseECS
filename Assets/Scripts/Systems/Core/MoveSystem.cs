@@ -1,9 +1,9 @@
-using Components;
+using Components.Core;
 using Leopotam.Ecs;
 using Tags;
 using UnityEngine;
 
-namespace Systems.Enemies
+namespace Systems.Core
 {
     sealed class MoveSystem : IEcsRunSystem 
     {
@@ -18,9 +18,9 @@ namespace Systems.Enemies
 
                 ref float speed = ref moveComponent.speed;
                 ref CharacterController controller = ref moveComponent.rigidbody;
-                ref Transform position = ref filter.Get1(i).position;
+                ref Transform position = ref filter.Get1(i).transform;
 
-                ref Transform destination = ref tileFilter.Get1(0).position;
+                ref Transform destination = ref tileFilter.Get1(0).transform;
 
                 Vector3 newPosition = (destination.position - position.position).normalized;
 

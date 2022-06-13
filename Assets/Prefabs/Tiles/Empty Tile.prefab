@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    position: {fileID: 7097298275353876816}
+    transform: {fileID: 7097298275353876816}
 --- !u!1 &8349107345962099737
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Components
+namespace Components.Core
 {
     [Serializable]
     public struct PositionComponent
     {
-        public Transform position;
+        public Transform transform;
     }
 }

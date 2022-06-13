@@ -1,4 +1,4 @@
-﻿using Components;
+﻿using Components.Core;
 using Voody.UniLeo;
 
 namespace MonoProviders
