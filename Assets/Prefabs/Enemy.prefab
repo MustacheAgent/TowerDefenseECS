@@ -102,9 +102,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5411813181797047382}
-  - component: {fileID: 1269473555781648584}
+  - component: {fileID: 3587559704260982641}
   - component: {fileID: 5252817248551855861}
-  - component: {fileID: 3897302951033346960}
   - component: {fileID: 639592491922986711}
   - component: {fileID: 7880763451424223848}
   m_Layer: 0
@@ -129,24 +128,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &1269473555781648584
-CharacterController:
+--- !u!54 &3587559704260982641
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8528946641360309052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &5252817248551855861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,18 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   convertMode: 0
---- !u!114 &3897302951033346960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8528946641360309052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035290390257f334db724159e45355f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &639592491922986711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,5 +184,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    rigidbody: {fileID: 1269473555781648584}
+    rigidbody: {fileID: 3587559704260982641}
     speed: 3

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerInputData
   m_EditorClassIdentifier: 
   keyInput: {x: 0, y: 0, z: 0}
-  mousePosition: {x: 0, y: 0, z: 0}
+  mousePosition: {x: 591, y: 638, z: 0}

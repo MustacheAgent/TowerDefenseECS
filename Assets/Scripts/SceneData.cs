@@ -1,7 +1,6 @@
-﻿using Factories;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SceneData : MonoBehaviour
+public class SceneData : ScriptableObject
 {
-	public PrefabFactory Factory;
+	
 }

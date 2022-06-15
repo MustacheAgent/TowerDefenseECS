@@ -1,7 +1,7 @@
 ﻿using Tags;
 using Voody.UniLeo;
 
-namespace MonoProviders
+namespace MonoProviders.Tags
 {
     public class SpawnTagProvider : MonoProvider<SpawnTag> { }
 }

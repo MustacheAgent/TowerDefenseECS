@@ -6,7 +6,7 @@ namespace Components.Core
     [Serializable]
     public struct MoveComponent
     {
-        public CharacterController rigidbody;
+        public Rigidbody rigidbody;
         public float speed;
     }
 }

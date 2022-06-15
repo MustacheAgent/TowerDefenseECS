@@ -9,6 +9,7 @@ namespace Assets.Scripts
     {
         EcsWorld _world;
         EcsSystems _systems;
+        EcsSystems _fixedSystems;
 
         [SerializeField]
         PlayerInputData _inputData;
@@ -17,18 +18,32 @@ namespace Assets.Scripts
         {
             _world = new EcsWorld();
             _systems = new EcsSystems(_world);
+            _fixedSystems = new EcsSystems(_world);
             _systems.ConvertScene();
+            _fixedSystems.ConvertScene();
 
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
 #endif
+            _systems
+                .Add(new PlayerInputSystem())
+                .Add(new CameraMoveSystem())
+                //.Add(new MoveSystem())
+                ;
 
-            AddSystems();
-            AddOneFrames();
-            AddInjects();
+            _systems.Inject(
+                _inputData);
+
+            _fixedSystems
+                .Add(new MoveSystem())
+                ;
 
             _systems.Init();
+            _fixedSystems.Init();
+
+
+
             // register your systems here, for example:
             // .Add (new TestSystem1 ())
             // .Add (new TestSystem2 ())
@@ -42,28 +57,14 @@ namespace Assets.Scripts
             // .Inject (new NavMeshSupport ())
         }
 
-        void AddSystems()
-        {
-            _systems
-                .Add(new PlayerInputSystem())
-                .Add(new CameraMoveSystem())
-                .Add(new MoveSystem());
-        }
-
-        void AddOneFrames()
-        {
-
-        }
-
-        void AddInjects()
-        {
-            _systems.Inject(
-                _inputData);
-        }
-
         void Update () 
         {
             _systems?.Run();
+        }
+
+        private void FixedUpdate()
+        {
+            _fixedSystems?.Run();
         }
 
         void OnDestroy () 

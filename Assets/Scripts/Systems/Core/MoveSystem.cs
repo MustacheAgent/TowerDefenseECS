@@ -14,22 +14,17 @@ namespace Systems.Core
         {
             foreach (var i in filter)
             {
+                ref Transform position = ref filter.Get1(i).transform;
                 ref MoveComponent moveComponent = ref filter.Get2(i);
 
                 ref float speed = ref moveComponent.speed;
-                ref CharacterController controller = ref moveComponent.rigidbody;
-                ref Transform position = ref filter.Get1(i).transform;
+                ref Rigidbody rigidbody = ref moveComponent.rigidbody;
 
                 ref Transform destination = ref tileFilter.Get1(0).transform;
 
-                Vector3 newPosition = (destination.position - position.position).normalized;
+                Vector3 newPosition = (destination.position - position.position);
 
-                if (newPosition != Vector3.zero)
-                {
-                    Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
-                    controller.transform.rotation = Quaternion.RotateTowards(controller.transform.rotation, toRotation, 720 * Time.deltaTime);
-                }
-                controller.Move(speed * Time.deltaTime * newPosition);
+                rigidbody.MovePosition(speed * Time.fixedDeltaTime * Vector3.forward.normalized);
             }
         }
     }
