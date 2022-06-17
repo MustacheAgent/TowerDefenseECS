@@ -13,6 +13,10 @@ namespace Assets.Scripts
 
         [SerializeField]
         PlayerInputData _inputData;
+        [SerializeField]
+        SceneData _sceneData;
+        [SerializeField]
+        StaticData _staticData;
 
         void Start () 
         {
@@ -29,15 +33,15 @@ namespace Assets.Scripts
             _systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
-                //.Add(new MoveSystem())
-                ;
-
-            _systems.Inject(
-                _inputData);
-
-            _fixedSystems
+                .Add(new SpawnSystem())
+                .Add(new EnemySpawnSystem())
                 .Add(new MoveSystem())
                 ;
+
+            _systems
+                .Inject(_inputData)
+                .Inject(_sceneData)
+                .Inject(_staticData);
 
             _systems.Init();
             _fixedSystems.Init();

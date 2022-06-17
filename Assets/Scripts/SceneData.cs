@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using Factories;
+using System;
+using UnityEngine;
 
-public class SceneData : ScriptableObject
+[Serializable]
+public class SceneData : MonoBehaviour
 {
-	
+	public EnemyFactory enemyFactory;
 }

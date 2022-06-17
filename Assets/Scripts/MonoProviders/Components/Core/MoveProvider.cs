@@ -1,7 +1,7 @@
 ﻿using Components.Core;
 using Voody.UniLeo;
 
-namespace MonoProviders
+namespace MonoProviders.Components.Core
 {
     public class MoveProvider : MonoProvider<MoveComponent> { }
 }

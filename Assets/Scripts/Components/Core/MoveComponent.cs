@@ -7,6 +7,7 @@ namespace Components.Core
     public struct MoveComponent
     {
         public Rigidbody rigidbody;
+        public CharacterController controller;
         public float speed;
     }
 }

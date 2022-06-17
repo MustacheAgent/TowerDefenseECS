@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Scriptable Objects/Player Input")]
 public class PlayerInputData : ScriptableObject
 {
     public Vector3 keyInput;

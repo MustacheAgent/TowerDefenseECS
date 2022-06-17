@@ -9,8 +9,8 @@ namespace Systems.Core
     {
         readonly EcsFilter<PositionComponent, MoveComponent> filter = null;
         readonly EcsFilter<PositionComponent, DestinationTag> tileFilter = null;
-        
-        void IEcsRunSystem.Run() 
+
+        void IEcsRunSystem.Run()
         {
             foreach (var i in filter)
             {
@@ -18,13 +18,18 @@ namespace Systems.Core
                 ref MoveComponent moveComponent = ref filter.Get2(i);
 
                 ref float speed = ref moveComponent.speed;
+                ref CharacterController controller = ref moveComponent.controller;
                 ref Rigidbody rigidbody = ref moveComponent.rigidbody;
 
                 ref Transform destination = ref tileFilter.Get1(0).transform;
 
-                Vector3 newPosition = (destination.position - position.position);
+                Vector3 newPosition = (destination.position - position.position).normalized;
 
-                rigidbody.MovePosition(speed * Time.fixedDeltaTime * Vector3.forward.normalized);
+                if (newPosition != Vector3.zero)
+                {
+                    controller.Move(speed * Time.deltaTime * newPosition);
+                    //rigidbody.velocity = speed * Time.deltaTime * destination.position;
+                }
             }
         }
     }
