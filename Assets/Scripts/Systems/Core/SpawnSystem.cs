@@ -6,7 +6,7 @@ namespace Systems.Core
 {
     public class SpawnSystem : IEcsPreInitSystem, IEcsRunSystem
     {
-		private SceneData _sceneData;
+		private readonly SceneData _sceneData;
 
 		private EcsFilter<SpawnPrefabComponent> _spawnFilter = null;
 

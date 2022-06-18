@@ -16,7 +16,7 @@ namespace Systems.Core
         private float _spawnDelay;
         private float _lastTime;
 
-        readonly EcsFilter<PositionComponent, SpawnTag> tileFilter = null;
+        readonly EcsFilter<PositionComponent, SpawnTag>.Exclude<DestinationTag> tileFilter = null;
 
         public void Init()
         {

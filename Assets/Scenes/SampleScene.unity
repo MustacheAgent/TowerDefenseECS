@@ -10338,8 +10338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8781dd3148173f940a74293a6f2be939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value:
-    cameraSpeed: 10
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10364,7 +10362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb99022154c4102499f815cc98d311fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {transform: {fileID: 963194228}}
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0

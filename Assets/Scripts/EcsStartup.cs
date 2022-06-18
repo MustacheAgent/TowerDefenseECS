@@ -9,7 +9,6 @@ namespace Assets.Scripts
     {
         EcsWorld _world;
         EcsSystems _systems;
-        EcsSystems _fixedSystems;
 
         [SerializeField]
         PlayerInputData _inputData;
@@ -22,9 +21,7 @@ namespace Assets.Scripts
         {
             _world = new EcsWorld();
             _systems = new EcsSystems(_world);
-            _fixedSystems = new EcsSystems(_world);
             _systems.ConvertScene();
-            _fixedSystems.ConvertScene();
 
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
@@ -44,7 +41,6 @@ namespace Assets.Scripts
                 .Inject(_staticData);
 
             _systems.Init();
-            _fixedSystems.Init();
 
 
 
@@ -64,11 +60,6 @@ namespace Assets.Scripts
         void Update () 
         {
             _systems?.Run();
-        }
-
-        private void FixedUpdate()
-        {
-            _fixedSystems?.Run();
         }
 
         void OnDestroy () 
