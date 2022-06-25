@@ -8,6 +8,7 @@ namespace Components
     {
         public int hCost;
         public int gCost;
+        public bool isWalkable;
 
         public int fCost { get { return hCost + gCost; } }
     }
