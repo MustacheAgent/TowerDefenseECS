@@ -10,5 +10,7 @@ namespace Components
         public int gCost;
 
         public int fCost { get { return hCost + gCost; } }
+
+        public bool IsWalkable { get; set; }
     }
 }

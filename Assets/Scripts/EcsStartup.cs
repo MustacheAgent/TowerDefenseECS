@@ -17,7 +17,7 @@ namespace Assets.Scripts
         [SerializeField]
         StaticData _staticData;
 
-        void Start () 
+        void Start()
         {
             _world = new EcsWorld();
             _systems = new EcsSystems(_world);
@@ -31,7 +31,8 @@ namespace Assets.Scripts
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
                 .Add(new SpawnSystem())
-                .Add(new EnemySpawnSystem())
+                //.Add(new EnemySpawnSystem())
+                .Add(new PathfindingSystem())
                 .Add(new MoveSystem())
                 ;
 

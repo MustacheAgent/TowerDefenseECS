@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace Systems.Core
 {
-    sealed class MoveSystem : IEcsRunSystem 
+    public class MoveSystem : IEcsRunSystem 
     {
         readonly EcsFilter<PositionComponent, MoveComponent> filter = null;
         readonly EcsFilter<PositionComponent, DestinationTag> tileFilter = null;
 
-        void IEcsRunSystem.Run()
+        public void Run()
         {
             foreach (var i in filter)
             {
