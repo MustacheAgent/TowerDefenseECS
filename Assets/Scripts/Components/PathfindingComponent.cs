@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Components
 {
@@ -12,5 +11,7 @@ namespace Components
         public int fCost { get { return hCost + gCost; } }
 
         public bool IsWalkable { get; set; }
+
+        public bool IsProcessed { get; set; }
     }
 }

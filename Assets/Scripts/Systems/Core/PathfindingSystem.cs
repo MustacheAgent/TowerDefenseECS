@@ -9,8 +9,22 @@ namespace Systems.Core
     {
         readonly EcsFilter<PositionComponent, EmptyTileTag, SpawnTag, DestinationTag> filter = null;
         private SceneData _sceneData;
+        EcsEntity[] entity;
 
         public void Init()
+        {
+            SetGridSize();
+        }
+
+        public void Run()
+        {
+
+        }
+
+        /// <summary>
+        /// Вычисляет размер сетки игрового поля.
+        /// </summary>
+        private void SetGridSize()
         {
             int gridSizeZ = 1;
             int gridSizeX = 1;
@@ -19,6 +33,7 @@ namespace Systems.Core
             // получение размера сетки по Z
             while (true)
             {
+                // TODO: возможно надо увеличить расстояние луча (ведь клетки не всегда будут стоят вплотную)
                 if (Physics.Raycast(raycastPos, Vector3.forward, out RaycastHit ray, 1))
                 {
                     raycastPos = ray.collider.transform.position;
@@ -46,11 +61,6 @@ namespace Systems.Core
 
             _sceneData.gridSizeX = gridSizeX;
             _sceneData.gridSizeZ = gridSizeZ;
-        }
-
-        public void Run()
-        {
-
         }
     }
 }
