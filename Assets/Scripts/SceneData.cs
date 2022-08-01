@@ -1,4 +1,5 @@
 ﻿using Factories;
+using Leopotam.Ecs;
 using System;
 using UnityEngine;
 
@@ -11,4 +12,6 @@ public class SceneData : MonoBehaviour
     // параметры сетки
     public int gridSizeX;
     public int gridSizeZ;
+
+    public EcsEntity[,] tiles;
 }

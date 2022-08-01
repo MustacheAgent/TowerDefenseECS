@@ -1,6 +1,7 @@
 ﻿using Components.Core;
 using Leopotam.Ecs;
 using Tags;
+using Unity.Collections;
 using UnityEngine;
 
 namespace Systems.Core
@@ -12,6 +13,19 @@ namespace Systems.Core
 
         public void Init()
         {
+            SetGridSize();
+        }
+
+        public void Run()
+        {
+
+        }
+
+        /// <summary>
+        /// Вычисляет размер сетки игрового поля.
+        /// </summary>
+        private void SetGridSize()
+        {
             int gridSizeZ = 1;
             int gridSizeX = 1;
             Vector3 raycastPos = _sceneData.worldBottomLeft.transform.position;
@@ -19,6 +33,7 @@ namespace Systems.Core
             // получение размера сетки по Z
             while (true)
             {
+                // TODO: возможно надо увеличить расстояние луча (ведь клетки не всегда будут стоят вплотную)
                 if (Physics.Raycast(raycastPos, Vector3.forward, out RaycastHit ray, 1))
                 {
                     raycastPos = ray.collider.transform.position;
@@ -46,11 +61,6 @@ namespace Systems.Core
 
             _sceneData.gridSizeX = gridSizeX;
             _sceneData.gridSizeZ = gridSizeZ;
-        }
-
-        public void Run()
-        {
-
         }
     }
 }
