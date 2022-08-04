@@ -10,6 +10,7 @@ namespace Systems.Core
     {
         readonly EcsFilter<PositionComponent, EmptyTileTag, SpawnTag, DestinationTag> filter = null;
         private SceneData _sceneData;
+        EcsEntity[] entity;
 
         public void Init()
         {
