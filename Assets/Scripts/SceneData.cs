@@ -1,6 +1,7 @@
 ﻿using Factories;
 using Leopotam.Ecs;
 using System;
+using Unity.Collections;
 using UnityEngine;
 
 [Serializable]

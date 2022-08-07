@@ -5,61 +5,34 @@ using Leopotam.Ecs;
 using Tags;
 using Unity.Collections;
 using UnityEngine;
+using Unity.Mathematics;
 
 namespace Systems.Core
 {
     public class PathfindingSystem : IEcsInitSystem, IEcsRunSystem
     {
-        readonly EcsFilter<PositionComponent, EmptyTileTag> filter = null;
+        readonly EcsFilter<PositionComponent, FindPathTag> filter = null;
         private SceneData _sceneData;
-        
+        private EcsEntity[,] tiles;
+
+        private const int MOVE_STRAIGHT_COST = 10;
+        private const int MOVE_DIAGONAL_COST = 14;
+
         public void Init()
         {
             SetGridSize();
-            EcsEntity entity;
-            RaycastHit hit;
-            Vector3 first;
-            Vector3 boxCastPos = first = _sceneData.worldBottomLeft.transform.position;
-            GameObject obj = _sceneData.worldBottomLeft;
-            
-            for (int x = 0; x < _sceneData.gridSizeX; x++)
-            {
-                entity = obj.GetEntity();
-                ref var path = ref entity.Get<PathfindingComponent>();
-                path.x = x;
-                path.z = 0;
-                path.index = CalculateIndex(x, 0, _sceneData.gridSizeX);
-                path.IsWalkable = true;
-
-                ref var position = ref entity.Get<PositionComponent>();
-                boxCastPos = first = position.transform.position;
-
-                for (int z = 1; z < _sceneData.gridSizeZ; z++)
-                {
-                    if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 500), Vector3.forward, out hit,
-                        _sceneData.worldBottomLeft.transform.rotation))
-                    {   
-                        entity = hit.transform.gameObject.GetEntity();
-                        path = ref entity.Get<PathfindingComponent>();
-                        path.x = x;
-                        path.z = z;
-                        path.index = CalculateIndex(x, z, _sceneData.gridSizeX);
-                        path.IsWalkable = true;
-
-                        position = ref entity.Get<PositionComponent>();
-                        boxCastPos = position.transform.position;
-                    }
-                }
-
-                if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 500), Vector3.right, out hit,
-                        _sceneData.worldBottomLeft.transform.rotation))
-                {
-                    obj = hit.transform.gameObject;
-                }
-            }
+            SetInitialState();
         }        
 
         public void Run()
+        {
+            foreach(var i in filter)
+            {
+
+            }
+        }
+
+        private void FindPath(Vector3 start, Vector3 end)
         {
 
         }
@@ -106,9 +79,71 @@ namespace Systems.Core
             _sceneData.gridSizeZ = gridSizeZ;
         }
 
+        private void SetInitialState()
+        {
+            EcsEntity entity;
+            RaycastHit hit;
+            Vector3 first;
+            Vector3 boxCastPos = first = _sceneData.worldBottomLeft.transform.position;
+            GameObject obj = _sceneData.worldBottomLeft;
+
+            tiles = new EcsEntity[_sceneData.gridSizeX, _sceneData.gridSizeZ];
+
+            for (int x = 0; x < _sceneData.gridSizeX; x++)
+            {
+                entity = obj.GetEntity();
+                ref var path = ref entity.Get<PathfindingComponent>();
+                path.x = x;
+                path.z = 0;
+                path.index = CalculateIndex(x, 0, _sceneData.gridSizeX);
+                path.IsWalkable = true;
+
+                ref var position = ref entity.Get<PositionComponent>();
+                boxCastPos = first = position.transform.position;
+
+                tiles[x, 0] = entity;
+
+                for (int z = 1; z < _sceneData.gridSizeZ; z++)
+                {
+                    if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 500), Vector3.forward, out hit,
+                        _sceneData.worldBottomLeft.transform.rotation))
+                    {
+                        entity = hit.transform.gameObject.GetEntity();
+                        path = ref entity.Get<PathfindingComponent>();
+                        path.x = x;
+                        path.z = z;
+                        path.index = CalculateIndex(x, z, _sceneData.gridSizeX);
+                        path.IsWalkable = true;
+                        path.cameFromIndex = -1;
+
+                        tiles[x, z] = entity;
+
+                        position = ref entity.Get<PositionComponent>();
+                        boxCastPos = position.transform.position;
+                    }
+                }
+
+                if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 500), Vector3.right, out hit,
+                        _sceneData.worldBottomLeft.transform.rotation))
+                {
+                    obj = hit.transform.gameObject;
+                }
+            }
+
+            _sceneData.tiles = tiles;
+        }
+
         private int CalculateIndex(int x, int y, int width)
         {
             return x + y * width;
+        }
+
+        private int CalculateDistanceCost(int2 aPos, int2 bPos)
+        {
+            int xDistance = math.abs(aPos.x - bPos.x);
+            int zDistance = math.abs(aPos.y - bPos.y);
+            int remaining = math.abs(xDistance - zDistance);
+            return MOVE_DIAGONAL_COST * math.min(xDistance, zDistance) + MOVE_STRAIGHT_COST * remaining;
         }
     }
 }
