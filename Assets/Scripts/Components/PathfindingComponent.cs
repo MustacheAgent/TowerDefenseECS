@@ -6,9 +6,10 @@ namespace Components
     public struct PathfindingComponent
     {
         public int x;
-        public int y;
+        public int z;
 
         public int index;
+        public int cameFromIndex;
 
         public int hCost;
         public int gCost;
@@ -16,7 +17,5 @@ namespace Components
         public int fCost { get { return hCost + gCost; } }
 
         public bool IsWalkable { get; set; }
-
-        public bool IsProcessed { get; set; }
     }
 }

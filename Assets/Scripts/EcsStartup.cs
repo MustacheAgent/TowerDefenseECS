@@ -27,10 +27,12 @@ namespace Assets.Scripts
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
 #endif
+            //_systems.OneFrame<>
             _systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
                 .Add(new SpawnSystem())
+                .Add(new ClickSystem())
                 //.Add(new EnemySpawnSystem())
                 .Add(new PathfindingSystem())
                 .Add(new MoveSystem())

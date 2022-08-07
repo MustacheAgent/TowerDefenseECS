@@ -1,7 +1,7 @@
 ﻿using Components.Core;
 using Voody.UniLeo;
 
-namespace MonoProviders.Components.Core
+namespace Components.Core
 {
     public class PositionProvider : MonoProvider<PositionComponent> { }
 }

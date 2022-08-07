@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657862, g: 0.49641532, b: 0.57481533, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641526, b: 0.5748154, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4284,6 +4284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyFactory: {fileID: 11400000, guid: 9f981445ac94b264782b089e96188b3c, type: 2}
   worldBottomLeft: {fileID: 1283012030}
+  gridSizeX: 0
+  gridSizeZ: 0
 --- !u!4 &455675496
 Transform:
   m_ObjectHideFlags: 0
@@ -20696,7 +20698,7 @@ PrefabInstance:
     - target: {fileID: 1570918714281050742, guid: 49ec1eb6b606aa546a0e56b83c243271,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.75
+      value: 16.14
       objectReference: {fileID: 0}
     - target: {fileID: 1570918714281050742, guid: 49ec1eb6b606aa546a0e56b83c243271,
         type: 3}
@@ -20760,7 +20762,7 @@ PrefabInstance:
     - target: {fileID: 17451043323130492, guid: 697206b6f2ee8ac479833571aa8ca4d3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25221068
+      value: -1.42
       objectReference: {fileID: 0}
     - target: {fileID: 17451043323130492, guid: 697206b6f2ee8ac479833571aa8ca4d3,
         type: 3}
