@@ -1,3 +1,4 @@
+using Components;
 using Components.Core;
 using Leopotam.Ecs;
 using Tags;
@@ -7,21 +8,21 @@ namespace Systems.Core
 {
     public class MoveSystem : IEcsRunSystem 
     {
-        readonly EcsFilter<PositionComponent, MoveComponent> filter = null;
-        readonly EcsFilter<PositionComponent, DestinationTag> tileFilter = null;
+        readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> enemyFilter = null;
+        readonly EcsFilter<PositionComponent, DestinationTag> destFilter = null;
+        SceneData _sceneData;
 
         public void Run()
         {
-            foreach (var i in filter)
+            foreach (var i in enemyFilter)
             {
-                ref Transform position = ref filter.Get1(i).transform;
-                ref MoveComponent moveComponent = ref filter.Get2(i);
+                ref Transform position = ref enemyFilter.Get1(i).transform;
+                ref MoveComponent moveComponent = ref enemyFilter.Get2(i);
 
                 ref float speed = ref moveComponent.speed;
                 ref CharacterController controller = ref moveComponent.controller;
-                ref Rigidbody rigidbody = ref moveComponent.rigidbody;
 
-                ref Transform destination = ref tileFilter.Get1(0).transform;
+                ref Transform destination = ref destFilter.Get1(0).transform;
 
                 Vector3 newPosition = (destination.position - position.position).normalized;
 

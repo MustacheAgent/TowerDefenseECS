@@ -14,5 +14,5 @@ public class SceneData : MonoBehaviour
     public int gridSizeX;
     public int gridSizeZ;
 
-    public EcsEntity[,] tiles;
+    public EcsEntity[] tiles;
 }

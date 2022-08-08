@@ -1,12 +1,12 @@
 using System;
+using Unity.Mathematics;
 
 namespace Components
 {
     [Serializable]
     public struct PathfindingComponent
     {
-        public int x;
-        public int z;
+        public int2 position;
 
         public int index;
         public int cameFromIndex;

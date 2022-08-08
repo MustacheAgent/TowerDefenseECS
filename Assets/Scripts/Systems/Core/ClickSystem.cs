@@ -37,28 +37,25 @@ namespace Systems.Core
 
                     ref var path = ref entity.Get<PathfindingComponent>();
 
-                    Debug.Log("Got entity from world. X: " + path.x);
-                    path.x = 1350;
+                    //Debug.Log("Got entity from world. X: " + path.x);
 
-                    ref var pathf = ref _sceneData.tiles[0,0].Get<PathfindingComponent>();
-                    Debug.Log("Got entity from cache. X: " + pathf.x);
-                    //int2 node = NodeFromPoint(gameObject.transform.position);
-                    //Debug.Log("Got entity. X: " + node.x + " Z : " + node.y);
+                    int node = NodeFromPoint(hit.point);
+
+                    //Debug.Log("Got entity from world. X: " + _sceneData.tiles[node].Get<PathfindingComponent>().x + "\n" + "Index: " + node);
                 }
             }
         }
 
-        private int2 NodeFromPoint(Vector3 point)
+        private int NodeFromPoint(Vector3 point)
         {
-            float percentX = (point.x + _sceneData.gridSizeX / 4f) / _sceneData.gridSizeX;
-            float percentZ = (point.z + _sceneData.gridSizeZ / 4f) / _sceneData.gridSizeZ;
-
-            percentX = Mathf.Clamp01(percentX);
-            percentZ = Mathf.Clamp01(percentZ);
-
-            int x = Mathf.RoundToInt((_sceneData.gridSizeX - 1) * percentX);
-            int z = Mathf.RoundToInt((_sceneData.gridSizeZ - 1) * percentZ);
-            return new int2(x, z);
+            int x = Mathf.RoundToInt(point.x);
+            int y = Mathf.RoundToInt(point.z);
+            Debug.Log("Point: " + point + "\n" + "Got indexes. X: " + x + " Z: " + y);
+            if (x >= 0 && x < _sceneData.gridSizeX && y >= 0 && y < _sceneData.gridSizeZ)
+            {
+                return x + y * _sceneData.gridSizeX;
+            }
+            return -1;
         }
     }
 }

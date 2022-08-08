@@ -3,5 +3,5 @@ using Voody.UniLeo;
 
 namespace MonoProviders.Components
 {
-    public class PathfindingProvider : MonoProvider<PathfindingComponent> { }
+    public class PathProvider : MonoProvider<PathComponent> { }
 }
