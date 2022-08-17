@@ -3,6 +3,7 @@ using Leopotam.Ecs;
 using Systems.Core;
 using Systems.Enemy;
 using Systems.Factory;
+using Systems.Towers;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -35,14 +36,15 @@ namespace Assets.Scripts
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
 
-                .Add(new SpawnSystem())
                 .Add(new EnemySpawnSystem())
+                .Add(new SpawnSystem())
                 .Add(new EnemyDestroySystem())
                 .Add(new DestroySystem())
 
                 .Add(new PathfindingSystem())
-                .Add(new EnemyMoveSystem())
+                //.Add(new EnemyMoveSystem())
                 .Add(new ClickSystem())
+                .Add(new BuildTowerSystem())
                 ;
 
             _systems

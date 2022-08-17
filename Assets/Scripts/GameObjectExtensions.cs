@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using Voody.UniLeo;
 
-namespace Assets.Scripts
+namespace Scripts
 {
     public static class GameObjectExtensions
     {

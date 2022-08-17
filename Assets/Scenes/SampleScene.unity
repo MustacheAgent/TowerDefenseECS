@@ -3970,7 +3970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14198594d8ff224459deaef5c8e1f716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFactory: {fileID: 11400000, guid: 9f981445ac94b264782b089e96188b3c, type: 2}
+  factory: {fileID: 11400000, guid: da0bd480fe3d91542a0212aa12e3855c, type: 2}
   worldBottomLeft: {fileID: 1283012030}
   gridSizeX: 0
   gridSizeZ: 0

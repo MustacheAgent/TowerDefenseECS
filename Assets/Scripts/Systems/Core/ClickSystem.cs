@@ -1,10 +1,7 @@
-﻿using Components;
-using Leopotam.Ecs;
-using System;
+﻿using Leopotam.Ecs;
+using Scripts;
 using Tags;
-using Unity.Mathematics;
 using UnityEngine;
-using Voody.UniLeo;
 
 namespace Systems.Core
 {
@@ -29,7 +26,8 @@ namespace Systems.Core
                 if(Physics.Raycast(ray, out RaycastHit hit))
                 {
                     var gameObject = hit.transform.gameObject;
-
+                    var entity = gameObject.GetEntity();
+                    //Debug.Log("Clicked");
                 }
             }
         }

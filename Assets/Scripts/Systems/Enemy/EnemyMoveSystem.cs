@@ -31,7 +31,6 @@ namespace Systems.Enemy
                 }
                 else
                 {
-                    Debug.Log("Time to die!");
                     enemyFilter.GetEntity(i).Get<DestroyEvent>();
                 }
             }
