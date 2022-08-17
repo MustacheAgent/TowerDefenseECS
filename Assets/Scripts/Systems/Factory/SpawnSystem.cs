@@ -1,8 +1,8 @@
-﻿using Components;
+﻿using Components.Factory;
 using Factories;
 using Leopotam.Ecs;
 
-namespace Systems.Core
+namespace Systems.Factory
 {
     public class SpawnSystem : IEcsPreInitSystem, IEcsRunSystem
     {
@@ -10,11 +10,11 @@ namespace Systems.Core
 
 		private EcsFilter<SpawnPrefabComponent> _spawnFilter = null;
 
-		private EnemyFactory _factory;
+		private GameObjectFactory _factory;
 
 		public void PreInit()
 		{
-			_factory = _sceneData.enemyFactory;
+			_factory = _sceneData.factory;
 		}
 
 		public void Run()

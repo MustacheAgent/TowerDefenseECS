@@ -1,32 +1,19 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using Components.Factory;
+using UnityEngine;
 
 namespace Factories
 {
-	public class GameObjectFactory : ScriptableObject
-	{
-		Scene scene;
+    [CreateAssetMenu(menuName = "Factories/Game Object Factory")]
+    public class GameObjectFactory : ScriptableObject
+    {
+        public void Spawn(SpawnPrefabComponent spawnInfo)
+        {
+            Instantiate(spawnInfo.Prefab, spawnInfo.Position, spawnInfo.Rotation, spawnInfo.Parent);
+        }
 
-		protected T CreateGameObjectInstance<T>(T prefab) where T : MonoBehaviour
-		{
-			if (!scene.isLoaded)
-			{
-				if (Application.isEditor)
-				{
-					scene = SceneManager.GetSceneByName(name);
-					if (!scene.isLoaded)
-					{
-						scene = SceneManager.CreateScene(name);
-					}
-				}
-				else
-				{
-					scene = SceneManager.CreateScene(name);
-				}
-			}
-			T instance = Instantiate(prefab);
-			SceneManager.MoveGameObjectToScene(instance.gameObject, scene);
-			return instance;
-		}
-	}
+        public void Reclaim(DestroyPrefabComponent destroyInfo)
+        {
+            Destroy(destroyInfo.gameObject);
+        }
+    }
 }

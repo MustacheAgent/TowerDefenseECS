@@ -1,5 +1,8 @@
+using Events.Enemies;
 using Leopotam.Ecs;
 using Systems.Core;
+using Systems.Enemy;
+using Systems.Factory;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -31,11 +34,15 @@ namespace Assets.Scripts
             _systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
+
                 .Add(new SpawnSystem())
-                .Add(new ClickSystem())
-                //.Add(new EnemySpawnSystem())
+                .Add(new EnemySpawnSystem())
+                .Add(new EnemyDestroySystem())
+                .Add(new DestroySystem())
+
                 .Add(new PathfindingSystem())
-                .Add(new MoveSystem())
+                .Add(new EnemyMoveSystem())
+                .Add(new ClickSystem())
                 ;
 
             _systems

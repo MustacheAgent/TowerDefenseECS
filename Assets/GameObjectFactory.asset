@@ -10,8 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddd1ebdf7024bec40b3857c89ff783cc, type: 3}
-  m_Name: EnemyFactory
+  m_Name: GameObjectFactory
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 885365576191432147, guid: 23f9d5361cf040443b420376980480b9,
-    type: 3}
-  spawnRate: 1

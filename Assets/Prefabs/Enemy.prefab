@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6565354835968639257}
   - component: {fileID: 1922400103781340457}
   - component: {fileID: 3071767850290771249}
+  - component: {fileID: -5065953072266325866}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -131,12 +132,12 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.4
-  m_Radius: 0.35
+  m_Height: 0.3
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.05
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6136922584944430226
 MonoBehaviour:
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  convertMode: 0
+  convertMode: 2
 --- !u!114 &450839448449601545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   value:
     rigidbody: {fileID: 525278539218231540}
     controller: {fileID: 8101974542284545690}
-    speed: 3
+    speed: 2
 --- !u!114 &3071767850290771249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,11 +206,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3e89dcb66c31d44ba40f487fb501f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5065953072266325866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885365576191432147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50910b5b8881f5f48b0b4696a4b7823d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   value:
-    position:
-      x: 0
-      y: 0
-    index: 0
-    cameFromIndex: 0
-    hCost: 0
-    gCost: 0
+    gameObject: {fileID: 885365576191432147}

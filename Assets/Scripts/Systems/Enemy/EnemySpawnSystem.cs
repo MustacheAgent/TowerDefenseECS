@@ -1,17 +1,15 @@
-﻿using Components;
-using Components.Core;
+﻿using Components.Core;
+using Components.Factory;
 using Leopotam.Ecs;
-using System;
 using Tags;
 using UnityEngine;
 
-namespace Systems.Core
+namespace Systems.Enemy
 {
     public class EnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld _world = null;
         private StaticData _staticData;
-        private SceneData _sceneData;
 
         private float _spawnDelay;
         private float _lastTime;
@@ -20,7 +18,7 @@ namespace Systems.Core
 
         public void Init()
         {
-            _spawnDelay = 2.0f;
+            _spawnDelay = 5.0f;
         }
 
         public void Run()

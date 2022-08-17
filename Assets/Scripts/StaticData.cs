@@ -6,4 +6,5 @@ using UnityEngine;
 public class StaticData : ScriptableObject
 {
     public GameObject enemyPrefab;
+    public GameObject wallPrefab;
 }

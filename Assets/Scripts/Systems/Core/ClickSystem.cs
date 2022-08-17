@@ -29,19 +29,7 @@ namespace Systems.Core
                 if(Physics.Raycast(ray, out RaycastHit hit))
                 {
                     var gameObject = hit.transform.gameObject;
-                    var data = gameObject.GetComponent<ConvertToEntity>();
-                    if (data.TryGetEntity().HasValue)
-                    {
-                        entity = data.TryGetEntity().Value;
-                    }
 
-                    ref var path = ref entity.Get<PathfindingComponent>();
-
-                    //Debug.Log("Got entity from world. X: " + path.x);
-
-                    int node = NodeFromPoint(hit.point);
-
-                    //Debug.Log("Got entity from world. X: " + _sceneData.tiles[node].Get<PathfindingComponent>().x + "\n" + "Index: " + node);
                 }
             }
         }

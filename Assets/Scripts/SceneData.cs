@@ -7,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public class SceneData : MonoBehaviour
 {
-    public EnemyFactory enemyFactory;
+    public GameObjectFactory factory;
     public GameObject worldBottomLeft;
 
     // параметры сетки

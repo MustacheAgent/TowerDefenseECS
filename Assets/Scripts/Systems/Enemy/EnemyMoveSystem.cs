@@ -1,16 +1,16 @@
 using Components;
 using Components.Core;
+using Events.Enemies;
 using Leopotam.Ecs;
 using Tags;
 using UnityEngine;
 
-namespace Systems.Core
+namespace Systems.Enemy
 {
-    public class MoveSystem : IEcsRunSystem 
+    public class EnemyMoveSystem : IEcsRunSystem 
     {
         readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> enemyFilter = null;
         readonly EcsFilter<PositionComponent, DestinationTag> destFilter = null;
-        SceneData _sceneData;
 
         public void Run()
         {
@@ -23,13 +23,16 @@ namespace Systems.Core
                 ref CharacterController controller = ref moveComponent.controller;
 
                 ref Transform destination = ref destFilter.Get1(0).transform;
+                Vector3 newPosition = destination.position - position.position;
 
-                Vector3 newPosition = (destination.position - position.position).normalized;
-
-                if (newPosition != Vector3.zero)
+                if (Vector3.Distance(position.position, destination.position) > .5f)
+                {                    
+                    controller.Move(speed * Time.deltaTime * newPosition.normalized);
+                }
+                else
                 {
-                    controller.Move(speed * Time.deltaTime * newPosition);
-                    //rigidbody.velocity = speed * Time.deltaTime * destination.position;
+                    Debug.Log("Time to die!");
+                    enemyFilter.GetEntity(i).Get<DestroyEvent>();
                 }
             }
         }
