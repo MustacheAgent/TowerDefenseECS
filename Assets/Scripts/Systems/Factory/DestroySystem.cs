@@ -23,8 +23,10 @@ namespace Systems.Factory
             {
                 foreach (int index in _destroyFilter)
                 {
-                    ref var destroyInfo = ref _destroyFilter.Get1(index);
+                    ref EcsEntity destroyEntity = ref _destroyFilter.GetEntity(index);
+                    ref var destroyInfo = ref destroyEntity.Get<DestroyPrefabComponent>();
                     _factory.Reclaim(destroyInfo);
+                    destroyEntity.Del<DestroyPrefabComponent>();
                 }
             }
         }

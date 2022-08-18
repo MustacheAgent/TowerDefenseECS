@@ -16,3 +16,5 @@ MonoBehaviour:
     type: 3}
   wallPrefab: {fileID: 8014469748087798198, guid: 2e05737429b49f64d80c4e275503e70c,
     type: 3}
+  laserPrefab: {fileID: 4808321949195822956, guid: 6c516b66c4e93dd48bfbe4502354ac9c,
+    type: 3}

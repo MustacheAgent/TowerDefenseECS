@@ -16,6 +16,10 @@ namespace Scripts
         public static EcsEntity GetEntity(this GameObject gameObject)
         {
             var data = gameObject.GetComponent<ConvertToEntity>();
+            if (data == null)
+            {
+                data = gameObject.GetComponentInParent<ConvertToEntity>();
+            }
             if (data.TryGetEntity().HasValue)
             {
                 return data.TryGetEntity().Value;

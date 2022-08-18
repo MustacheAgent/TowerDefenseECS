@@ -8,10 +8,7 @@ namespace Systems.Core
     public class ClickSystem : IEcsInitSystem, IEcsRunSystem
     {
         private PlayerInputData _input = null;
-        private EcsFilter<CameraTag> filter = null;
-        private EcsFilter<EmptyTileTag> tiles = null;
-        private EcsEntity entity;
-        private SceneData _sceneData;
+        private SceneData _sceneData = null;
 
         public void Init()
         {
@@ -27,7 +24,7 @@ namespace Systems.Core
                 {
                     var gameObject = hit.transform.gameObject;
                     var entity = gameObject.GetEntity();
-                    //Debug.Log("Clicked");
+                    Debug.Log("Clicked object" + gameObject);
                 }
             }
         }

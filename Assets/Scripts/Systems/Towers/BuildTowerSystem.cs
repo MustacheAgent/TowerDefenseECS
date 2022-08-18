@@ -9,7 +9,7 @@ namespace Systems.Towers
 {
     public class BuildTowerSystem : IEcsRunSystem
     {
-        private StaticData _staticData;
+        private StaticData _staticData = null;
         private EcsWorld _world = null;
         private PlayerInputData _input = null;
 
@@ -31,13 +31,13 @@ namespace Systems.Towers
                             ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
                             _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                             {
-                                Prefab = _staticData.wallPrefab,
+                                Prefab = _staticData.laserPrefab,
                                 Position = spawnPosition.position,
                                 Rotation = Quaternion.identity,
                                 Parent = null
                             };
 
-                            tileContent.content = TileContent.Wall;
+                            tileContent.content = TileContent.Tower;
                         }
                     }
                 }

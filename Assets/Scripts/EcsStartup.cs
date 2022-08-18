@@ -4,6 +4,7 @@ using Systems.Core;
 using Systems.Enemy;
 using Systems.Factory;
 using Systems.Towers;
+using Tags;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -38,11 +39,11 @@ namespace Assets.Scripts
 
                 .Add(new EnemySpawnSystem())
                 .Add(new SpawnSystem())
-                .Add(new EnemyDestroySystem())
+                //.Add(new EnemyDestroySystem())
                 .Add(new DestroySystem())
 
                 .Add(new PathfindingSystem())
-                //.Add(new EnemyMoveSystem())
+                .Add(new EnemyMoveSystem())
                 .Add(new ClickSystem())
                 .Add(new BuildTowerSystem())
                 ;

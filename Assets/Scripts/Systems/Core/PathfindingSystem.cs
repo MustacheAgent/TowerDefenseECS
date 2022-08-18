@@ -8,14 +8,15 @@ using UnityEngine;
 using Unity.Mathematics;
 using System.Collections.Generic;
 using Scripts;
+using Events.Enemies;
 
 namespace Systems.Core
 {
     public class PathfindingSystem : IEcsInitSystem, IEcsRunSystem
     {
-        readonly EcsFilter<PositionComponent, FindPathTag> units = null;
+        readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> units = null;
         readonly EcsFilter<PositionComponent, DestinationTag> dest = null;
-        private SceneData _sceneData;
+        private SceneData _sceneData = null;
 
         private const int MOVE_STRAIGHT_COST = 10;
         private const int MOVE_DIAGONAL_COST = 14;
@@ -32,7 +33,10 @@ namespace Systems.Core
             foreach(var i in units)
             {
                 ref var unitPosition = ref units.Get1(i);
+                ref var unitPath = ref units.Get2(i);
                 List<int2> path = FindPath(unitPosition.transform.position, pos.transform.position);
+                unitPath.path = new List<int2>(path);
+                units.GetEntity(i).Del<FindPathEvent>();
             }
         }
 

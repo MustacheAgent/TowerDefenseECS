@@ -1,6 +1,9 @@
 ﻿using Components.Factory;
+using Events.Enemies;
 using Factories;
 using Leopotam.Ecs;
+using Scripts;
+using Tags;
 
 namespace Systems.Factory
 {
@@ -25,7 +28,7 @@ namespace Systems.Factory
 				{
 					ref EcsEntity spawnEntity = ref _spawnFilter.GetEntity(index);
 					var spawnPrefabData = spawnEntity.Get<SpawnPrefabComponent>();
-					_factory.Spawn(spawnPrefabData);
+					var gameObject = _factory.Spawn(spawnPrefabData);
 					spawnEntity.Del<SpawnPrefabComponent>();
 				}
 			}

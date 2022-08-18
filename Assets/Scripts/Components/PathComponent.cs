@@ -5,6 +5,7 @@ namespace Components
 {
     public struct PathComponent
     {
-        public List<int2> Path;
+        public List<int2> path;
+        public int pathIndex;
     }
 }
