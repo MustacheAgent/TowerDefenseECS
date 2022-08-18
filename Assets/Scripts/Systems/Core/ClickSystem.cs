@@ -26,8 +26,8 @@ namespace Systems.Core
                 if(Physics.Raycast(ray, out RaycastHit hit))
                 {
                     var gameObject = hit.transform.gameObject;
-                    var entity = gameObject.GetEntity();
-                    //Debug.Log("Clicked");
+                    //var entity = gameObject.GetEntity();
+                    Debug.Log("Clicked object" + gameObject);
                 }
             }
         }

@@ -18,7 +18,7 @@ namespace Systems.Enemy
 
         public void Init()
         {
-            _spawnDelay = 5.0f;
+            _spawnDelay = 2.0f;
         }
 
         public void Run()
@@ -28,7 +28,6 @@ namespace Systems.Enemy
             {
                 foreach (var i in tileFilter)
                 {
-                    Debug.Log("Spawning!");
                     ref Transform spawnPosition = ref tileFilter.Get1(i).transform;
                     _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                     {
