@@ -24,7 +24,7 @@ namespace Systems.Core
                 {
                     var gameObject = hit.transform.gameObject;
                     var entity = gameObject.GetEntity();
-                    Debug.Log("Clicked object" + gameObject);
+                    //Debug.Log("Clicked");
                 }
             }
         }
