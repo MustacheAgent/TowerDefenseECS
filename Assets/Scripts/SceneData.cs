@@ -2,6 +2,7 @@
 using Leopotam.Ecs;
 using System;
 using Unity.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 [Serializable]
@@ -15,4 +16,5 @@ public class SceneData : MonoBehaviour
     public int gridSizeZ;
 
     public EcsEntity[] tiles;
+    public int2 spawn, destination;
 }

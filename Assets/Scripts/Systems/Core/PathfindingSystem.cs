@@ -1,14 +1,13 @@
-﻿using Assets.Scripts;
-using Components;
+﻿using Components;
 using Components.Core;
 using Leopotam.Ecs;
 using Tags;
-using Unity.Collections;
 using UnityEngine;
 using Unity.Mathematics;
 using System.Collections.Generic;
 using Scripts;
 using Events.Enemies;
+using System;
 
 namespace Systems.Core
 {
@@ -16,6 +15,7 @@ namespace Systems.Core
     {
         readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> units = null;
         readonly EcsFilter<PositionComponent, DestinationTag> dest = null;
+        readonly EcsFilter<PositionComponent, SpawnTag> spawn = null;
         private SceneData _sceneData = null;
 
         private const int MOVE_STRAIGHT_COST = 10;
@@ -24,8 +24,9 @@ namespace Systems.Core
         public void Init()
         {
             SetGridSize();
+            FindSpawnDestination();
             SetInitialState();
-        }        
+        }
 
         public void Run()
         {
@@ -36,6 +37,7 @@ namespace Systems.Core
                 ref var unitPath = ref units.Get2(i);
                 List<int2> path = FindPath(unitPosition.transform.position, pos.transform.position);
                 unitPath.path = new List<int2>(path);
+                unitPath.pathIndex = 0;
                 units.GetEntity(i).Del<FindPathEvent>();
             }
         }
@@ -46,8 +48,9 @@ namespace Systems.Core
             int endNodeIndex = NodeFromPoint(end);
 
             EcsEntity startNode = _sceneData.tiles[startNodeIndex];
+            EcsEntity endNode = _sceneData.tiles[endNodeIndex];
             ref var startPath = ref startNode.Get<PathfindingComponent>();
-            ref var endPath = ref startNode.Get<PathfindingComponent>();
+            ref var endPath = ref endNode.Get<PathfindingComponent>();
             startPath.gCost = 0;
             startPath.hCost = CalculateDistanceCost(startPath.position, endPath.position);
 
@@ -101,7 +104,7 @@ namespace Systems.Core
                         continue;
                     }
 
-                    int neighbourIndex = CalculateIndex(neighbourPosition.x, neighbourPosition.y, _sceneData.gridSizeX);
+                    int neighbourIndex = PathfindingExtensions.CalculateIndex(neighbourPosition.x, neighbourPosition.y, _sceneData.gridSizeX);
 
                     if (closedList.Contains(neighbourIndex))
                     {
@@ -180,6 +183,11 @@ namespace Systems.Core
             _sceneData.gridSizeZ = gridSizeZ;
         }
 
+        private void FindSpawnDestination()
+        {
+            
+        }
+
         private void SetInitialState()
         {
             EcsEntity entity;
@@ -196,9 +204,10 @@ namespace Systems.Core
                 ref var path = ref entity.Get<PathfindingComponent>();
                 path.position.x = x;
                 path.position.y = 0;
-                path.index = CalculateIndex(x, 0, _sceneData.gridSizeX);
+                path.index = PathfindingExtensions.CalculateIndex(x, 0, _sceneData.gridSizeX);
                 path.IsWalkable = true;
                 path.cameFromIndex = -1;
+                path.gCost = int.MaxValue;
 
                 ref var position = ref entity.Get<PositionComponent>();
                 boxCastPos = first = position.transform.position;
@@ -214,7 +223,7 @@ namespace Systems.Core
                         path = ref entity.Get<PathfindingComponent>();
                         path.position.x = x;
                         path.position.y = z;
-                        path.index = CalculateIndex(x, z, _sceneData.gridSizeX);
+                        path.index = PathfindingExtensions.CalculateIndex(x, z, _sceneData.gridSizeX);
                         path.IsWalkable = true;
                         path.cameFromIndex = -1;
 
@@ -252,11 +261,6 @@ namespace Systems.Core
             return path;
         }
 
-        private int CalculateIndex(int x, int y, int width)
-        {
-            return x + y * width;
-        }
-
         private bool IsPositionInsideGrid(int2 position)
         {
             return position.x >= 0 && position.x < _sceneData.gridSizeX && position.y >= 0 && position.y < _sceneData.gridSizeZ;
@@ -283,10 +287,12 @@ namespace Systems.Core
         {
             int x = Mathf.RoundToInt(point.x);
             int y = Mathf.RoundToInt(point.z);
-            Debug.Log("Point: " + point + "\n" + "Got indexes. X: " + x + " Z: " + y);
+            //Debug.Log("Point: " + point + "\n" + "Got indexes. X: " + x + " Z: " + y);
             if (x >= 0 && x < _sceneData.gridSizeX && y >= 0 && y < _sceneData.gridSizeZ)
             {
-                return x + y * _sceneData.gridSizeX;
+                int index = x + y * _sceneData.gridSizeX;
+                Debug.Log("Index: " + index);
+                return index;
             }
             return -1;
         }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2da779be5550254bbb774a3dd4a899f, type: 3}
   m_Name: StaticData
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 885365576191432147, guid: 23f9d5361cf040443b420376980480b9,
+  enemyPrefab: {fileID: 3969407090528160754, guid: 23f9d5361cf040443b420376980480b9,
     type: 3}
-  wallPrefab: {fileID: 8014469748087798198, guid: 2e05737429b49f64d80c4e275503e70c,
+  wallPrefab: {fileID: 4732683586919912502, guid: 2e05737429b49f64d80c4e275503e70c,
     type: 3}
   laserPrefab: {fileID: 4808321949195822956, guid: 6c516b66c4e93dd48bfbe4502354ac9c,
     type: 3}

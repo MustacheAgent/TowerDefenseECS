@@ -1,8 +1,10 @@
 ﻿using Components.Core;
 using Components.Factory;
 using Enums;
+using Events.Enemies;
 using Leopotam.Ecs;
 using Scripts;
+using Tags;
 using UnityEngine;
 
 namespace Systems.Towers
@@ -12,6 +14,7 @@ namespace Systems.Towers
         private StaticData _staticData = null;
         private EcsWorld _world = null;
         private PlayerInputData _input = null;
+        readonly EcsFilter<EnemyTag> enemyFilter = null;
 
         public void Run()
         {
@@ -31,13 +34,18 @@ namespace Systems.Towers
                             ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
                             _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                             {
-                                Prefab = _staticData.laserPrefab,
+                                Prefab = _staticData.wallPrefab,
                                 Position = spawnPosition.position,
                                 Rotation = Quaternion.identity,
                                 Parent = null
                             };
 
-                            tileContent.content = TileContent.Tower;
+                            tileContent.content = TileContent.Wall;
+
+                            foreach(var i in enemyFilter)
+                            {
+                                enemyFilter.GetEntity(i).Get<FindPathEvent>();
+                            }
                         }
                     }
                 }

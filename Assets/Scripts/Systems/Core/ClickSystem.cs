@@ -1,4 +1,5 @@
-﻿using Leopotam.Ecs;
+﻿using Components;
+using Leopotam.Ecs;
 using Scripts;
 using Tags;
 using UnityEngine;
@@ -23,8 +24,12 @@ namespace Systems.Core
                 if(Physics.Raycast(ray, out RaycastHit hit))
                 {
                     var gameObject = hit.transform.gameObject;
+                    NodeFromPoint(hit.transform.position);
+                    /*
                     var entity = gameObject.GetEntity();
-                    Debug.Log("Clicked object" + gameObject);
+                    ref var path = ref entity.Get<PathfindingComponent>();
+                    Debug.Log("Got tile. X: " + gameObject);
+                    */
                 }
             }
         }

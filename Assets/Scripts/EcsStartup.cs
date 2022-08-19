@@ -39,7 +39,7 @@ namespace Assets.Scripts
 
                 .Add(new EnemySpawnSystem())
                 .Add(new SpawnSystem())
-                //.Add(new EnemyDestroySystem())
+                .Add(new EnemyDestroySystem())
                 .Add(new DestroySystem())
 
                 .Add(new PathfindingSystem())
