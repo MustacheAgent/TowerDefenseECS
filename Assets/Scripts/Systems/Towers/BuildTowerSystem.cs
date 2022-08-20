@@ -1,4 +1,5 @@
-﻿using Components.Core;
+﻿using Components;
+using Components.Core;
 using Components.Factory;
 using Enums;
 using Events.Enemies;
@@ -41,6 +42,7 @@ namespace Systems.Towers
                             };
 
                             tileContent.content = TileContent.Wall;
+                            tile.Get<PathfindingComponent>().isWalkable = false;
 
                             foreach(var i in enemyFilter)
                             {

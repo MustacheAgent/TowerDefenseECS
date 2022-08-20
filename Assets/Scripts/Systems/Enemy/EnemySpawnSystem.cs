@@ -9,7 +9,7 @@ namespace Systems.Enemy
     public class EnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld _world = null;
-        private StaticData _staticData;
+        private StaticData _staticData = null;
 
         private float _spawnDelay;
         private float _lastTime;
@@ -18,8 +18,8 @@ namespace Systems.Enemy
 
         public void Init()
         {
-            _spawnDelay = 5.0f;
-            _lastTime = _spawnDelay;
+            _spawnDelay = 2.0f;
+            //_lastTime = _spawnDelay;
         }
 
         public void Run()

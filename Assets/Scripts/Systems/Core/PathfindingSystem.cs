@@ -24,8 +24,8 @@ namespace Systems.Core
         public void Init()
         {
             SetGridSize();
-            FindSpawnDestination();
             SetInitialState();
+            //SetPathfindingValues();
         }
 
         public void Run()
@@ -33,12 +33,13 @@ namespace Systems.Core
             ref var pos = ref dest.Get1(0);
             foreach(var i in units)
             {
+                units.GetEntity(i).Del<FindPathEvent>();
                 ref var unitPosition = ref units.Get1(i);
                 ref var unitPath = ref units.Get2(i);
+                SetPathfindingValues();
                 List<int2> path = FindPath(unitPosition.transform.position, pos.transform.position);
                 unitPath.path = new List<int2>(path);
                 unitPath.pathIndex = 0;
-                units.GetEntity(i).Del<FindPathEvent>();
             }
         }
 
@@ -52,7 +53,6 @@ namespace Systems.Core
             ref var startPath = ref startNode.Get<PathfindingComponent>();
             ref var endPath = ref endNode.Get<PathfindingComponent>();
             startPath.gCost = 0;
-            startPath.hCost = CalculateDistanceCost(startPath.position, endPath.position);
 
             int2[] neighbours = new int2[]
             {
@@ -96,7 +96,7 @@ namespace Systems.Core
                 for (int i = 0; i < neighbours.Length; i++)
                 {
                     int2 neighbourOffset = neighbours[i];
-                    int2 neighbourPosition = new int2(currentPath.position.x + neighbourOffset.x, 
+                    int2 neighbourPosition = new(currentPath.position.x + neighbourOffset.x, 
                         currentPath.position.y + neighbourOffset.y);
 
                     if (!IsPositionInsideGrid(neighbourPosition))
@@ -112,7 +112,7 @@ namespace Systems.Core
                     }
 
                     ref var neighbourPath = ref _sceneData.tiles[neighbourIndex].Get<PathfindingComponent>();
-                    if (!neighbourPath.IsWalkable)
+                    if (!neighbourPath.isWalkable)
                     {
                         continue;
                     }
@@ -183,9 +183,15 @@ namespace Systems.Core
             _sceneData.gridSizeZ = gridSizeZ;
         }
 
-        private void FindSpawnDestination()
+        private void SetPathfindingValues()
         {
-            
+            for (int i = 0; i < _sceneData.tiles.Length; i++)
+            {
+                ref var path = ref _sceneData.tiles[i].Get<PathfindingComponent>();
+                path.cameFromIndex = -1;
+                path.gCost = int.MaxValue;
+                path.hCost = CalculateDistanceCost(path.position, _sceneData.destination);
+            }
         }
 
         private void SetInitialState()
@@ -205,9 +211,15 @@ namespace Systems.Core
                 path.position.x = x;
                 path.position.y = 0;
                 path.index = PathfindingExtensions.CalculateIndex(x, 0, _sceneData.gridSizeX);
-                path.IsWalkable = true;
-                path.cameFromIndex = -1;
-                path.gCost = int.MaxValue;
+
+                if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == Enums.TileContent.SpawnPoint)
+                {
+                    _sceneData.spawn = new int2(path.position.x, path.position.y);
+                }
+                if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == Enums.TileContent.Destination)
+                {
+                    _sceneData.spawn = new int2(path.position.x, path.position.y);
+                }
 
                 ref var position = ref entity.Get<PositionComponent>();
                 boxCastPos = first = position.transform.position;
@@ -224,8 +236,6 @@ namespace Systems.Core
                         path.position.x = x;
                         path.position.y = z;
                         path.index = PathfindingExtensions.CalculateIndex(x, z, _sceneData.gridSizeX);
-                        path.IsWalkable = true;
-                        path.cameFromIndex = -1;
 
                         _sceneData.tiles[path.index] = entity;
 
@@ -257,13 +267,18 @@ namespace Systems.Core
                 path.Add(cameFromPath.position);
                 currentPath = cameFromPath;
             }
+            path.Reverse();
 
             return path;
         }
 
         private bool IsPositionInsideGrid(int2 position)
         {
-            return position.x >= 0 && position.x < _sceneData.gridSizeX && position.y >= 0 && position.y < _sceneData.gridSizeZ;
+            return 
+                position.x >= 0 &&
+                position.y >= 0 &&
+                position.x < _sceneData.gridSizeX && 
+                position.y < _sceneData.gridSizeZ;
         }
 
         private int GetLowestFCost(List<int> openList)
@@ -291,7 +306,7 @@ namespace Systems.Core
             if (x >= 0 && x < _sceneData.gridSizeX && y >= 0 && y < _sceneData.gridSizeZ)
             {
                 int index = x + y * _sceneData.gridSizeX;
-                Debug.Log("Index: " + index);
+                //Debug.Log("Index: " + index);
                 return index;
             }
             return -1;

@@ -16,6 +16,6 @@ namespace Components
 
         public int fCost { get { return hCost + gCost; } }
 
-        public bool IsWalkable { get; set; }
+        public bool isWalkable;
     }
 }

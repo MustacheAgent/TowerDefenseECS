@@ -96,6 +96,7 @@ MonoBehaviour:
     cameFromIndex: 0
     hCost: 0
     gCost: 0
+    isWalkable: 1
 --- !u!114 &752785103841159175
 MonoBehaviour:
   m_ObjectHideFlags: 0
