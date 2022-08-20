@@ -7,7 +7,6 @@ using Unity.Mathematics;
 using System.Collections.Generic;
 using Scripts;
 using Events.Enemies;
-using System;
 
 namespace Systems.Core
 {
@@ -15,7 +14,6 @@ namespace Systems.Core
     {
         readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> units = null;
         readonly EcsFilter<PositionComponent, DestinationTag> dest = null;
-        readonly EcsFilter<PositionComponent, SpawnTag> spawn = null;
         private SceneData _sceneData = null;
 
         private const int MOVE_STRAIGHT_COST = 10;
@@ -25,7 +23,7 @@ namespace Systems.Core
         {
             SetGridSize();
             SetInitialState();
-            //SetPathfindingValues();
+            //SetPathfindingValues(_sceneData.tiles);
         }
 
         public void Run()
@@ -36,10 +34,12 @@ namespace Systems.Core
                 units.GetEntity(i).Del<FindPathEvent>();
                 ref var unitPosition = ref units.Get1(i);
                 ref var unitPath = ref units.Get2(i);
-                SetPathfindingValues();
                 List<int2> path = FindPath(unitPosition.transform.position, pos.transform.position);
-                unitPath.path = new List<int2>(path);
-                unitPath.pathIndex = 0;
+                if (path != null)
+                {
+                    unitPath.path = new List<int2>(path);
+                    unitPath.pathIndex = 0;
+                }
             }
         }
 
@@ -48,8 +48,12 @@ namespace Systems.Core
             int startNodeIndex = NodeFromPoint(start);
             int endNodeIndex = NodeFromPoint(end);
 
-            EcsEntity startNode = _sceneData.tiles[startNodeIndex];
-            EcsEntity endNode = _sceneData.tiles[endNodeIndex];
+            EcsEntity[] tiles = new EcsEntity[_sceneData.gridSizeX * _sceneData.gridSizeZ];
+            _sceneData.tiles.CopyTo(tiles, 0);
+            SetPathfindingValues(tiles);
+
+            EcsEntity startNode = tiles[startNodeIndex];
+            EcsEntity endNode = tiles[endNodeIndex];
             ref var startPath = ref startNode.Get<PathfindingComponent>();
             ref var endPath = ref endNode.Get<PathfindingComponent>();
             startPath.gCost = 0;
@@ -73,8 +77,8 @@ namespace Systems.Core
 
             while(openList.Count > 0)
             {
-                int currentIndex = GetLowestFCost(openList);
-                ref var currentPath = ref _sceneData.tiles[currentIndex].Get<PathfindingComponent>();
+                int currentIndex = GetLowestFCost(openList, tiles);
+                ref var currentPath = ref tiles[currentIndex].Get<PathfindingComponent>();
 
                 if (currentIndex == endNodeIndex)
                 {
@@ -82,14 +86,17 @@ namespace Systems.Core
                     break;
                 }
 
+                openList.Remove(currentIndex);
+                /*
                 for (int i = 0; i < openList.Count; i++)
                 {
                     if (openList[i] == currentIndex)
                     {
-                        openList.Remove(currentIndex);
+                        
                         break;
                     }
                 }
+                */
 
                 closedList.Add(currentIndex);
 
@@ -111,7 +118,7 @@ namespace Systems.Core
                         continue;
                     }
 
-                    ref var neighbourPath = ref _sceneData.tiles[neighbourIndex].Get<PathfindingComponent>();
+                    ref var neighbourPath = ref tiles[neighbourIndex].Get<PathfindingComponent>();
                     if (!neighbourPath.isWalkable)
                     {
                         continue;
@@ -137,7 +144,7 @@ namespace Systems.Core
             }
             else
             {
-                return CalculatePath(endPath);
+                return CalculatePath(endPath, tiles);
             }
         }
 
@@ -183,11 +190,11 @@ namespace Systems.Core
             _sceneData.gridSizeZ = gridSizeZ;
         }
 
-        private void SetPathfindingValues()
+        private void SetPathfindingValues(EcsEntity[] tiles)
         {
-            for (int i = 0; i < _sceneData.tiles.Length; i++)
+            for (int i = 0; i < tiles.Length; i++)
             {
-                ref var path = ref _sceneData.tiles[i].Get<PathfindingComponent>();
+                ref var path = ref tiles[i].Get<PathfindingComponent>();
                 path.cameFromIndex = -1;
                 path.gCost = int.MaxValue;
                 path.hCost = CalculateDistanceCost(path.position, _sceneData.destination);
@@ -218,7 +225,7 @@ namespace Systems.Core
                 }
                 if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == Enums.TileContent.Destination)
                 {
-                    _sceneData.spawn = new int2(path.position.x, path.position.y);
+                    _sceneData.destination = new int2(path.position.x, path.position.y);
                 }
 
                 ref var position = ref entity.Get<PositionComponent>();
@@ -252,20 +259,21 @@ namespace Systems.Core
             }
         }
 
-        private List<int2> CalculatePath(PathfindingComponent endPath)
+        private List<int2> CalculatePath(PathfindingComponent endPath, EcsEntity[] tiles)
         {
             if (endPath.cameFromIndex == -1)
             {
                 return null;
             }
             List<int2> path = new();
-            ref var currentPath = ref _sceneData.tiles[endPath.index].Get<PathfindingComponent>();
+            ref var currentPath = ref tiles[endPath.index].Get<PathfindingComponent>();
+            path.Add(currentPath.position);
             
             while (currentPath.cameFromIndex != -1)
             {
-                ref var cameFromPath = ref _sceneData.tiles[currentPath.cameFromIndex].Get<PathfindingComponent>();
+                ref var cameFromPath = ref tiles[currentPath.cameFromIndex].Get<PathfindingComponent>();
                 path.Add(cameFromPath.position);
-                currentPath = cameFromPath;
+                currentPath = ref tiles[currentPath.cameFromIndex].Get<PathfindingComponent>();
             }
             path.Reverse();
 
@@ -281,14 +289,14 @@ namespace Systems.Core
                 position.y < _sceneData.gridSizeZ;
         }
 
-        private int GetLowestFCost(List<int> openList)
+        private int GetLowestFCost(List<int> openList, EcsEntity[] tiles)
         {
-            ref var lowestPath = ref _sceneData.tiles[openList[0]].Get<PathfindingComponent>();
+            ref var lowestPath = ref tiles[openList[0]].Get<PathfindingComponent>();
             int index = lowestPath.index;
 
             for (int i = 1; i < openList.Count; i++)
             {
-                ref var currentPath = ref _sceneData.tiles[openList[i]].Get<PathfindingComponent>();
+                ref var currentPath = ref tiles[openList[i]].Get<PathfindingComponent>();
                 if (currentPath.fCost < lowestPath.fCost)
                 {
                     index = currentPath.index;

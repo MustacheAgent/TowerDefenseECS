@@ -27,26 +27,30 @@ namespace Systems.Enemy
                 ref CharacterController controller = ref moveComponent.controller;
 
                 ref int currentPathIndex = ref path.pathIndex;
-                int2 currentPathXY = path.path[currentPathIndex];
-
-                EcsEntity nextOnPath = 
-                    _sceneData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _sceneData.gridSizeX)];
-                ref Transform destination = ref nextOnPath.Get<PositionComponent>().transform;
-
-                //ref Transform destination = ref destFilter.Get1(0).transform;
-
-                if (Vector2.Distance(new Vector2(position.position.x, position.position.z), 
-                    new Vector2(destination.position.x, destination.position.z)) > .1f)
+                if (currentPathIndex >= path.path.Count)
                 {
-                    Vector3 newPosition = (destination.position - position.position).normalized;
-                    controller.Move(speed * Time.deltaTime * newPosition);
+                    enemyFilter.GetEntity(i).Get<DestroyEvent>();
                 }
                 else
                 {
-                    currentPathIndex++;
-                    if (currentPathIndex > path.path.Count)
+                    int2 currentPathXY = path.path[currentPathIndex];
+
+                    EcsEntity nextOnPath =
+                        _sceneData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _sceneData.gridSizeX)];
+                    ref Transform destination = ref nextOnPath.Get<PositionComponent>().transform;
+
+                    //ref Transform destination = ref destFilter.Get1(0).transform;
+
+                    if (Vector2.Distance(new Vector2(position.position.x, position.position.z),
+                        new Vector2(destination.position.x, destination.position.z)) > .1f)
                     {
-                        enemyFilter.GetEntity(i).Get<DestroyEvent>();
+                        Vector3 newPosition = (destination.position - position.position).normalized;
+                        controller.Move(speed * Time.deltaTime * newPosition);
+                        //position.Translate(speed * Time.deltaTime * newPosition);
+                    }
+                    else
+                    {
+                        currentPathIndex++;
                     }
                 }
             }

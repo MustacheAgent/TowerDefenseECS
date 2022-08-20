@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7249227385269702174}
   - component: {fileID: 5556883990876373491}
   - component: {fileID: 3092639382492325522}
+  - component: {fileID: 8643393912866822878}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -114,9 +115,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    rigidbody: {fileID: 8861630131656796797}
     controller: {fileID: 5634033480320405890}
-    speed: 3
+    speed: 4
+--- !u!114 &8643393912866822878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969407090528160754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50910b5b8881f5f48b0b4696a4b7823d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    gameObject: {fileID: 3969407090528160754}
 --- !u!1 &5992881336122866398
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,8 +143,8 @@ GameObject:
   - component: {fileID: 9019159357675017687}
   - component: {fileID: 8943149976519750729}
   - component: {fileID: 9072841002658427925}
-  - component: {fileID: 8861630131656796797}
   - component: {fileID: 5634033480320405890}
+  - component: {fileID: 3919098365404030471}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -216,22 +230,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8861630131656796797
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5992881336122866398}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!143 &5634033480320405890
 CharacterController:
   m_ObjectHideFlags: 0
@@ -247,6 +245,22 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.008
+  m_MinMoveDistance: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3919098365404030471
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992881336122866398}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0

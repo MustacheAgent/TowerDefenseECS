@@ -42,10 +42,10 @@ namespace Assets.Scripts
                 .Add(new EnemyDestroySystem())
                 .Add(new DestroySystem())
 
+                .Add(new BuildTowerSystem())
                 .Add(new PathfindingSystem())
                 .Add(new EnemyMoveSystem())
-                .Add(new ClickSystem())
-                .Add(new BuildTowerSystem())
+                //.Add(new ClickSystem())
                 ;
 
             _systems
