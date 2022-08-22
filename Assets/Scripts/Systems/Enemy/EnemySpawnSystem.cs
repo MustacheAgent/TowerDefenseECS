@@ -18,8 +18,8 @@ namespace Systems.Enemy
 
         public void Init()
         {
-            _spawnDelay = 5.0f;
-            //_lastTime = _spawnDelay;
+            _spawnDelay = 4.0f;
+            _lastTime = _spawnDelay;
         }
 
         public void Run()

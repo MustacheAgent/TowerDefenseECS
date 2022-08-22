@@ -40,10 +40,11 @@ namespace Systems.Enemy
                         _sceneData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _sceneData.gridSizeX)];
                     ref Transform destination = ref nextOnPath.Get<PositionComponent>().transform;
 
-                    Vector3 moveDir = Vector3.Lerp(position.position, destination.position, 1);
+                    
                     if (Vector2.Distance(new Vector2(position.position.x, position.position.z),
                         new Vector2(destination.position.x, destination.position.z)) > .1f)
                     {
+                        Vector3 moveDir = (destination.position - position.position);
                         controller.Move(speed * Time.deltaTime * moveDir.normalized);
                     }
                     else
