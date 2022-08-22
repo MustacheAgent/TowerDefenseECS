@@ -38,7 +38,7 @@ namespace Systems.Core
                 if (path != null)
                 {
                     unitPath.path = new List<int2>(path);
-                    unitPath.pathIndex = 0;
+                    unitPath.pathIndex = 1;
                 }
             }
         }

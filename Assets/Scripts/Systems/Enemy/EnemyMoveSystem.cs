@@ -25,6 +25,7 @@ namespace Systems.Enemy
 
                 ref float speed = ref moveComponent.speed;
                 ref CharacterController controller = ref moveComponent.controller;
+                ref Rigidbody rb = ref moveComponent.rigidbody;
 
                 ref int currentPathIndex = ref path.pathIndex;
                 if (currentPathIndex >= path.path.Count)
@@ -39,14 +40,11 @@ namespace Systems.Enemy
                         _sceneData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _sceneData.gridSizeX)];
                     ref Transform destination = ref nextOnPath.Get<PositionComponent>().transform;
 
-                    //ref Transform destination = ref destFilter.Get1(0).transform;
-
+                    Vector3 moveDir = Vector3.Lerp(position.position, destination.position, 1);
                     if (Vector2.Distance(new Vector2(position.position.x, position.position.z),
                         new Vector2(destination.position.x, destination.position.z)) > .1f)
                     {
-                        Vector3 newPosition = (destination.position - position.position).normalized;
-                        controller.Move(speed * Time.deltaTime * newPosition);
-                        //position.Translate(speed * Time.deltaTime * newPosition);
+                        controller.Move(speed * Time.deltaTime * moveDir.normalized);
                     }
                     else
                     {

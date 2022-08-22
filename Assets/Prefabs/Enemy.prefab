@@ -116,7 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     controller: {fileID: 5634033480320405890}
-    speed: 4
+    rigidbody: {fileID: 3919098365404030471}
+    speed: 2
 --- !u!114 &8643393912866822878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +247,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.008
-  m_MinMoveDistance: 0.00001
+  m_MinMoveDistance: 0.0001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3919098365404030471
 Rigidbody:
