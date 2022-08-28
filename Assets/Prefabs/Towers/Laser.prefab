@@ -357,6 +357,8 @@ MonoBehaviour:
   value:
     turret: {fileID: 6168981837166751726}
     laser: {fileID: 7950021165329023040}
+    damagePerSecond: 5
+    attackRadius: 2
 --- !u!1 &7226352533017766791
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,5 +8,8 @@ namespace Components.Towers
     {
         public Transform turret;
         public Transform laser;
+
+        public int damagePerSecond;
+        public int attackRadius;
     }
 }
