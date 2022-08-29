@@ -5,6 +5,6 @@ namespace Components
     [Serializable]
     public struct HealthComponent
     {
-        public int health;
+        public float health;
     }
 }

@@ -9,7 +9,7 @@ namespace Components.Towers
         public Transform turret;
         public Transform laser;
 
-        public int damagePerSecond;
+        public float damagePerSecond;
         public int attackRadius;
     }
 }

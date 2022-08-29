@@ -1,10 +1,8 @@
-using Events.Enemies;
 using Leopotam.Ecs;
 using Systems.Core;
 using Systems.Enemy;
 using Systems.Factory;
 using Systems.Towers;
-using Tags;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -45,6 +43,8 @@ namespace Assets.Scripts
                 .Add(new BuildTowerSystem())
                 .Add(new PathfindingSystem())
                 .Add(new EnemyMoveSystem())
+                .Add(new LaserSystem())
+                .Add(new DamageSystem())
                 //.Add(new ClickSystem())
                 ;
 
