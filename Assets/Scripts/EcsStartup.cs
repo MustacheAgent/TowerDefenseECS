@@ -1,4 +1,5 @@
 using Leopotam.Ecs;
+using Leopotam.Ecs.Ui.Systems;
 using Systems.Core;
 using Systems.Enemy;
 using Systems.Factory;
@@ -19,7 +20,8 @@ namespace Assets.Scripts
         SceneData _sceneData;
         [SerializeField]
         StaticData _staticData;
-
+        [SerializeField]
+        EcsUiEmitter _emitter;
         void Start()
         {
             _world = new EcsWorld();
@@ -31,31 +33,15 @@ namespace Assets.Scripts
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
 #endif
             //_systems.OneFrame<>
-            _systems
-                .Add(new PlayerInputSystem())
-                .Add(new CameraMoveSystem())
 
-                .Add(new EnemySpawnSystem())
-                .Add(new SpawnSystem())
-                .Add(new EnemyDestroySystem())
-                .Add(new DestroySystem())
+            AddGameplaySystems();
+            AddSpawnSystems();
+            AddTowerSystems();
+            AddMiscSystems();
 
-                .Add(new BuildTowerSystem())
-                .Add(new PathfindingSystem())
-                .Add(new EnemyMoveSystem())
-                .Add(new LaserSystem())
-                .Add(new DamageSystem())
-                //.Add(new ClickSystem())
-                ;
-
-            _systems
-                .Inject(_inputData)
-                .Inject(_sceneData)
-                .Inject(_staticData);
+            Inject();
 
             _systems.Init();
-
-
 
             // register your systems here, for example:
             // .Add (new TestSystem1 ())
@@ -70,14 +56,56 @@ namespace Assets.Scripts
             // .Inject (new NavMeshSupport ())
         }
 
+        void AddGameplaySystems()
+        {
+            _systems
+                .Add(new PlayerInputSystem())
+                .Add(new CameraMoveSystem())
+                .Add(new UiSystem())
+                .Add(new PathfindingSystem())
+                ;
+        }
+
+        void AddSpawnSystems()
+        {
+            _systems
+                .Add(new EnemySpawnSystem())
+                .Add(new EnemyDestroySystem())
+                .Add(new BuildTowerSystem())
+                .Add(new SpawnSystem())
+                .Add(new DestroySystem())
+                ;
+        }
+
+        void AddTowerSystems()
+        {
+            _systems
+                .Add(new LaserSystem())
+                .Add(new MortarSystem())
+                ;
+        }
+
+        void AddMiscSystems()
+        {
+            _systems
+                .Add(new EnemyMoveSystem())
+                .Add(new DamageSystem())
+                //.Add(new ClickSystem())
+                ;
+        }
+
+        void Inject()
+        {
+            _systems
+                .InjectUi(_emitter)
+                .Inject(_inputData)
+                .Inject(_sceneData)
+                .Inject(_staticData);
+        }
+
         void Update () 
         {
             _systems?.Run();
-        }
-
-        private void FixedUpdate()
-        {
-            
         }
 
         void OnDestroy () 

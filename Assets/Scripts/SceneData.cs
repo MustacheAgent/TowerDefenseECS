@@ -1,7 +1,7 @@
-﻿using Factories;
+﻿using Enums;
+using Factories;
 using Leopotam.Ecs;
 using System;
-using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ public class SceneData : MonoBehaviour
 {
     public GameObjectFactory factory;
     public GameObject worldBottomLeft;
+    public TowerType selectedTower;
 
     // параметры сетки
     public int gridSizeX;

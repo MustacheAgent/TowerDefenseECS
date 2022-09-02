@@ -8,4 +8,5 @@ public class StaticData : ScriptableObject
     public GameObject enemyPrefab;
     public GameObject wallPrefab;
     public GameObject laserPrefab;
+    public GameObject mortarPrefab;
 }

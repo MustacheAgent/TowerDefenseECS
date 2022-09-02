@@ -29,33 +29,19 @@ namespace Systems.Towers
                 foreach(var enemyIndex in enemyFilter)
                 {
                     ref var enemyPosition = ref enemyFilter.Get1(enemyIndex).transform;
-                    if (Vector3.Distance(towerPosition.position, enemyPosition.position) < towerRadius)
+                    var distance = Vector3.Distance(towerPosition.position, enemyPosition.position);
+                    if (distance < towerRadius)
                     {
                         enemiesInRange.Add(enemyIndex);
                     }
-                    if (enemiesInRange.Count > 0) closestEnemyIndex = enemiesInRange.Min();
                 }
+                if (enemiesInRange.Count > 0) closestEnemyIndex = enemiesInRange.Min();
                 ref var laserBeam = ref tower.laser;
+
                 if (closestEnemyIndex >= 0)
                 {
-                    ref var enemyPosition = ref enemyFilter.Get1(closestEnemyIndex).transform;
-
-                    tower.turret.LookAt(enemyPosition);
-
-                    laserBeam.localRotation = tower.turret.localRotation;
-                    float d = Vector3.Distance(tower.turret.position, enemyPosition.position);
-                    Vector3 laserScale = laserBeam.localScale;
-                    laserScale.x = 0.1f;
-                    laserScale.y = 0.1f;
-                    laserScale.z = d;
-                    laserBeam.localScale = laserScale;
-                    laserBeam.localPosition = tower.turret.localPosition + 0.5f * d * laserBeam.forward;
-
-                    _world.NewEntity().Get<DamageEvent>() = new DamageEvent
-                    {
-                        entity = enemyFilter.GetEntity(closestEnemyIndex),
-                        damage = tower.damagePerSecond * Time.deltaTime
-                    };
+                    ref var enemy = ref enemyFilter.GetEntity(closestEnemyIndex);
+                    Shoot(tower, enemy);
                 }
                 else
                 {
@@ -64,9 +50,27 @@ namespace Systems.Towers
             }
         }
 
-        void Shoot()
+        void Shoot(LaserTurretComponent tower, EcsEntity enemy)
         {
+            ref var laserBeam = ref tower.laser;
+            ref var enemyPosition = ref enemy.Get<PositionComponent>().transform;
 
+            tower.turret.LookAt(enemyPosition);
+
+            laserBeam.localRotation = tower.turret.localRotation;
+            float d = Vector3.Distance(tower.turret.position, enemyPosition.position);
+            Vector3 laserScale = laserBeam.localScale;
+            laserScale.x = 0.1f;
+            laserScale.y = 0.1f;
+            laserScale.z = d;
+            laserBeam.localScale = laserScale;
+            laserBeam.localPosition = tower.turret.localPosition + 0.5f * d * laserBeam.forward;
+
+            _world.NewEntity().Get<DamageEvent>() = new DamageEvent
+            {
+                entity = enemy,
+                damage = tower.damage * tower.attackSpeed * Time.deltaTime
+            };
         }
     }
 }

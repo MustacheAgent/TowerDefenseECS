@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6743380047366773418}
   - component: {fileID: 6415057360292007105}
-  - component: {fileID: 7386020278277293264}
+  - component: {fileID: 1258974333613271433}
+  - component: {fileID: 2589237005618720258}
   m_Layer: 0
   m_Name: Mortar
   m_TagString: Untagged
@@ -28,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3396640614566305667}
   - {fileID: 8168931568745509312}
@@ -47,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   convertMode: 0
---- !u!114 &7386020278277293264
+--- !u!114 &1258974333613271433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,11 +58,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 125550913269902966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb99022154c4102499f815cc98d311fb, type: 3}
+  m_Script: {fileID: 11500000, guid: e5545813c74571745844c439f15ed2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    position: {fileID: 6743380047366773418}
+    transform: {fileID: 0}
+--- !u!114 &2589237005618720258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125550913269902966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fac3438f7254b418f4468051f35744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    damage: 10
+    attackRadius: 4
+    innerRadius: 2
+    explosionRadius: 2
+    attackSpeed: 0.5
+    turret: {fileID: 8168931568745509312}
 --- !u!1 &908197608006237800
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +111,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 0.9, y: 0.3, z: 0.9}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6743380047366773418}
   m_RootOrder: 0
@@ -113,10 +135,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -141,6 +165,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2675279656716347914
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -183,6 +208,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6743380047366773418}
   m_RootOrder: 1
@@ -206,10 +232,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -234,6 +262,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &55499417010370133
 BoxCollider:
   m_ObjectHideFlags: 0

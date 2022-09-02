@@ -18,3 +18,5 @@ MonoBehaviour:
     type: 3}
   laserPrefab: {fileID: 4808321949195822956, guid: 6c516b66c4e93dd48bfbe4502354ac9c,
     type: 3}
+  mortarPrefab: {fileID: 125550913269902966, guid: bd72ae6e20c080444b59bc702b71aa5e,
+    type: 3}

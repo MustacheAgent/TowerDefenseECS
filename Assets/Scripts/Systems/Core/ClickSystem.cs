@@ -1,36 +1,24 @@
 ﻿using Components;
 using Leopotam.Ecs;
+using Leopotam.Ecs.Ui.Components;
 using Scripts;
 using Tags;
 using UnityEngine;
 
 namespace Systems.Core
 {
-    public class ClickSystem : IEcsInitSystem, IEcsRunSystem
+    public class ClickSystem : IEcsRunSystem
     {
         private PlayerInputData _input = null;
         private SceneData _sceneData = null;
-
-        public void Init()
-        {
-            
-        }
+        EcsFilter<EcsUiClickEvent> _clickEvents;
 
         public void Run()
         {
-            if (_input.leftMousePressed)
+            foreach (var idx in _clickEvents)
             {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if(Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    var gameObject = hit.transform.gameObject;
-                    NodeFromPoint(hit.transform.position);
-                    /*
-                    var entity = gameObject.GetEntity();
-                    ref var path = ref entity.Get<PathfindingComponent>();
-                    Debug.Log("Got tile. X: " + gameObject);
-                    */
-                }
+                ref EcsUiClickEvent data = ref _clickEvents.Get1(idx);
+                Debug.Log("Im clicked!", data.Sender);
             }
         }
 

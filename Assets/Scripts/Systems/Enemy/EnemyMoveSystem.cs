@@ -43,7 +43,7 @@ namespace Systems.Enemy
                         new Vector2(destination.position.x, destination.position.z)) > .1f)
                     {
                         Vector3 moveDir = (destination.position - position.position);
-                        controller.SimpleMove(speed * Time.deltaTime * moveDir.normalized);
+                        controller.Move(speed * Time.deltaTime * moveDir.normalized);
                         //rb.MovePosition(rb.position + speed * Time.deltaTime * moveDir);
                         //position.position = Vector3.MoveTowards(position.position, destination.position, speed * Time.deltaTime);
                     }

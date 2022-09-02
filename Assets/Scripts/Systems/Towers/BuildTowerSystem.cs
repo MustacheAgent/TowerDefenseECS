@@ -12,9 +12,10 @@ namespace Systems.Towers
 {
     public class BuildTowerSystem : IEcsRunSystem
     {
-        private StaticData _staticData = null;
-        private EcsWorld _world = null;
-        private PlayerInputData _input = null;
+        readonly StaticData _staticData = null;
+        readonly SceneData _sceneData = null;
+        readonly EcsWorld _world = null;
+        readonly PlayerInputData _input = null;
         readonly EcsFilter<EnemyTag> enemyFilter = null;
 
         public void Run()
@@ -33,20 +34,37 @@ namespace Systems.Towers
                         if (tileContent.content == TileContent.Empty)
                         {   
                             ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
-                            _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
+                            GameObject prefab = null;
+                            switch (_sceneData.selectedTower)
                             {
-                                Prefab = _staticData.laserPrefab,
-                                Position = spawnPosition.position,
-                                Rotation = Quaternion.identity,
-                                Parent = null
-                            };
+                                case TowerType.Wall:
+                                    prefab = _staticData.wallPrefab;
+                                    break;
+                                case TowerType.Laser:
+                                    prefab = _staticData.laserPrefab;
+                                    break;
+                                case TowerType.Mortar:
+                                    prefab = _staticData.mortarPrefab;
+                                    break;
+                            }
 
-                            tileContent.content = TileContent.Tower;
-                            tile.Get<PathfindingComponent>().isWalkable = false;
-
-                            foreach(var i in enemyFilter)
+                            if (prefab != null)
                             {
-                                enemyFilter.GetEntity(i).Get<FindPathEvent>();
+                                _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
+                                {
+                                    Prefab = prefab,
+                                    Position = spawnPosition.position,
+                                    Rotation = Quaternion.identity,
+                                    Parent = null
+                                };
+
+                                tileContent.content = TileContent.Tower;
+                                tile.Get<PathfindingComponent>().isWalkable = false;
+
+                                foreach (var i in enemyFilter)
+                                {
+                                    enemyFilter.GetEntity(i).Get<FindPathEvent>();
+                                }
                             }
                         }
                     }
