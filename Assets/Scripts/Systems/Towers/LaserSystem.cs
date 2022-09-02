@@ -12,7 +12,7 @@ namespace Systems.Towers
 {
     public class LaserSystem : IEcsRunSystem
     {
-        readonly EcsWorld world = null;
+        readonly EcsWorld _world = null;
 
         readonly EcsFilter<PositionComponent, LaserTurretComponent> laserFilter = null;
         readonly EcsFilter<PositionComponent, HealthComponent, EnemyTag> enemyFilter = null;
@@ -51,8 +51,9 @@ namespace Systems.Towers
                     laserBeam.localScale = laserScale;
                     laserBeam.localPosition = tower.turret.localPosition + 0.5f * d * laserBeam.forward;
 
-                    enemyFilter.GetEntity(closestEnemyIndex).Get<DamageEvent>() = new DamageEvent
+                    _world.NewEntity().Get<DamageEvent>() = new DamageEvent
                     {
+                        entity = enemyFilter.GetEntity(closestEnemyIndex),
                         damage = tower.damagePerSecond * Time.deltaTime
                     };
                 }

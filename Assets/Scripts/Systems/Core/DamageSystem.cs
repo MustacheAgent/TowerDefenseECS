@@ -7,20 +7,22 @@ namespace Systems.Core
 {
     public class DamageSystem : IEcsRunSystem
     {
-        readonly EcsFilter<DamageEvent, HealthComponent, EnemyTag> enemyFilter = null;
+        readonly EcsFilter<DamageEvent> damageFilter = null;
 
         public void Run()
         {
-            foreach(var index in enemyFilter)
+            foreach(var index in damageFilter)
             {
-                ref var health = ref enemyFilter.Get2(index);
-                ref var damage = ref enemyFilter.Get1(index).damage;
-                health.health -= damage;
-                if (health.health < 0)
+                ref var damageEvent = ref damageFilter.Get1(index);
+                ref EcsEntity entity = ref damageEvent.entity;
+                ref var health = ref entity.Get<HealthComponent>().health;
+                ref var damage = ref damageEvent.damage;
+                health -= damage;
+                if (health < 0)
                 {
-                    enemyFilter.GetEntity(index).Get<DestroyEvent>();
+                    entity.Get<DestroyEvent>();
                 }
-                enemyFilter.GetEntity(index).Del<DamageEvent>();
+                damageFilter.GetEntity(index).Del<DamageEvent>();
             }
         }
     }

@@ -12,7 +12,6 @@ namespace Systems.Enemy
     public class EnemyMoveSystem : IEcsRunSystem 
     {
         readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> enemyFilter = null;
-        readonly EcsFilter<PositionComponent, DestinationTag> destFilter = null;
         readonly SceneData _sceneData = null;
 
         public void Run()
@@ -40,12 +39,13 @@ namespace Systems.Enemy
                         _sceneData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _sceneData.gridSizeX)];
                     ref Transform destination = ref nextOnPath.Get<PositionComponent>().transform;
 
-                    
                     if (Vector2.Distance(new Vector2(position.position.x, position.position.z),
                         new Vector2(destination.position.x, destination.position.z)) > .1f)
                     {
                         Vector3 moveDir = (destination.position - position.position);
-                        controller.Move(speed * Time.deltaTime * moveDir.normalized);
+                        controller.SimpleMove(speed * Time.deltaTime * moveDir.normalized);
+                        //rb.MovePosition(rb.position + speed * Time.deltaTime * moveDir);
+                        //position.position = Vector3.MoveTowards(position.position, destination.position, speed * Time.deltaTime);
                     }
                     else
                     {

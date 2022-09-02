@@ -75,6 +75,11 @@ namespace Assets.Scripts
             _systems?.Run();
         }
 
+        private void FixedUpdate()
+        {
+            
+        }
+
         void OnDestroy () 
         {
             if (_systems != null) 

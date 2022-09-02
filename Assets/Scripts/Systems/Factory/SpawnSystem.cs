@@ -28,7 +28,7 @@ namespace Systems.Factory
 				{
 					ref EcsEntity spawnEntity = ref _spawnFilter.GetEntity(index);
 					var spawnPrefabData = spawnEntity.Get<SpawnPrefabComponent>();
-					var gameObject = _factory.Spawn(spawnPrefabData);
+					_factory.Spawn(spawnPrefabData);
 					spawnEntity.Del<SpawnPrefabComponent>();
 				}
 			}
