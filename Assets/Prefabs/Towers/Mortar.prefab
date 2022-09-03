@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    transform: {fileID: 0}
+    transform: {fileID: 6743380047366773418}
 --- !u!114 &2589237005618720258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     damage: 10
-    attackRadius: 4
+    attackRadius: 6
     innerRadius: 2
     explosionRadius: 2
     attackSpeed: 0.5

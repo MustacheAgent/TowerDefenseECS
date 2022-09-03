@@ -51,7 +51,7 @@ namespace Systems.Towers
 
         void Shoot(MortarTurretComponent tower, EcsEntity enemy)
         {
-            float targetingRange = 1.5f;
+            float targetingRange = tower.attackRadius;
             float x_speed = targetingRange + 0.25001f;
             float y_speed = -tower.turret.position.y;
             float launchSpeed = Mathf.Sqrt(9.81f * (y_speed + Mathf.Sqrt(x_speed * x_speed + y_speed * y_speed)));

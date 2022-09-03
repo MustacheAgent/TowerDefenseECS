@@ -45,7 +45,8 @@ namespace Systems.Enemy
                         Vector3 moveDir = (destination.position - position.position);
                         controller.Move(speed * Time.deltaTime * moveDir.normalized);
                         //rb.MovePosition(rb.position + speed * Time.deltaTime * moveDir);
-                        //position.position = Vector3.MoveTowards(position.position, destination.position, speed * Time.deltaTime);
+                        //rb.velocity = speed * Time.deltaTime * moveDir;
+                        //position.localPosition = Vector3.LerpUnclamped(position.position, destination.position, speed * Time.deltaTime);
                     }
                     else
                     {
