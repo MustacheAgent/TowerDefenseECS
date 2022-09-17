@@ -118,7 +118,7 @@ MonoBehaviour:
   value:
     controller: {fileID: 5634033480320405890}
     rigidbody: {fileID: 3919098365404030471}
-    speed: 50
+    speed: 3
 --- !u!114 &8643393912866822878
 MonoBehaviour:
   m_ObjectHideFlags: 0

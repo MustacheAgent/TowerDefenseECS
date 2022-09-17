@@ -11,9 +11,9 @@ namespace Factories
             return Instantiate(spawnInfo.Prefab, spawnInfo.Position, spawnInfo.Rotation, spawnInfo.Parent);
         }
 
-        public void Reclaim(DestroyPrefabComponent destroyInfo)
+        public void Reclaim(GameObject destroyObject)
         {
-            Destroy(destroyInfo.gameObject);
+            Destroy(destroyObject);
         }
     }
 }

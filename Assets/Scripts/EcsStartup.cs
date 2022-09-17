@@ -70,10 +70,9 @@ namespace Assets.Scripts
         {
             _systems
                 .Add(new EnemySpawnSystem())
-                .Add(new EnemyDestroySystem())
                 .Add(new BuildTowerSystem())
-                .Add(new SpawnSystem())
-                .Add(new DestroySystem())
+                .Add(new GameObjectSpawnSystem())
+                .Add(new GameObjectDestroySystem())
                 ;
         }
 
@@ -82,6 +81,7 @@ namespace Assets.Scripts
             _systems
                 .Add(new LaserSystem())
                 .Add(new MortarSystem())
+                .Add(new ProjectileSystem())
                 ;
         }
 

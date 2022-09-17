@@ -1,6 +1,6 @@
 using Components;
 using Components.Core;
-using Events.Enemies;
+using Events;
 using Leopotam.Ecs;
 using Scripts;
 using Tags;

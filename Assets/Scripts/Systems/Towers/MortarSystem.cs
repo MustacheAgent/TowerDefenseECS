@@ -77,6 +77,16 @@ namespace Systems.Towers
             float sinTheta = cosTheta * tanTheta;
 
             tower.turret.localRotation = Quaternion.LookRotation(new Vector3(dir.x, tanTheta, dir.y));
+            
+            _world.NewEntity().Get<ProjectileComponent>() = new ProjectileComponent
+            {
+                launchPoint = launchPoint,
+                targetPoint = targetPoint,
+                launchVelocity = new Vector3(s * cosTheta * dir.x, s * sinTheta, s * cosTheta * dir.y),
+                explosionRadius = tower.explosionRadius,
+                damage = tower.damage,
+                age = 0
+            };
         }
     }
 }
