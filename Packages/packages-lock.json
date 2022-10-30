@@ -129,11 +129,10 @@
       }
     },
     "com.voody.unileo": {
-      "version": "https://github.com/voody2506/UniLeo.git",
+      "version": "file:D:/Unity Projects/UniLeo",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "bbaed2aec8231b6e79369eecd5c3a9f3b80a97e2"
+      "source": "local",
+      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

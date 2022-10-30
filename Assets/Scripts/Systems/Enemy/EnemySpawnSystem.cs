@@ -1,4 +1,5 @@
-﻿using Components.Core;
+﻿using Components;
+using Components.Core;
 using Components.Factory;
 using Leopotam.Ecs;
 using Tags;
@@ -30,12 +31,17 @@ namespace Systems.Enemy
                 foreach (var i in tileFilter)
                 {
                     ref Transform spawnPosition = ref tileFilter.Get1(i).transform;
-                    _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
+                    var entity = _world.NewEntity();
+                    entity.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                     {
                         Prefab = _staticData.enemyPrefab,
                         Position = spawnPosition.position,
                         Rotation = Quaternion.identity,
                         Parent = null
+                    };
+                    entity.Get<HealthComponent>() = new HealthComponent
+                    {
+                        health = 50
                     };
                 }
                 _lastTime -= _spawnDelay;

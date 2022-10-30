@@ -1,6 +1,9 @@
 ﻿using Components.Factory;
 using Factories;
 using Leopotam.Ecs;
+using System;
+using UnityEngine;
+using Voody.UniLeo;
 
 namespace Systems.Factory
 {
@@ -25,8 +28,11 @@ namespace Systems.Factory
 				{
 					ref EcsEntity spawnEntity = ref _spawnFilter.GetEntity(index);
 					var spawnPrefabData = spawnEntity.Get<SpawnPrefabComponent>();
-					_factory.Spawn(spawnPrefabData);
+					var gameObject = _factory.Spawn(spawnPrefabData);
 					spawnEntity.Del<SpawnPrefabComponent>();
+
+					if (!spawnEntity.IsNull() && spawnEntity.IsAlive()) 
+						gameObject.GetComponent<ConvertToEntity>().SetInitialValues(spawnEntity);
 				}
 			}
 		}

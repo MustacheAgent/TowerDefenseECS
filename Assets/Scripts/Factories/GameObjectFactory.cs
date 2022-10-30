@@ -8,7 +8,9 @@ namespace Factories
     {
         public GameObject Spawn(SpawnPrefabComponent spawnInfo)
         {
-            return Instantiate(spawnInfo.Prefab, spawnInfo.Position, spawnInfo.Rotation, spawnInfo.Parent);
+            var gameObject = Instantiate(spawnInfo.Prefab, spawnInfo.Position, spawnInfo.Rotation, spawnInfo.Parent);
+
+            return gameObject;
         }
 
         public void Reclaim(GameObject destroyObject)

@@ -22,6 +22,7 @@ namespace Assets.Scripts
         StaticData _staticData;
         [SerializeField]
         EcsUiEmitter _emitter;
+
         void Start()
         {
             _world = new EcsWorld();
