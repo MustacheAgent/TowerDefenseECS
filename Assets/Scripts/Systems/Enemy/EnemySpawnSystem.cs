@@ -39,10 +39,6 @@ namespace Systems.Enemy
                         Rotation = Quaternion.identity,
                         Parent = null
                     };
-                    entity.Get<HealthComponent>() = new HealthComponent
-                    {
-                        health = 50
-                    };
                 }
                 _lastTime -= _spawnDelay;
             }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1286061583001087575}
   - component: {fileID: 2108983459911185230}
   - component: {fileID: 3879686428187392843}
+  - component: {fileID: 4664138660264039232}
   m_Layer: 0
   m_Name: MortarShell
   m_TagString: Untagged
@@ -61,6 +62,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     transform: {fileID: 1286061583001087575}
+--- !u!114 &4664138660264039232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495508834088660506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50910b5b8881f5f48b0b4696a4b7823d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    gameObject: {fileID: 495508834088660506}
 --- !u!1 &2548642767570333591
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using Components;
 using Components.Core;
+using Components.Factory;
 using Components.Towers;
 using Leopotam.Ecs;
 using System.Collections.Generic;
@@ -12,17 +13,21 @@ namespace Systems.Towers
     public class MortarSystem : IEcsRunSystem
     {
         readonly EcsWorld _world = null;
+        readonly StaticData _staticData = null;
 
-        readonly EcsFilter<PositionComponent, MortarTurretComponent> mortarFilter = null;
+        readonly EcsFilter<PositionComponent, MortarTurretComponent, FireProgressComponent> mortarFilter = null;
         readonly EcsFilter<PositionComponent, HealthComponent, EnemyTag> enemyFilter = null;
 
         public void Run()
-        {
-            List<int> enemiesInRange = new();
+        {   
             foreach (var towerIndex in mortarFilter)
             {
-                ref var towerPosition = ref mortarFilter.Get1(towerIndex).transform;
+                ref var fireProgress = ref mortarFilter.Get3(towerIndex);
                 ref var tower = ref mortarFilter.Get2(towerIndex);
+                fireProgress.progress += tower.attackSpeed * Time.deltaTime;
+
+                List<int> enemiesInRange = new();
+                ref var towerPosition = ref mortarFilter.Get1(towerIndex).transform;
                 ref var towerRadius = ref tower.attackRadius;
                 ref var innerRadius = ref tower.innerRadius;
                 int closestEnemyIndex = -1;
@@ -37,14 +42,18 @@ namespace Systems.Towers
                 }
                 if (enemiesInRange.Count > 0) closestEnemyIndex = enemiesInRange.Min();
 
-                if (closestEnemyIndex >= 0)
+                while (fireProgress.progress >= 1f)
                 {
-                    ref var enemy = ref enemyFilter.GetEntity(closestEnemyIndex);
-                    Shoot(tower, enemy);
-                }
-                else
-                {
-                    
+                    if (closestEnemyIndex >= 0 && fireProgress.progress >= 1f)
+                    {
+                        ref var enemy = ref enemyFilter.GetEntity(closestEnemyIndex);
+                        Shoot(tower, enemy);
+                        fireProgress.progress -= 1f;
+                    }
+                    else
+                    {
+                        fireProgress.progress = 0.999f;
+                    }
                 }
             }
         }
@@ -77,8 +86,17 @@ namespace Systems.Towers
             float sinTheta = cosTheta * tanTheta;
 
             tower.turret.localRotation = Quaternion.LookRotation(new Vector3(dir.x, tanTheta, dir.y));
-            
-            _world.NewEntity().Get<ProjectileComponent>() = new ProjectileComponent
+
+            var projectile = _world.NewEntity();
+            projectile.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
+             {
+                 Prefab = _staticData.projectilePrefab,
+                 Position = launchPoint,
+                 Rotation = tower.turret.localRotation,
+                 Parent = null
+             };
+
+            projectile.Get<ProjectileComponent>() = new ProjectileComponent
             {
                 launchPoint = launchPoint,
                 targetPoint = targetPoint,

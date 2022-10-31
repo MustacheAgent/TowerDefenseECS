@@ -20,3 +20,5 @@ MonoBehaviour:
     type: 3}
   mortarPrefab: {fileID: 125550913269902966, guid: bd72ae6e20c080444b59bc702b71aa5e,
     type: 3}
+  projectilePrefab: {fileID: 495508834088660506, guid: b837f03bd465fbb4282d9e2e63189c23,
+    type: 3}
