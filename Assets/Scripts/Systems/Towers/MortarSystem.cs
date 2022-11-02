@@ -42,24 +42,29 @@ namespace Systems.Towers
                 }
                 if (enemiesInRange.Count > 0) closestEnemyIndex = enemiesInRange.Min();
 
-                while (fireProgress.progress >= 1f)
+                if (closestEnemyIndex >= 0)
                 {
-                    if (closestEnemyIndex >= 0 && fireProgress.progress >= 1f)
+                    ref var enemy = ref enemyFilter.GetEntity(closestEnemyIndex);
+                    ref var track = ref mortarFilter.GetEntity(towerIndex).Get<MortarTrackComponent>();
+                    TrackTarget(tower, enemy, ref track);
+                    while (fireProgress.progress >= 1f)
                     {
-                        ref var enemy = ref enemyFilter.GetEntity(closestEnemyIndex);
-                        Shoot(tower, enemy);
-                        fireProgress.progress -= 1f;
-                    }
-                    else
-                    {
-                        fireProgress.progress = 0.999f;
+                        if (fireProgress.progress >= 1f)
+                        {
+                            Shoot(tower, track);
+                            fireProgress.progress -= 1f;
+                        }
+                        else
+                        {
+                            fireProgress.progress = 0.999f;
+                        }
                     }
                 }
             }
         }
 
-        void Shoot(MortarTurretComponent tower, EcsEntity enemy)
-        {
+        void TrackTarget(MortarTurretComponent tower, EcsEntity enemy, ref MortarTrackComponent track)
+        {   
             float targetingRange = tower.attackRadius;
             float x_speed = targetingRange + 0.25001f;
             float y_speed = -tower.turret.position.y;
@@ -87,20 +92,28 @@ namespace Systems.Towers
 
             tower.turret.localRotation = Quaternion.LookRotation(new Vector3(dir.x, tanTheta, dir.y));
 
+            track.targetPoint = targetPoint;
+            track.launchPoint = launchPoint;
+            track.launchVelocity = new Vector3(s * cosTheta * dir.x, s * sinTheta, s * cosTheta * dir.y);
+        }
+
+        void Shoot(MortarTurretComponent tower, MortarTrackComponent track)
+        {
+            Debug.Log("FIRE!!!");
             var projectile = _world.NewEntity();
             projectile.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
              {
                  Prefab = _staticData.projectilePrefab,
-                 Position = launchPoint,
+                 Position = track.launchPoint,
                  Rotation = tower.turret.localRotation,
                  Parent = null
              };
 
             projectile.Get<ProjectileComponent>() = new ProjectileComponent
             {
-                launchPoint = launchPoint,
-                targetPoint = targetPoint,
-                launchVelocity = new Vector3(s * cosTheta * dir.x, s * sinTheta, s * cosTheta * dir.y),
+                launchPoint = track.launchPoint,
+                targetPoint = track.targetPoint,
+                launchVelocity = track.launchVelocity,
                 explosionRadius = tower.explosionRadius,
                 damage = tower.damage,
                 age = 0
