@@ -22,6 +22,10 @@ namespace Scenarios
 
         public bool Progress()
         {
+            if (index >= waves.Length)
+			{
+				return false;
+			}
             float deltaTime = waves[index].Progress(timeScale * Time.deltaTime);
             while (deltaTime >= 0f)
 				{
