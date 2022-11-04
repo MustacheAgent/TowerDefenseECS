@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Systems.Core
 {
-    public class ClickSystem : IEcsRunSystem
+    public class TestSystem : IEcsRunSystem
     {
         private PlayerInputData _input = null;
         private SceneData _sceneData = null;

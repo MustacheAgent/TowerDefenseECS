@@ -4,6 +4,7 @@ using Systems.Core;
 using Systems.Enemy;
 using Systems.Factory;
 using Systems.Towers;
+using Systems.UI;
 using UnityEngine;
 using Voody.UniLeo;
 
@@ -62,7 +63,7 @@ namespace Assets.Scripts
             _systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
-                .Add(new UiSystem())
+                .Add(new Systems.UI.ClickSystem())
                 .Add(new PathfindingSystem())
                 ;
         }

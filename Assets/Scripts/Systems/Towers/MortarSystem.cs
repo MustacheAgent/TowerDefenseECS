@@ -99,7 +99,6 @@ namespace Systems.Towers
 
         void Shoot(MortarTurretComponent tower, MortarTrackComponent track)
         {
-            Debug.Log("FIRE!!!");
             var projectile = _world.NewEntity();
             projectile.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
              {

@@ -3,9 +3,9 @@ using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Components;
 using UnityEngine;
 
-namespace Systems.Core
+namespace Systems.UI
 {
-    public class UiSystem : IEcsRunSystem
+    public class ClickSystem : IEcsRunSystem
     {
         readonly EcsFilter<EcsUiClickEvent> _clickEvents;
         readonly SceneData _sceneData = null;
