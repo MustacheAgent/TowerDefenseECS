@@ -63,7 +63,8 @@ namespace Assets.Scripts
             _systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
-                .Add(new Systems.UI.ClickSystem())
+                .Add(new ClickSystem())
+                .Add(new ScenarioSystem())
                 .Add(new PathfindingSystem())
                 ;
         }

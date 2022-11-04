@@ -43,6 +43,8 @@ namespace Systems.Enemy
                         Parent = null
                     };
                 }
+
+                _spawnEventFilter.GetEntity(eventIndex).Destroy();
             }
             /*
             _lastTime += Time.deltaTime;

@@ -1,6 +1,7 @@
 ﻿using Enums;
 using Factories;
 using Leopotam.Ecs;
+using Scenarios;
 using System;
 using Unity.Mathematics;
 using UnityEngine;
@@ -18,4 +19,6 @@ public class SceneData : MonoBehaviour
 
     public EcsEntity[] tiles;
     public int2 spawn, destination;
+
+    public Scenario scenario;
 }

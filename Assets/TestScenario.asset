@@ -10,6 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1ec68eec78c1a84d8e8fdba1aff1995, type: 3}
-  m_Name: LevelScenario
+  m_Name: TestScenario
   m_EditorClassIdentifier: 
-  waves: []
+  waves:
+  - spawnSequences:
+    - type: 0
+      amount: 8
+      cooldown: 1
+    - type: 1
+      amount: 4
+      cooldown: 1
+    - type: 2
+      amount: 2
+      cooldown: 1
+  - spawnSequences:
+    - type: 2
+      amount: 2
+      cooldown: 1
+    - type: 1
+      amount: 4
+      cooldown: 1
+    - type: 0
+      amount: 8
+      cooldown: 1

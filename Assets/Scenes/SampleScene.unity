@@ -4392,6 +4392,7 @@ MonoBehaviour:
   destination:
     x: 0
     y: 0
+  scenario: {fileID: 11400000, guid: eb52b6d12d3ff8347b42f38031bd78d0, type: 2}
 --- !u!4 &455675496
 Transform:
   m_ObjectHideFlags: 0
