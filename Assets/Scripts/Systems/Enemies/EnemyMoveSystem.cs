@@ -7,20 +7,20 @@ using Tags;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Systems.Enemy
+namespace Systems.Enemies
 {
     public class EnemyMoveSystem : IEcsRunSystem 
     {
-        readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> enemyFilter = null;
+        readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> _enemyFilter = null;
         readonly SceneData _sceneData = null;
 
         public void Run()
         {
-            foreach (var i in enemyFilter)
+            foreach (var i in _enemyFilter)
             {
-                ref Transform position = ref enemyFilter.Get1(i).transform;
-                ref MoveComponent moveComponent = ref enemyFilter.Get2(i);
-                ref PathComponent path = ref enemyFilter.Get3(i);
+                ref Transform position = ref _enemyFilter.Get1(i).transform;
+                ref MoveComponent moveComponent = ref _enemyFilter.Get2(i);
+                ref PathComponent path = ref _enemyFilter.Get3(i);
 
                 ref float speed = ref moveComponent.speed;
                 ref CharacterController controller = ref moveComponent.controller;
@@ -29,7 +29,7 @@ namespace Systems.Enemy
                 ref int currentPathIndex = ref path.pathIndex;
                 if (currentPathIndex >= path.path.Count)
                 {
-                    enemyFilter.GetEntity(i).Get<DestroyEvent>();
+                    _enemyFilter.GetEntity(i).Get<DestroyEvent>();
                 }
                 else
                 {

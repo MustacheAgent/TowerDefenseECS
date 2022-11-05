@@ -1,14 +1,14 @@
 using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Systems;
 using Systems.Core;
-using Systems.Enemy;
+using Systems.Enemies;
 using Systems.Factory;
 using Systems.Towers;
 using Systems.UI;
 using UnityEngine;
 using Voody.UniLeo;
 
-namespace Assets.Scripts
+namespace Scripts
 {
     sealed class EcsStartup : MonoBehaviour
     {
@@ -16,13 +16,13 @@ namespace Assets.Scripts
         EcsSystems _systems;
 
         [SerializeField]
-        PlayerInputData _inputData;
+        PlayerInputData inputData;
         [SerializeField]
-        SceneData _sceneData;
+        SceneData sceneData;
         [SerializeField]
-        StaticData _staticData;
+        StaticData staticData;
         [SerializeField]
-        EcsUiEmitter _emitter;
+        EcsUiEmitter emitter;
 
         void Start()
         {
@@ -93,25 +93,24 @@ namespace Assets.Scripts
             _systems
                 .Add(new EnemyMoveSystem())
                 .Add(new DamageSystem())
-                //.Add(new ClickSystem())
                 ;
         }
 
         void Inject()
         {
             _systems
-                .InjectUi(_emitter)
-                .Inject(_inputData)
-                .Inject(_sceneData)
-                .Inject(_staticData);
+                .InjectUi(emitter)
+                .Inject(inputData)
+                .Inject(sceneData)
+                .Inject(staticData);
         }
 
-        void Update () 
+        void Update() 
         {
             _systems?.Run();
         }
 
-        void OnDestroy () 
+        void OnDestroy() 
         {
             if (_systems != null) 
             {

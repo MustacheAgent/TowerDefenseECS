@@ -7,7 +7,7 @@ using Tags;
 using UnityEngine;
 using Dictionaries;
 
-namespace Systems.Enemy
+namespace Systems.Enemies
 {
     public class EnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
     {

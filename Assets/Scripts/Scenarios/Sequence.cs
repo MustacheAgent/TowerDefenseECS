@@ -2,7 +2,6 @@
 using Events.Enemies;
 using Leopotam.Ecs;
 using System;
-using UnityEngine;
 using Voody.UniLeo;
 
 namespace Scenarios
@@ -14,23 +13,23 @@ namespace Scenarios
         public int amount;
         public float cooldown;
 
-        private float currentTime;
-        private int count;
+        private float _currentTime;
+        private int _count;
 
         public void Init()
         {
-            currentTime = 0;
-            count = 0;
+            _currentTime = cooldown;
+            _count = 0;
         }
 
         public float Progress(float deltaTime)
         {
-            currentTime += deltaTime;
-            while(currentTime >= cooldown)
+            _currentTime += deltaTime;
+            while(_currentTime >= cooldown)
             {
-                currentTime -= cooldown;
-                if (count >= amount) return currentTime;
-                count += 1;
+                _currentTime -= cooldown;
+                if (_count >= amount) return _currentTime;
+                _count += 1;
                 // создать противника
                 WorldHandler.GetWorld().NewEntity().Get<SpawnEnemyEvent>() = new SpawnEnemyEvent
                 {

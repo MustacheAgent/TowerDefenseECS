@@ -33,3 +33,4 @@ MonoBehaviour:
     - type: 0
       amount: 8
       cooldown: 1
+  timeSpan: 2

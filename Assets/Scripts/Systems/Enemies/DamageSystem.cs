@@ -3,17 +3,17 @@ using Events;
 using Events.Enemies;
 using Leopotam.Ecs;
 
-namespace Systems.Enemy
+namespace Systems.Enemies
 {
     public class DamageSystem : IEcsRunSystem
     {
-        readonly EcsFilter<DamageEvent> damageFilter = null;
+        readonly EcsFilter<DamageEvent> _damageFilter = null;
 
         public void Run()
         {
-            foreach(var index in damageFilter)
+            foreach(var index in _damageFilter)
             {
-                ref var damageEvent = ref damageFilter.Get1(index);
+                ref var damageEvent = ref _damageFilter.Get1(index);
                 ref EcsEntity entity = ref damageEvent.entity;
                 ref var health = ref entity.Get<HealthComponent>().health;
                 ref var damage = ref damageEvent.damage;
@@ -22,7 +22,7 @@ namespace Systems.Enemy
                 {
                     entity.Get<DestroyEvent>();
                 }
-                damageFilter.GetEntity(index).Del<DamageEvent>();
+                _damageFilter.GetEntity(index).Del<DamageEvent>();
             }
         }
     }
