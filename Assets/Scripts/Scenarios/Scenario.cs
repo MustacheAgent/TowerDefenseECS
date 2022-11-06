@@ -29,20 +29,15 @@ namespace Scenarios
 				return false;
 			}
             
-            _currentTime += Time.deltaTime;
-            while(_currentTime >= timeSpan)
+            float deltaTime = waves[_index].Progress(_timeScale * Time.deltaTime);
+            while (deltaTime >= 0f)
             {
-	            _currentTime -= timeSpan;
-                float deltaTime = waves[_index].Progress(_timeScale * Time.deltaTime);
-                while (deltaTime >= 0f)
+                if (++_index >= waves.Length)
                 {
-                    if (++_index >= waves.Length)
-                    {
-                        return false;
-                    }
-                    waves[_index].Init();
-                    deltaTime = waves[_index].Progress(deltaTime);
+                    return false;
                 }
+                waves[_index].Init();
+                deltaTime = waves[_index].Progress(deltaTime);
             }
             return true;
         }

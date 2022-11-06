@@ -15,6 +15,5 @@ namespace Services
         public GameObject laserPrefab;
         public GameObject mortarPrefab;
         public GameObject projectilePrefab;
-        public Scenario scenario;
     }
 }
