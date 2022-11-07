@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6783523133646982056}
   - component: {fileID: 8884364995197595194}
   - component: {fileID: 5415919266378061842}
+  - component: {fileID: 1241343895349220663}
+  - component: {fileID: 8781912123009524806}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -61,6 +63,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     transform: {fileID: 3049716848203606713}
+--- !u!114 &1241343895349220663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732683586919912502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7102c097bcb437292f9aeefe6c53d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    towerIcon: {fileID: 21300000, guid: d6c11b9a43dfb413b86a3ff8908088db, type: 3}
+    towerPrice: 25
+    energyIcon: {fileID: 21300000, guid: 10f6c8d03930b4a449f543633892e711, type: 3}
+    defaultColor: {r: 0.3647059, g: 0.7058824, b: 1, a: 1}
+    invalidColor: {r: 1, g: 0.3647059, b: 0.3647059, a: 1}
+--- !u!114 &8781912123009524806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732683586919912502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50910b5b8881f5f48b0b4696a4b7823d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    gameObject: {fileID: 4732683586919912502}
 --- !u!1 &6727229602774817623
 GameObject:
   m_ObjectHideFlags: 0

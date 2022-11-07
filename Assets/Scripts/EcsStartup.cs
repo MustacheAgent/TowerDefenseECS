@@ -64,7 +64,7 @@ namespace Scripts
             _systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
-                .Add(new ClickSystem())
+                .Add(new HudSystem())
                 .Add(new ScenarioSystem())
                 .Add(new PathfindingSystem())
                 ;

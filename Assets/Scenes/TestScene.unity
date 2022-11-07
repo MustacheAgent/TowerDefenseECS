@@ -4457,7 +4457,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factory: {fileID: 11400000, guid: da0bd480fe3d91542a0212aa12e3855c, type: 2}
   worldBottomLeft: {fileID: 1283012030}
-  selectedTower: 0
   gridSizeX: 0
   gridSizeZ: 0
   spawn:
@@ -4466,6 +4465,13 @@ MonoBehaviour:
   destination:
     x: 0
     y: 0
+  selectedTower: 0
+  towerDictionary:
+    m_keys: 010000000200000003000000
+    m_values:
+    - {fileID: 4732683586919912502, guid: 2e05737429b49f64d80c4e275503e70c, type: 3}
+    - {fileID: 4808321949195822956, guid: 6c516b66c4e93dd48bfbe4502354ac9c, type: 3}
+    - {fileID: 125550913269902966, guid: bd72ae6e20c080444b59bc702b71aa5e, type: 3}
   scenario: {fileID: 11400000, guid: eb52b6d12d3ff8347b42f38031bd78d0, type: 2}
 --- !u!4 &455675496
 Transform:

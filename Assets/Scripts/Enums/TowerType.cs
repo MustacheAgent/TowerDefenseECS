@@ -5,6 +5,7 @@
         None,
         Wall,
         Laser,
-        Mortar
+        Mortar,
+        Rocket
     }
 }

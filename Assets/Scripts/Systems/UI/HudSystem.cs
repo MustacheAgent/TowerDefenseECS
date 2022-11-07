@@ -6,11 +6,16 @@ using UnityEngine;
 
 namespace Systems.UI
 {
-    public class ClickSystem : IEcsRunSystem
+    public class HudSystem : IEcsInitSystem, IEcsRunSystem
     {
         readonly EcsFilter<EcsUiClickEvent> _clickEvents;
         readonly SceneData _sceneData = null;
 
+        public void Init()
+        {
+            
+        }
+        
         public void Run()
         {
             foreach (var idx in _clickEvents)

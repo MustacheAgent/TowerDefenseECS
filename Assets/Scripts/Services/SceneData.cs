@@ -3,6 +3,7 @@ using Factories;
 using Leopotam.Ecs;
 using Scenarios;
 using System;
+using Dictionaries;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -13,15 +14,14 @@ namespace Services
     {
         public GameObjectFactory factory;
         public GameObject worldBottomLeft;
-        public TowerType selectedTower;
-
         // параметры сетки
         public int gridSizeX;
         public int gridSizeZ;
-
         public EcsEntity[] tiles;
         public int2 spawn, destination;
 
+        public TowerType selectedTower;
+        public TowerDictionary towerDictionary;
         public Scenario scenario;
     }
 }
