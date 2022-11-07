@@ -16,6 +16,7 @@ namespace Systems.Core
         readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> units = null;
         readonly EcsFilter<PositionComponent, DestinationTag> dest = null;
         private SceneData _sceneData = null;
+        private PathfindingData _pathfindingData = null;
 
         private const int MOVE_STRAIGHT_COST = 10;
         private const int MOVE_DIAGONAL_COST = 14;
@@ -49,8 +50,8 @@ namespace Systems.Core
             int startNodeIndex = NodeFromPoint(start);
             int endNodeIndex = NodeFromPoint(end);
 
-            EcsEntity[] tiles = new EcsEntity[_sceneData.gridSizeX * _sceneData.gridSizeZ];
-            _sceneData.tiles.CopyTo(tiles, 0);
+            EcsEntity[] tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
+            _pathfindingData.tiles.CopyTo(tiles, 0);
             SetPathfindingValues(tiles);
 
             EcsEntity startNode = tiles[startNodeIndex];
@@ -112,7 +113,7 @@ namespace Systems.Core
                         continue;
                     }
 
-                    int neighbourIndex = PathfindingExtensions.CalculateIndex(neighbourPosition.x, neighbourPosition.y, _sceneData.gridSizeX);
+                    int neighbourIndex = PathfindingExtensions.CalculateIndex(neighbourPosition.x, neighbourPosition.y, _pathfindingData.gridSizeX);
 
                     if (closedList.Contains(neighbourIndex))
                     {
@@ -187,8 +188,8 @@ namespace Systems.Core
                 }
             }
 
-            _sceneData.gridSizeX = gridSizeX;
-            _sceneData.gridSizeZ = gridSizeZ;
+            _pathfindingData.gridSizeX = gridSizeX;
+            _pathfindingData.gridSizeZ = gridSizeZ;
         }
 
         private void SetPathfindingValues(EcsEntity[] tiles)
@@ -198,7 +199,7 @@ namespace Systems.Core
                 ref var path = ref tiles[i].Get<PathfindingComponent>();
                 path.cameFromIndex = -1;
                 path.gCost = int.MaxValue;
-                path.hCost = CalculateDistanceCost(path.position, _sceneData.destination);
+                path.hCost = CalculateDistanceCost(path.position, _pathfindingData.destination);
             }
         }
 
@@ -210,31 +211,31 @@ namespace Systems.Core
             Vector3 boxCastPos = first = _sceneData.worldBottomLeft.transform.position;
             GameObject obj = _sceneData.worldBottomLeft;
 
-            _sceneData.tiles = new EcsEntity[_sceneData.gridSizeX * _sceneData.gridSizeZ];
+            _pathfindingData.tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
 
-            for (int x = 0; x < _sceneData.gridSizeX; x++)
+            for (int x = 0; x < _pathfindingData.gridSizeX; x++)
             {
                 entity = obj.GetEntity();
                 ref var path = ref entity.Get<PathfindingComponent>();
                 path.position.x = x;
                 path.position.y = 0;
-                path.index = PathfindingExtensions.CalculateIndex(x, 0, _sceneData.gridSizeX);
+                path.index = PathfindingExtensions.CalculateIndex(x, 0, _pathfindingData.gridSizeX);
 
                 if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == Enums.TileContent.SpawnPoint)
                 {
-                    _sceneData.spawn = new int2(path.position.x, path.position.y);
+                    _pathfindingData.spawn = new int2(path.position.x, path.position.y);
                 }
                 if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == Enums.TileContent.Destination)
                 {
-                    _sceneData.destination = new int2(path.position.x, path.position.y);
+                    _pathfindingData.destination = new int2(path.position.x, path.position.y);
                 }
 
                 ref var position = ref entity.Get<PositionComponent>();
                 boxCastPos = first = position.transform.position;
 
-                _sceneData.tiles[path.index] = entity;
+                _pathfindingData.tiles[path.index] = entity;
 
-                for (int z = 1; z < _sceneData.gridSizeZ; z++)
+                for (int z = 1; z < _pathfindingData.gridSizeZ; z++)
                 {
                     if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 500), Vector3.forward, out hit,
                         _sceneData.worldBottomLeft.transform.rotation))
@@ -243,9 +244,9 @@ namespace Systems.Core
                         path = ref entity.Get<PathfindingComponent>();
                         path.position.x = x;
                         path.position.y = z;
-                        path.index = PathfindingExtensions.CalculateIndex(x, z, _sceneData.gridSizeX);
+                        path.index = PathfindingExtensions.CalculateIndex(x, z, _pathfindingData.gridSizeX);
 
-                        _sceneData.tiles[path.index] = entity;
+                        _pathfindingData.tiles[path.index] = entity;
 
                         position = ref entity.Get<PositionComponent>();
                         boxCastPos = position.transform.position;
@@ -286,8 +287,8 @@ namespace Systems.Core
             return 
                 position.x >= 0 &&
                 position.y >= 0 &&
-                position.x < _sceneData.gridSizeX && 
-                position.y < _sceneData.gridSizeZ;
+                position.x < _pathfindingData.gridSizeX && 
+                position.y < _pathfindingData.gridSizeZ;
         }
 
         private int GetLowestFCost(List<int> openList, EcsEntity[] tiles)
@@ -312,9 +313,9 @@ namespace Systems.Core
             int x = Mathf.RoundToInt(point.x);
             int y = Mathf.RoundToInt(point.z);
             //Debug.Log("Point: " + point + "\n" + "Got indexes. X: " + x + " Z: " + y);
-            if (x >= 0 && x < _sceneData.gridSizeX && y >= 0 && y < _sceneData.gridSizeZ)
+            if (x >= 0 && x < _pathfindingData.gridSizeX && y >= 0 && y < _pathfindingData.gridSizeZ)
             {
-                int index = x + y * _sceneData.gridSizeX;
+                int index = x + y * _pathfindingData.gridSizeX;
                 //Debug.Log("Index: " + index);
                 return index;
             }

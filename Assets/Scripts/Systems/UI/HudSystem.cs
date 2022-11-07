@@ -13,7 +13,10 @@ namespace Systems.UI
 
         public void Init()
         {
-            
+            foreach (var tower in _sceneData.towerDictionary)
+            {
+                
+            }
         }
         
         public void Run()

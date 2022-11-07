@@ -12,16 +12,13 @@ namespace Services
     [Serializable]
     public class SceneData : MonoBehaviour
     {
-        public GameObjectFactory factory;
+        public GameObjectFactory gameObjectFactory;
+        public UIObjectFactory uiFactory;
+        
         public GameObject worldBottomLeft;
-        // параметры сетки
-        public int gridSizeX;
-        public int gridSizeZ;
-        public EcsEntity[] tiles;
-        public int2 spawn, destination;
-
+        public Canvas hud;
+        public Scenario scenario;
         public TowerType selectedTower;
         public TowerDictionary towerDictionary;
-        public Scenario scenario;
     }
 }

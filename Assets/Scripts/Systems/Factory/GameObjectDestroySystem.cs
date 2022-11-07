@@ -17,7 +17,7 @@ namespace Systems.Factory
 
         public void PreInit()
         {
-            _factory = _sceneData.factory;
+            _factory = _sceneData.gameObjectFactory;
         }
 
         public void Run()

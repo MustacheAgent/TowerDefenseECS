@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Factories
 {
-    [CreateAssetMenu(menuName = "Factories/Game Object Factory")]
+    [CreateAssetMenu(menuName = "Factories/Game Object Factory", fileName = "GameObjectFactory")]
     public class GameObjectFactory : ScriptableObject
     {
         public GameObject Spawn(SpawnPrefabComponent spawnInfo)

@@ -22,17 +22,5 @@ namespace Systems.Core
                 Debug.Log("Im clicked!", data.Sender);
             }
         }
-
-        private int NodeFromPoint(Vector3 point)
-        {
-            int x = Mathf.RoundToInt(point.x);
-            int y = Mathf.RoundToInt(point.z);
-            Debug.Log("Point: " + point + "\n" + "Got indexes. X: " + x + " Z: " + y);
-            if (x >= 0 && x < _sceneData.gridSizeX && y >= 0 && y < _sceneData.gridSizeZ)
-            {
-                return x + y * _sceneData.gridSizeX;
-            }
-            return -1;
-        }
     }
 }

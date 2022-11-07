@@ -10,7 +10,6 @@ namespace Services
     public class StaticData : ScriptableObject
     {
         public EnemyDictionary enemies;
-        public GameObject enemyPrefab;
         public GameObject wallPrefab;
         public GameObject laserPrefab;
         public GameObject mortarPrefab;

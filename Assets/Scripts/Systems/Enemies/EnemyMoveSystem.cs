@@ -1,3 +1,4 @@
+using System.IO;
 using Components;
 using Components.Core;
 using Events;
@@ -14,6 +15,7 @@ namespace Systems.Enemies
     {
         readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> _enemyFilter = null;
         readonly SceneData _sceneData = null;
+        readonly PathfindingData _pathfindingData = null;
 
         public void Run()
         {
@@ -37,7 +39,7 @@ namespace Systems.Enemies
                     int2 currentPathXY = path.path[currentPathIndex];
 
                     EcsEntity nextOnPath =
-                        _sceneData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _sceneData.gridSizeX)];
+                        _pathfindingData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX)];
                     ref Transform destination = ref nextOnPath.Get<PositionComponent>().transform;
 
                     if (Vector2.Distance(new Vector2(position.position.x, position.position.z),

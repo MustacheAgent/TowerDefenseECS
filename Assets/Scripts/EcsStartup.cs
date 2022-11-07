@@ -16,14 +16,11 @@ namespace Scripts
         EcsWorld _world;
         EcsSystems _systems;
 
-        [SerializeField]
-        PlayerInputData inputData;
-        [SerializeField]
-        SceneData sceneData;
-        [SerializeField]
-        StaticData staticData;
-        [SerializeField]
-        EcsUiEmitter emitter;
+        [SerializeField] PlayerInputData inputData;
+        [SerializeField] SceneData sceneData;
+        [SerializeField] StaticData staticData;
+        [SerializeField] EcsUiEmitter emitter;
+        [SerializeField] PathfindingData pathfindingData;
 
         void Start()
         {
@@ -37,12 +34,12 @@ namespace Scripts
 #endif
             //_systems.OneFrame<>
 
-            AddGameplaySystems();
-            AddSpawnSystems();
-            AddTowerSystems();
-            AddMiscSystems();
+            AddGameplaySystems(_systems);
+            AddSpawnSystems(_systems);
+            AddTowerSystems(_systems);
+            AddMiscSystems(_systems);
 
-            Inject();
+            Inject(_systems);
 
             _systems.Init();
 
@@ -59,9 +56,9 @@ namespace Scripts
             // .Inject (new NavMeshSupport ())
         }
 
-        void AddGameplaySystems()
+        void AddGameplaySystems(EcsSystems systems)
         {
-            _systems
+            systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
                 .Add(new HudSystem())
@@ -70,9 +67,9 @@ namespace Scripts
                 ;
         }
 
-        void AddSpawnSystems()
+        void AddSpawnSystems(EcsSystems systems)
         {
-            _systems
+            systems
                 .Add(new EnemySpawnSystem())
                 .Add(new BuildTowerSystem())
                 .Add(new GameObjectSpawnSystem())
@@ -80,30 +77,31 @@ namespace Scripts
                 ;
         }
 
-        void AddTowerSystems()
+        void AddTowerSystems(EcsSystems systems)
         {
-            _systems
+            systems
                 .Add(new LaserSystem())
                 .Add(new MortarSystem())
                 .Add(new ProjectileSystem())
                 ;
         }
 
-        void AddMiscSystems()
+        void AddMiscSystems(EcsSystems systems)
         {
-            _systems
+            systems
                 .Add(new EnemyMoveSystem())
                 .Add(new DamageSystem())
                 ;
         }
 
-        void Inject()
+        void Inject(EcsSystems systems)
         {
-            _systems
+            systems
                 .InjectUi(emitter)
                 .Inject(inputData)
                 .Inject(sceneData)
-                .Inject(staticData);
+                .Inject(staticData)
+                .Inject(pathfindingData);
         }
 
         void Update() 
