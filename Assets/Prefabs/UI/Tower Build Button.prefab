@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 639236164780423587}
   - component: {fileID: 4606760290743377510}
   - component: {fileID: 6278729644304822526}
+  - component: {fileID: 1736421801246554874}
   m_Layer: 5
-  m_Name: TowerIcon
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,6 +77,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1736421801246554874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244117493811295637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 6278729644304822526}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2686443269624788121
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +133,7 @@ GameObject:
   - component: {fileID: 2686443269624788124}
   - component: {fileID: 2686443269624788123}
   m_Layer: 5
-  m_Name: Image
+  m_Name: EnergyIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,8 +207,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2686443270617193041}
   - component: {fileID: 2686443270617193044}
-  - component: {fileID: 2686443270617193042}
-  - component: {fileID: 2686443270617193045}
+  - component: {fileID: 1498591429392055675}
+  - component: {fileID: 2752354519301456353}
   m_Layer: 5
   m_Name: Tower Build Button
   m_TagString: Untagged
@@ -202,7 +247,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2686443270617193040}
   m_CullTransparentMesh: 1
---- !u!114 &2686443270617193042
+--- !u!114 &1498591429392055675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,42 +256,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2686443270617193040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f9103c7c4bf0da43bc37ff6ca86ba4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 0
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 6278729644304822526}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2686443270617193045
+  price: {fileID: 2686443271260104963}
+  towerIcon: {fileID: 6278729644304822526}
+  buyButton: {fileID: 1736421801246554874}
+  energyIcon: {fileID: 2686443269624788123}
+  energyDefaultColor: {r: 0.3647059, g: 0.7058824, b: 1, a: 1}
+  energyInvalidColor: {r: 1, g: 0.3647059, b: 0.3647059, a: 1}
+--- !u!114 &2752354519301456353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,8 +279,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WidgetName: 
   Emitter: {fileID: 0}
-  _nameRegistrationType: 0
-  _selectable: {fileID: 0}
+  _nameRegistrationType: 1
+  _selectable: {fileID: 1736421801246554874}
   DragTreshold: 5
 --- !u!1 &2686443271260104961
 GameObject:

@@ -40,6 +40,8 @@ namespace Scripts
             AddMiscSystems(_systems);
 
             Inject(_systems);
+            
+            _systems.InjectUi(emitter);
 
             _systems.Init();
 
@@ -97,7 +99,6 @@ namespace Scripts
         void Inject(EcsSystems systems)
         {
             systems
-                .InjectUi(emitter)
                 .Inject(inputData)
                 .Inject(sceneData)
                 .Inject(staticData)

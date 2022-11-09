@@ -1,8 +1,10 @@
 ﻿using Enums;
 using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Components;
+using MonoProviders.Components.Towers;
 using Services;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Systems.UI
 {
@@ -24,6 +26,7 @@ namespace Systems.UI
             foreach (var idx in _clickEvents)
             {
                 ref EcsUiClickEvent data = ref _clickEvents.Get1(idx);
+                Debug.Log("Im clicked!", data.Sender);
                 switch (data.WidgetName)
                 {
                     case "Wall":
