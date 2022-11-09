@@ -10,10 +10,6 @@ namespace Components.Towers
         public Sprite towerIcon;
         public int towerPrice;
         public Sprite energyIcon;
-
         public string towerName;
-
-        public Color defaultColor;
-        public Color invalidColor;
     }
 }

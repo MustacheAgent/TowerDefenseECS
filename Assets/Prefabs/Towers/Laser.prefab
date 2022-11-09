@@ -382,8 +382,7 @@ MonoBehaviour:
     towerIcon: {fileID: 21300000, guid: 53652022b1d444a5c9e9630488e44e13, type: 3}
     towerPrice: 50
     energyIcon: {fileID: 21300000, guid: 10f6c8d03930b4a449f543633892e711, type: 3}
-    defaultColor: {r: 0.3647059, g: 0.7058824, b: 1, a: 1}
-    invalidColor: {r: 1, g: 0.3647059, b: 0.3647059, a: 1}
+    towerName: Laser
 --- !u!1 &7226352533017766791
 GameObject:
   m_ObjectHideFlags: 0
