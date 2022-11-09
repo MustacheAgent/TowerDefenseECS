@@ -16,13 +16,12 @@ public class BuildTowerButton : MonoBehaviour
     public Image energyIcon;
 
     public Color energyDefaultColor;
-		
+    
     public Color energyInvalidColor;
 
     public void InitButton(TowerInfoComponent info)
     {
         price.text = info.towerPrice.ToString();
         towerIcon.sprite = info.towerIcon;
-        EcsUiActionBase.AddAction<EcsUiClickAction>(gameObject);
     }
 }

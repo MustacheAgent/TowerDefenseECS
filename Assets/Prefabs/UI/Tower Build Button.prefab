@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4606760290743377510}
   - component: {fileID: 6278729644304822526}
   - component: {fileID: 1736421801246554874}
+  - component: {fileID: 5112520019298524825}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -121,6 +122,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5112520019298524825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244117493811295637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0c9fb09327b4c8193edaee9a0ce4ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WidgetName: 
+  Emitter: {fileID: 0}
+  _nameRegistrationType: 0
+  _selectable: {fileID: 1736421801246554874}
+  DragTreshold: 5
 --- !u!1 &2686443269624788121
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +226,6 @@ GameObject:
   - component: {fileID: 2686443270617193041}
   - component: {fileID: 2686443270617193044}
   - component: {fileID: 1498591429392055675}
-  - component: {fileID: 2752354519301456353}
   m_Layer: 5
   m_Name: Tower Build Button
   m_TagString: Untagged
@@ -265,23 +282,6 @@ MonoBehaviour:
   energyIcon: {fileID: 2686443269624788123}
   energyDefaultColor: {r: 0.3647059, g: 0.7058824, b: 1, a: 1}
   energyInvalidColor: {r: 1, g: 0.3647059, b: 0.3647059, a: 1}
---- !u!114 &2752354519301456353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2686443270617193040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab0c9fb09327b4c8193edaee9a0ce4ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WidgetName: 
-  Emitter: {fileID: 0}
-  _nameRegistrationType: 1
-  _selectable: {fileID: 1736421801246554874}
-  DragTreshold: 5
 --- !u!1 &2686443271260104961
 GameObject:
   m_ObjectHideFlags: 0
