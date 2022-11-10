@@ -27,21 +27,8 @@ namespace Systems.UI
             {
                 ref EcsUiClickEvent data = ref _clickEvents.Get1(idx);
                 Debug.Log("Im clicked!", data.Sender);
-                switch (data.WidgetName)
-                {
-                    case "Wall":
-                        _sceneData.selectedTower = TowerType.Wall;
-                        break;
-                    case "Laser":
-                        _sceneData.selectedTower = TowerType.Laser;
-                        break;
-                    case "Mortar":
-                        _sceneData.selectedTower = TowerType.Mortar;
-                        break;
-                    default:
-                        Debug.LogWarning("Unsupported tower type!");
-                        break;
-                }
+
+                _sceneData.selectedTower = data.Sender.GetComponentInParent<BuildTowerButton>().towerType;
             }
         }
     }

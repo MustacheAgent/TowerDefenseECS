@@ -45,7 +45,7 @@ namespace Systems.Towers
 
                 if (closestEnemyIndex >= 0)
                 {
-                    ref var enemy = ref enemyFilter.GetEntity(closestEnemyIndex);
+                    ref var enemy = ref enemyFilter.GetEntity(closestEnemyIndex).Get<PositionComponent>().transform;
                     ref var track = ref mortarFilter.GetEntity(towerIndex).Get<MortarTrackComponent>();
                     TrackTarget(tower, enemy, ref track);
                     while (fireProgress.progress >= 1f)
@@ -64,7 +64,7 @@ namespace Systems.Towers
             }
         }
 
-        void TrackTarget(MortarTurretComponent tower, EcsEntity enemy, ref MortarTrackComponent track)
+        void TrackTarget(MortarTurretComponent tower, Transform enemyPosition, ref MortarTrackComponent track)
         {   
             float targetingRange = tower.attackRadius;
             float x_speed = targetingRange + 0.25001f;
@@ -72,7 +72,7 @@ namespace Systems.Towers
             float launchSpeed = Mathf.Sqrt(9.81f * (y_speed + Mathf.Sqrt(x_speed * x_speed + y_speed * y_speed)));
 
             Vector3 launchPoint = tower.turret.position;
-            Vector3 targetPoint = enemy.Get<PositionComponent>().transform.position;
+            Vector3 targetPoint = enemyPosition.position;
             targetPoint.y = 0f;
 
             Vector2 dir;
@@ -103,7 +103,7 @@ namespace Systems.Towers
             var projectile = _world.NewEntity();
             projectile.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
              {
-                 Prefab = _staticData.projectilePrefab,
+                 Prefab = _staticData.mortarShellPrefab,
                  Position = track.launchPoint,
                  Rotation = tower.turret.localRotation,
                  Parent = null

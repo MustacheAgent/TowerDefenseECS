@@ -64,7 +64,7 @@ namespace Scripts
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
                 .Add(new HudSystem())
-                //.Add(new ScenarioSystem())
+                .Add(new ScenarioSystem())
                 .Add(new PathfindingSystem())
                 ;
         }
@@ -82,9 +82,11 @@ namespace Scripts
         void AddTowerSystems(EcsSystems systems)
         {
             systems
+                .Add(new TrackTargetSystem())
                 .Add(new LaserSystem())
                 .Add(new MortarSystem())
-                .Add(new ProjectileSystem())
+                .Add(new RocketSystem())
+                .Add(new MortarShellSystem())
                 ;
         }
 

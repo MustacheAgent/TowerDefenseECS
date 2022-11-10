@@ -21,55 +21,34 @@ namespace Systems.Towers
 
         public void Run()
         {
-            if (_input.leftMousePressed)
+            if (!_input.leftMousePressed) return;
+            var ray = Camera.main.ScreenPointToRay(_input.mousePosition);
+            if (!Physics.Raycast(ray, out RaycastHit hit)) return;
+            var gameObject = hit.transform.gameObject;
+            var tile = gameObject.GetEntity();
+
+            if (!tile.Has<TileContentComponent>()) return;
+            ref var tileContent = ref tile.Get<TileContentComponent>();
+            if (tileContent.content != TileContent.Empty) return;
+            ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
+            GameObject prefab = null;
+            prefab = _sceneData.towerDictionary[_sceneData.selectedTower];
+
+            if (prefab == null) return;
+            _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
             {
-                var ray = Camera.main.ScreenPointToRay(_input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    var gameObject = hit.transform.gameObject;
-                    var tile = gameObject.GetEntity();
+                Prefab = prefab,
+                Position = spawnPosition.position,
+                Rotation = Quaternion.identity,
+                Parent = null
+            };
 
-                    if (tile.Has<TileContentComponent>())
-                    {
-                        ref var tileContent = ref tile.Get<TileContentComponent>();
-                        if (tileContent.content == TileContent.Empty)
-                        {   
-                            ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
-                            GameObject prefab = null;
-                            switch (_sceneData.selectedTower)
-                            {
-                                case TowerType.Wall:
-                                    prefab = _staticData.wallPrefab;
-                                    break;
-                                case TowerType.Laser:
-                                    prefab = _staticData.laserPrefab;
-                                    break;
-                                case TowerType.Mortar:
-                                    prefab = _staticData.mortarPrefab;
-                                    break;
-                            }
+            tileContent.content = TileContent.Tower;
+            tile.Get<PathfindingComponent>().isWalkable = false;
 
-                            if (prefab != null)
-                            {
-                                _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
-                                {
-                                    Prefab = prefab,
-                                    Position = spawnPosition.position,
-                                    Rotation = Quaternion.identity,
-                                    Parent = null
-                                };
-
-                                tileContent.content = TileContent.Tower;
-                                tile.Get<PathfindingComponent>().isWalkable = false;
-
-                                foreach (var i in enemyFilter)
-                                {
-                                    enemyFilter.GetEntity(i).Get<FindPathEvent>();
-                                }
-                            }
-                        }
-                    }
-                }
+            foreach (var i in enemyFilter)
+            {
+                enemyFilter.GetEntity(i).Get<FindPathEvent>();
             }
         }
     }

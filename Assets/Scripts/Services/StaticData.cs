@@ -13,6 +13,7 @@ namespace Services
         public GameObject wallPrefab;
         public GameObject laserPrefab;
         public GameObject mortarPrefab;
-        public GameObject projectilePrefab;
+        public GameObject mortarShellPrefab;
+        public GameObject rocketPrefab;
     }
 }
