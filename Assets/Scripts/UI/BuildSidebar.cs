@@ -16,7 +16,7 @@ namespace UI
             foreach (var tower in sceneData.towerDictionary)
             {
                 var button = Instantiate(towerButton, transform);
-                button.InitButton(tower.Value.GetComponent<TowerInfoProvider>().Value);
+                button.InitButton(tower.Value.GetComponent<TowerInfoProvider>().Value, tower.Key);
             }
         }
     }
