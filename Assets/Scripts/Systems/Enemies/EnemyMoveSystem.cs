@@ -14,7 +14,6 @@ namespace Systems.Enemies
     public class EnemyMoveSystem : IEcsRunSystem 
     {
         readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> _enemyFilter = null;
-        readonly SceneData _sceneData = null;
         readonly PathfindingData _pathfindingData = null;
 
         public void Run()
@@ -43,12 +42,15 @@ namespace Systems.Enemies
                     ref Transform destination = ref nextOnPath.Get<PositionComponent>().transform;
 
                     if (Vector2.Distance(new Vector2(position.position.x, position.position.z),
-                        new Vector2(destination.position.x, destination.position.z)) > .1f)
+                        new Vector2(destination.position.x, destination.position.z)) > 0.5f)
                     {
                         Vector3 moveDir = (destination.position - position.position);
-                        controller.Move(speed * Time.deltaTime * moveDir.normalized);
+                        moveDir.y = 0;
+                        //Vector3 projected = Vector3.ProjectOnPlane(moveDir, new Vector3());
+                        controller.Move(moveDir.normalized * speed * Time.deltaTime);
                         //rb.MovePosition(rb.position + speed * Time.deltaTime * moveDir);
-                        //rb.velocity = speed * Time.deltaTime * moveDir;
+                        //position.position = Vector3.MoveTowards(position.position, destination.position, speed * Time.deltaTime);
+                        //rb.velocity = projected;
                         //position.localPosition = Vector3.LerpUnclamped(position.position, destination.position, speed * Time.deltaTime);
                     }
                     else
