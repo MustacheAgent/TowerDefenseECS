@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    attackRadius: 10
+    attackRadius: 4
     innerRadius: 1
 --- !u!114 &-2381963115688907443
 MonoBehaviour:

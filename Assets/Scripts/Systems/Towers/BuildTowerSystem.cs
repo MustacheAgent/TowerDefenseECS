@@ -32,7 +32,7 @@ namespace Systems.Towers
             if (tileContent.content != TileContent.Empty) return;
             ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
             GameObject prefab = null;
-            prefab = _sceneData.towerDictionary[_sceneData.selectedTower];
+            if (_sceneData.selectedTower != TowerType.None) prefab = _sceneData.towerDictionary[_sceneData.selectedTower];
 
             if (prefab == null) return;
             _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent

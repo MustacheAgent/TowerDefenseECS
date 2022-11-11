@@ -10,8 +10,8 @@ namespace Systems.Towers
 {
     public class TrackTargetSystem : IEcsRunSystem
     {
-        readonly EcsFilter<PositionComponent, EnemyTag> _enemyFilter = null;
-        readonly EcsFilter<PositionComponent, TowerRadiusComponent> _towerFilter = null;
+        private readonly EcsFilter<PositionComponent, EnemyTag> _enemyFilter = null;
+        private readonly EcsFilter<PositionComponent, TowerRadiusComponent> _towerFilter = null;
         
         public void Run()
         {
@@ -24,8 +24,13 @@ namespace Systems.Towers
                 ref var radius = ref _towerFilter.Get2(towerIndex);
                 int enemyIndex = GetClosestEnemy(tower.transform, radius.attackRadius, radius.innerRadius);
 
-                target.entity = _enemyFilter.GetEntity(enemyIndex);
+                if (enemyIndex > -1)
+                    target.entity = _enemyFilter.GetEntity(enemyIndex);
+                else
+                    target.entity = null;
             }
+            
+            Physics.SyncTransforms();
         }
 
         private int GetClosestEnemy(Transform towerPosition, float outerRadius, float innerRadius)

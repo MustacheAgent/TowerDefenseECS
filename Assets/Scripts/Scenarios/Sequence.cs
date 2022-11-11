@@ -18,7 +18,7 @@ namespace Scenarios
 
         public void Init()
         {
-            _currentTime = cooldown;
+            _currentTime = 0;
             _count = 0;
         }
 

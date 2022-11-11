@@ -18,8 +18,8 @@ namespace Systems.Enemies
         private float _spawnDelay;
         private float _lastTime;
 
-        readonly EcsFilter<PositionComponent, SpawnTag>.Exclude<DestinationTag> tileFilter = null;
-        readonly EcsFilter<SpawnEnemyEvent> _spawnEventFilter = null;
+        private readonly EcsFilter<PositionComponent, SpawnTag>.Exclude<DestinationTag> _tileFilter = null;
+        private readonly EcsFilter<SpawnEnemyEvent> _spawnEventFilter = null;
 
         public void Init()
         {
@@ -32,14 +32,15 @@ namespace Systems.Enemies
             {
                 ref var spawnEvent = ref _spawnEventFilter.Get1(eventIndex);
                 
-                foreach (var i in tileFilter)
+                foreach (var i in _tileFilter)
                 {
-                    ref Transform spawnPosition = ref tileFilter.Get1(i).transform;
+                    var spawnPosition = _tileFilter.Get1(i).transform.position;
+                    spawnPosition.y += 0.5f;
                     var entity = _world.NewEntity();
                     entity.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                     {
                         Prefab = _staticData.enemies[spawnEvent.type],
-                        Position = spawnPosition.position,
+                        Position = spawnPosition,
                         Rotation = Quaternion.identity,
                         Parent = null
                     };

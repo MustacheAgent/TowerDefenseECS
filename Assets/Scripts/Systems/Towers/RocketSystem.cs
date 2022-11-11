@@ -28,7 +28,7 @@ namespace Systems.Towers
                 ref var enemy = ref _rocketFilter.Get3(towerIndex).entity;
                 if (!enemy.HasValue) continue;
                 
-                ref var enemyPos = ref enemy.Value.Get<PositionComponent>().transform;
+                ref var enemyPos = ref enemy.Value.Get<TargetComponent>().target;
                 TrackTarget(tower, enemyPos);
                 while (fireProgress.progress >= 1f)
                 {
@@ -47,10 +47,13 @@ namespace Systems.Towers
 
         private void TrackTarget(RocketTowerComponent tower, Transform enemy)
         {
+            tower.turret.LookAt(enemy.position);
+            /*
             var targetPoint = enemy.position;
             var launchPoint = tower.projectilePoint.position;
             Vector3 dir = targetPoint - launchPoint;
-            tower.turret.rotation = Quaternion.LookRotation(dir, Vector3.up);
+            tower.turret.rotation = Quaternion.LookRotation(dir, Vector3.up).normalized;
+            */
         }
 
         private void Shoot(RocketTowerComponent tower, Transform enemy)
