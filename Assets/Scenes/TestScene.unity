@@ -711,7 +711,7 @@ RectTransform:
   m_Children:
   - {fileID: 1156383470}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0.324, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4247,8 +4247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectFactory: {fileID: 11400000, guid: da0bd480fe3d91542a0212aa12e3855c, type: 2}
   uiFactory: {fileID: 11400000, guid: 31e433c6965cd5b4c82e4ac208b729ac, type: 2}
-  worldBottomLeft: {fileID: 1283012030}
-  hud: {fileID: 47881693}
   scenario: {fileID: 11400000, guid: eb52b6d12d3ff8347b42f38031bd78d0, type: 2}
   selectedTower: 0
   towerDictionary:
@@ -4847,7 +4845,7 @@ Transform:
   - {fileID: 916542191}
   - {fileID: 726906603}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &482024845
 PrefabInstance:
@@ -11438,6 +11436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSizeX: 0
   gridSizeZ: 0
+  worldBottomLeft: {fileID: 1283012030}
   spawn:
     x: 0
     y: 0
@@ -11457,7 +11456,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1108622007 stripped
 Transform:
@@ -14484,7 +14483,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1539033210 stripped
 Transform:

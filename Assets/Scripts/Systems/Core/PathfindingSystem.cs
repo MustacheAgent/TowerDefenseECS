@@ -41,6 +41,11 @@ namespace Systems.Core
                 {
                     unitPath.path = new List<int2>(path);
                     unitPath.pathIndex = 1;
+                    var currentPathXY = unitPath.path[unitPath.pathIndex];
+                    var index = 
+                        PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX);
+                    unitPath.currentDestination =
+                        _pathfindingData.tiles[index].Get<PositionComponent>().transform.position;
                 }
             }
         }
@@ -157,7 +162,7 @@ namespace Systems.Core
         {
             int gridSizeZ = 1;
             int gridSizeX = 1;
-            Vector3 raycastPos = _sceneData.worldBottomLeft.transform.position;
+            Vector3 raycastPos = _pathfindingData.worldBottomLeft.transform.position;
 
             // получение размера сетки по Z
             while (true)
@@ -208,8 +213,8 @@ namespace Systems.Core
             EcsEntity entity;
             RaycastHit hit;
             Vector3 first;
-            Vector3 boxCastPos = first = _sceneData.worldBottomLeft.transform.position;
-            GameObject obj = _sceneData.worldBottomLeft;
+            Vector3 boxCastPos = first = _pathfindingData.worldBottomLeft.transform.position;
+            GameObject obj = _pathfindingData.worldBottomLeft;
 
             _pathfindingData.tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
 
@@ -238,7 +243,7 @@ namespace Systems.Core
                 for (int z = 1; z < _pathfindingData.gridSizeZ; z++)
                 {
                     if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 500), Vector3.forward, out hit,
-                        _sceneData.worldBottomLeft.transform.rotation))
+                            _pathfindingData.worldBottomLeft.transform.rotation))
                     {
                         entity = hit.transform.gameObject.GetEntity();
                         path = ref entity.Get<PathfindingComponent>();
@@ -254,7 +259,7 @@ namespace Systems.Core
                 }
 
                 if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 500), Vector3.right, out hit,
-                        _sceneData.worldBottomLeft.transform.rotation))
+                        _pathfindingData.worldBottomLeft.transform.rotation))
                 {
                     obj = hit.transform.gameObject;
                 }

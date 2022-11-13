@@ -15,8 +15,6 @@ namespace Services
         public GameObjectFactory gameObjectFactory;
         public UIObjectFactory uiFactory;
         
-        public GameObject worldBottomLeft;
-        public Canvas hud;
         public Scenario scenario;
         public TowerType selectedTower;
         public TowerDictionary towerDictionary;

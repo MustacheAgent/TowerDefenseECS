@@ -9,6 +9,7 @@ namespace Services
         // параметры сетки
         public int gridSizeX;
         public int gridSizeZ;
+        public GameObject worldBottomLeft;
         public EcsEntity[] tiles;
         public int2 spawn, destination;
     }

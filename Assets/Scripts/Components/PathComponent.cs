@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace Components
 {
@@ -7,5 +8,6 @@ namespace Components
     {
         public List<int2> path;
         public int pathIndex;
+        public Vector3 currentDestination;
     }
 }
