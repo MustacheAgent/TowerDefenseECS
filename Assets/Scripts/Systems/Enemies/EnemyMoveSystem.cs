@@ -38,6 +38,7 @@ namespace Systems.Enemies
                     EcsEntity nextOnPath =
                         _pathfindingData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX)];
                     var destination = nextOnPath.Get<PositionComponent>().transform.position;
+                    destination.y = transform.localScale.y;
 
                     if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z),
                         new Vector2(destination.x, destination.z)) > 0.5f)

@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 197426802280983143}
   - component: {fileID: 7968507972034044153}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: MediumEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    transform: {fileID: 6132770382222646068}
+    transform: {fileID: 9092754229469066842}
 --- !u!114 &4726383606016314591
 MonoBehaviour:
   m_ObjectHideFlags: 0
