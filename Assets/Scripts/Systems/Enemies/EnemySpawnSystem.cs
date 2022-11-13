@@ -12,8 +12,8 @@ namespace Systems.Enemies
 {
     public class EnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld _world = null;
-        private StaticData _staticData = null;
+        private readonly EcsWorld _world = null;
+        private readonly SceneData _sceneData = null;
 
         private float _spawnDelay;
         private float _lastTime;
@@ -35,11 +35,11 @@ namespace Systems.Enemies
                 foreach (var i in _tileFilter)
                 {
                     var spawnPosition = _tileFilter.Get1(i).transform.position;
-                    spawnPosition.y += 0.5f;
+                    spawnPosition.y += 0.2f;
                     var entity = _world.NewEntity();
                     entity.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                     {
-                        Prefab = _staticData.enemies[spawnEvent.type],
+                        Prefab = _sceneData.enemies[spawnEvent.type],
                         Position = spawnPosition,
                         Rotation = Quaternion.identity,
                         Parent = null

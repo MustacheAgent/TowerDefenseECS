@@ -12,32 +12,32 @@ namespace Systems.Towers
 {
     public class MortarShellSystem : IEcsRunSystem
     {
-        readonly EcsFilter<PositionComponent, ProjectileComponent> projectileFilter = null;
-        readonly EcsFilter<PositionComponent, HealthComponent, EnemyTag> enemyFilter = null;
-        readonly EcsWorld _world = null;
+        private readonly EcsFilter<PositionComponent, MortarShellComponent> _projectileFilter = null;
+        private readonly EcsFilter<PositionComponent, HealthComponent, EnemyTag> _enemyFilter = null;
+        private readonly EcsWorld _world = null;
 
         public void Run()
         {
-            foreach (var index in projectileFilter)
+            foreach (var index in _projectileFilter)
             {
-                ref var transform = ref projectileFilter.Get1(index).transform;
-                ref var projectile = ref projectileFilter.Get2(index);
+                ref var transform = ref _projectileFilter.Get1(index).transform;
+                ref var projectile = ref _projectileFilter.Get2(index);
                 
-                ref float age = ref projectile.age;
+                ref float age = ref projectile.Age;
 
                 age += Time.deltaTime;
-                Vector3 p = projectile.launchPoint + projectile.launchVelocity * age;
+                Vector3 p = projectile.LaunchPoint + projectile.LaunchVelocity * age;
                 p.y -= 0.5f * 9.81f * age * age;
 
                 if (p.y <= 0f)
                 {
                     Explode(index);
-                    projectileFilter.GetEntity(index).Get<DestroyEvent>();
+                    _projectileFilter.GetEntity(index).Get<DestroyEvent>();
                     continue;
                 }
 
                 transform.localPosition = p;
-                Vector3 d = projectile.launchVelocity;
+                Vector3 d = projectile.LaunchVelocity;
                 d.y -= 9.81f * age;
                 transform.localRotation = Quaternion.LookRotation(d);
             }
@@ -45,19 +45,19 @@ namespace Systems.Towers
 
         private void Explode(int index)
         {
-            foreach (var enemyIndex in enemyFilter)
+            foreach (var enemyIndex in _enemyFilter)
             {
-                ref var enemyPosition = ref enemyFilter.Get1(enemyIndex).transform;
-                ref var transform = ref projectileFilter.Get1(index).transform;
-                ref var projectile = ref projectileFilter.Get2(index);
+                ref var enemyPosition = ref _enemyFilter.Get1(enemyIndex).transform;
+                ref var transform = ref _projectileFilter.Get1(index).transform;
+                ref var projectile = ref _projectileFilter.Get2(index);
 
                 var distance = Vector3.Distance(transform.position, enemyPosition.position);
-                if (distance < projectile.explosionRadius)
+                if (distance < projectile.ExplosionRadius)
                 {
                     _world.NewEntity().Get<DamageEvent>() = new DamageEvent
                     {
-                        entity = enemyFilter.GetEntity(enemyIndex),
-                        damage = projectile.damage
+                        entity = _enemyFilter.GetEntity(enemyIndex),
+                        damage = projectile.Damage
                     };
                 }
             }

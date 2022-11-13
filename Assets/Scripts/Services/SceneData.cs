@@ -13,10 +13,13 @@ namespace Services
     public class SceneData : MonoBehaviour
     {
         public GameObjectFactory gameObjectFactory;
-        public UIObjectFactory uiFactory;
         
         public Scenario scenario;
         public TowerType selectedTower;
+
+        #region Dictionaries
         public TowerDictionary towerDictionary;
+        public EnemyDictionary enemies;
+        #endregion
     }
 }

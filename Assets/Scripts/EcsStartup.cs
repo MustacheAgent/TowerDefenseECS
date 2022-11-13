@@ -15,7 +15,6 @@ namespace Scripts
     {
         private EcsWorld _world;
         private EcsSystems _systems;
-        private EcsSystems _fixedSystems;
 
         [SerializeField] private PlayerInputData inputData;
         [SerializeField] private SceneData sceneData;
@@ -27,29 +26,24 @@ namespace Scripts
         {
             _world = new EcsWorld();
             _systems = new EcsSystems(_world);
-            _fixedSystems = new EcsSystems(_world);
             _systems.ConvertScene();
 
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
-            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_fixedSystems);
 #endif
             //_systems.OneFrame<>
 
             AddGameplaySystems(_systems);
             AddSpawnSystems(_systems);
             AddTowerSystems(_systems);
-            AddFixedSystems(_fixedSystems);
             AddMiscSystems(_systems);
 
             Inject(_systems);
-            Inject(_fixedSystems);
             
             _systems.InjectUi(emitter);
 
             _systems.Init();
-            _fixedSystems.Init();
 
             // register your systems here, for example:
             // .Add (new TestSystem1 ())
@@ -90,16 +84,10 @@ namespace Scripts
             systems
                 .Add(new TrackTargetSystem())
                 .Add(new LaserSystem())
-                .Add(new MortarSystem())
-                .Add(new RocketSystem())
+                .Add(new MortarTowerSystem())
                 .Add(new MortarShellSystem())
-                ;
-        }
-
-        void AddFixedSystems(EcsSystems fixedSystems)
-        {
-            fixedSystems
-                .Add(new EnemyMoveSystem())
+                .Add(new RocketTowerSystem())
+                .Add(new RocketSystem())
                 ;
         }
 
@@ -125,19 +113,12 @@ namespace Scripts
             _systems?.Run();
         }
 
-        void FixedUpdate()
-        {
-            //_fixedSystems?.Run();
-        }
-
         void OnDestroy() 
         {
             if (_systems != null) 
             {
                 _systems.Destroy();
                 _systems = null;
-                _fixedSystems.Destroy();
-                _fixedSystems = null;
                 _world.Destroy();
                 _world = null;
             }

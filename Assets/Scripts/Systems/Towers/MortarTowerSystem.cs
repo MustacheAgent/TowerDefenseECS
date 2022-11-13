@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Systems.Towers
 {
-    public class MortarSystem : IEcsRunSystem
+    public class MortarTowerSystem : IEcsRunSystem
     {
         readonly EcsWorld _world = null;
         readonly StaticData _staticData = null;
@@ -109,14 +109,14 @@ namespace Systems.Towers
                  Parent = null
              };
 
-            projectile.Get<ProjectileComponent>() = new ProjectileComponent
+            projectile.Get<MortarShellComponent>() = new MortarShellComponent
             {
-                launchPoint = track.launchPoint,
-                targetPoint = track.targetPoint,
-                launchVelocity = track.launchVelocity,
-                explosionRadius = tower.explosionRadius,
-                damage = tower.damage,
-                age = 0
+                LaunchPoint = track.launchPoint,
+                TargetPoint = track.targetPoint,
+                LaunchVelocity = track.launchVelocity,
+                ExplosionRadius = tower.explosionRadius,
+                Damage = tower.damage,
+                Age = 0
             };
         }
     }

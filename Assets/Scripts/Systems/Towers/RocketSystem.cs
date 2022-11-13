@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Components;
+﻿using Components;
 using Components.Core;
 using Components.Towers;
+using Events;
+using Events.Enemies;
 using Leopotam.Ecs;
-using Services;
 using Tags;
 using UnityEngine;
 
@@ -12,53 +11,50 @@ namespace Systems.Towers
 {
     public class RocketSystem : IEcsRunSystem
     {
-        readonly EcsWorld _world = null;
-        readonly StaticData _staticData = null;
-
-        private readonly EcsFilter<RocketTowerComponent, FireProgressComponent, TrackTargetComponent> _rocketFilter = null;
+        private readonly EcsFilter<PositionComponent, RocketComponent> _rocketFilter = null;
+        private readonly EcsFilter<PositionComponent, HealthComponent, EnemyTag> _enemyFilter = null;
+        private EcsWorld _world = null;
         
         public void Run()
         {
-            foreach (var towerIndex in _rocketFilter)
+            foreach (var rocketIndex in _rocketFilter)
             {
-                ref var fireProgress = ref _rocketFilter.Get2(towerIndex);
-                ref var tower = ref _rocketFilter.Get1(towerIndex);
-                fireProgress.progress += tower.attackSpeed * Time.deltaTime;
-
-                ref var enemy = ref _rocketFilter.Get3(towerIndex).entity;
-                if (!enemy.HasValue) continue;
+                ref var transform = ref _rocketFilter.Get1(rocketIndex).transform;
+                ref var rocket = ref _rocketFilter.Get2(rocketIndex);
                 
-                ref var enemyPos = ref enemy.Value.Get<TargetComponent>().target;
-                TrackTarget(tower, enemyPos);
-                while (fireProgress.progress >= 1f)
+                var newPos = 
+                    Vector3.MoveTowards(transform.position, rocket.TargetPoint, rocket.Velocity * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, rocket.TargetPoint) <= 0.1f)
                 {
-                    if (fireProgress.progress >= 1f)
-                    {
-                        Shoot(tower, enemyPos);
-                        fireProgress.progress -= 1f;
-                    }
-                    else
-                    {
-                        fireProgress.progress = 0.999f;
-                    }
+                    Explode(rocketIndex);
+                    _rocketFilter.GetEntity(rocketIndex).Get<DestroyEvent>();
+                    continue;
                 }
+
+                transform.position = newPos;
+                transform.LookAt(rocket.TargetPoint);
             }
         }
 
-        private void TrackTarget(RocketTowerComponent tower, Transform enemy)
+        private void Explode(int index)
         {
-            tower.turret.LookAt(enemy.position);
-            /*
-            var targetPoint = enemy.position;
-            var launchPoint = tower.projectilePoint.position;
-            Vector3 dir = targetPoint - launchPoint;
-            tower.turret.rotation = Quaternion.LookRotation(dir, Vector3.up).normalized;
-            */
-        }
+            foreach (var enemyIndex in _enemyFilter)
+            {
+                ref var enemyPosition = ref _enemyFilter.Get1(enemyIndex).transform;
+                ref var transform = ref _rocketFilter.Get1(index).transform;
+                ref var projectile = ref _rocketFilter.Get2(index);
 
-        private void Shoot(RocketTowerComponent tower, Transform enemy)
-        {
-            
+                var distance = Vector3.Distance(transform.position, enemyPosition.position);
+                if (distance < projectile.ExplosionRadius)
+                {
+                    _world.NewEntity().Get<DamageEvent>() = new DamageEvent
+                    {
+                        entity = _enemyFilter.GetEntity(enemyIndex),
+                        damage = projectile.Damage
+                    };
+                }
+            }
         }
     }
 }

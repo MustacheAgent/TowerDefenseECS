@@ -18,7 +18,6 @@ namespace Systems.Towers
             foreach (var towerIndex in _towerFilter)
             {
                 ref var target = ref _towerFilter.GetEntity(towerIndex).Get<TrackTargetComponent>();
-                if (target.entity.HasValue && target.entity.Value.IsAlive()) continue;
                 
                 ref var tower = ref _towerFilter.Get1(towerIndex);
                 ref var radius = ref _towerFilter.Get2(towerIndex);

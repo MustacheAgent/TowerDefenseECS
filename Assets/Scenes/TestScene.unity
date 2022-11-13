@@ -4246,7 +4246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectFactory: {fileID: 11400000, guid: da0bd480fe3d91542a0212aa12e3855c, type: 2}
-  uiFactory: {fileID: 11400000, guid: 31e433c6965cd5b4c82e4ac208b729ac, type: 2}
   scenario: {fileID: 11400000, guid: eb52b6d12d3ff8347b42f38031bd78d0, type: 2}
   selectedTower: 0
   towerDictionary:
@@ -4255,6 +4254,12 @@ MonoBehaviour:
     - {fileID: 4732683586919912502, guid: 2e05737429b49f64d80c4e275503e70c, type: 3}
     - {fileID: 4808321949195822956, guid: 6c516b66c4e93dd48bfbe4502354ac9c, type: 3}
     - {fileID: 532509460035736700, guid: 9b37a66763b173c4dadc9861d1b7002d, type: 3}
+  enemies:
+    m_keys: 000000000100000002000000
+    m_values:
+    - {fileID: 3107806033709961604, guid: fece7d59100148745960b06bbc91a25a, type: 3}
+    - {fileID: 3969407090528160754, guid: 23f9d5361cf040443b420376980480b9, type: 3}
+    - {fileID: 3107806033709961604, guid: bf50876e011e0d64a901af63286fc089, type: 3}
 --- !u!4 &455675496
 Transform:
   m_ObjectHideFlags: 0

@@ -3,5 +3,5 @@ using Voody.UniLeo;
 
 namespace MonoProviders.Components.Towers
 {
-    public class ProjectileProvider : MonoProvider<ProjectileComponent> { }
+    public class ProjectileProvider : MonoProvider<MortarShellComponent> { }
 }

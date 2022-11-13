@@ -9,6 +9,8 @@ namespace Components.Towers
         public float damage;
         public float explosionRadius;
         public float attackSpeed;
+        public float rotationSpeed;
+        public float rocketVelocity;
 
         public Transform projectilePoint;
         public Transform turret;

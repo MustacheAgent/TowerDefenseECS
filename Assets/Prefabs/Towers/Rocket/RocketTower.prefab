@@ -96,8 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     damage: 30
-    explosionRadius: 5
-    attackSpeed: 2
+    explosionRadius: 2
+    attackSpeed: 0.5
+    rotationSpeed: 5
+    rocketVelocity: 10
     projectilePoint: {fileID: 1520003738122706623}
     turret: {fileID: 2158764151078356471}
 --- !u!114 &5217454702029098531
@@ -113,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    attackRadius: 4
+    attackRadius: 5
     innerRadius: 1
 --- !u!114 &-2381963115688907443
 MonoBehaviour:

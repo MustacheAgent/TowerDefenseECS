@@ -26,8 +26,6 @@ namespace Systems.UI
             foreach (var idx in _clickEvents)
             {
                 ref EcsUiClickEvent data = ref _clickEvents.Get1(idx);
-                Debug.Log("Im clicked!", data.Sender);
-
                 _sceneData.selectedTower = data.Sender.GetComponentInParent<BuildTowerButton>().towerType;
             }
         }
