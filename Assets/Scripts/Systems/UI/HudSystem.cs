@@ -1,10 +1,7 @@
-﻿using Enums;
-using Leopotam.Ecs;
+﻿using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Components;
-using MonoProviders.Components.Towers;
 using Services;
-using UnityEngine;
-using UnityEngine.UIElements;
+using UnityComponents.UI;
 
 namespace Systems.UI
 {

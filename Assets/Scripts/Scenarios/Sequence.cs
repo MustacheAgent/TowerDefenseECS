@@ -1,7 +1,8 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using Events.Enemies;
+using Events.Scenario;
 using Leopotam.Ecs;
-using System;
 using Voody.UniLeo;
 
 namespace Scenarios
@@ -28,12 +29,15 @@ namespace Scenarios
             while(_currentTime >= cooldown)
             {
                 _currentTime -= cooldown;
-                if (_count >= amount) return _currentTime;
+                if (_count >= amount)
+                {
+                    return _currentTime;
+                }
                 _count += 1;
                 // создать противника
                 WorldHandler.GetWorld().NewEntity().Get<SpawnEnemyEvent>() = new SpawnEnemyEvent
                 {
-                    type = this.type
+                    type = type
                 };
             }
             return -1f;

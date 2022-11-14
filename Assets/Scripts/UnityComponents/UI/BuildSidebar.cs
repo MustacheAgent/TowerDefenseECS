@@ -2,7 +2,7 @@ using MonoProviders.Components.Towers;
 using Services;
 using UnityEngine;
 
-namespace UI
+namespace UnityComponents.UI
 {
     public class BuildSidebar : MonoBehaviour
     {

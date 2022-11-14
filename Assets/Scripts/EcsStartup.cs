@@ -21,6 +21,7 @@ namespace Scripts
         [SerializeField] private StaticData staticData;
         [SerializeField] private EcsUiEmitter emitter;
         [SerializeField] private PathfindingData pathfindingData;
+        [SerializeField] private HudData hudData;
 
         void Start()
         {
@@ -105,7 +106,9 @@ namespace Scripts
                 .Inject(inputData)
                 .Inject(sceneData)
                 .Inject(staticData)
-                .Inject(pathfindingData);
+                .Inject(pathfindingData)
+                .Inject(hudData)
+                ;
         }
 
         void Update() 

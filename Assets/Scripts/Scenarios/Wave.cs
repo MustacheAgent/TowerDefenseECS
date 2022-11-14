@@ -1,5 +1,9 @@
 ﻿using System;
+using Events.Enemies;
+using Events.Scenario;
+using Leopotam.Ecs;
 using UnityEngine;
+using Voody.UniLeo;
 
 namespace Scenarios
 {
@@ -9,6 +13,8 @@ namespace Scenarios
         public Sequence[] spawnSequences;
 
         private int _index;
+        
+        public int SeqLength => spawnSequences.Length;
 
         public void Init()
         {
@@ -22,10 +28,15 @@ namespace Scenarios
             deltaTime = spawnSequences[_index].Progress(deltaTime);
             while(deltaTime >= 0f)
             {
+                WorldHandler.GetWorld().NewEntity().Get<SequenceCompletedEvent>() = new SequenceCompletedEvent
+                {
+                    SequenceNumber = _index + 1
+                };
+                
                 if (++_index >= spawnSequences.Length)
-				{
-					return deltaTime;
-				}
+                {
+                    return deltaTime;
+                }
 				spawnSequences[_index].Init();
 				deltaTime = spawnSequences[_index].Progress(deltaTime);
             }

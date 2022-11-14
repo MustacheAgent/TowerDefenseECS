@@ -15,6 +15,43 @@ MonoBehaviour:
   waves:
   - spawnSequences:
     - type: 2
-      amount: 1
+      amount: 2
       cooldown: 1
-  timeSpan: 0
+    - type: 2
+      amount: 2
+      cooldown: 1
+  - spawnSequences:
+    - type: 2
+      amount: 2
+      cooldown: 1
+    - type: 2
+      amount: 2
+      cooldown: 1
+  - spawnSequences:
+    - type: 2
+      amount: 2
+      cooldown: 1
+    - type: 2
+      amount: 2
+      cooldown: 1
+  - spawnSequences:
+    - type: 2
+      amount: 2
+      cooldown: 1
+    - type: 2
+      amount: 2
+      cooldown: 1
+  - spawnSequences:
+    - type: 2
+      amount: 2
+      cooldown: 1
+    - type: 2
+      amount: 2
+      cooldown: 1
+  - spawnSequences:
+    - type: 2
+      amount: 2
+      cooldown: 1
+    - type: 2
+      amount: 2
+      cooldown: 1
