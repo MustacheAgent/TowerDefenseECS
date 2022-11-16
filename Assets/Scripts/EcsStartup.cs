@@ -97,6 +97,7 @@ namespace Scripts
             systems
                 .Add(new EnemyMoveSystem())
                 .Add(new DamageSystem())
+                .Add(new TimerSystem())
                 ;
         }
 
