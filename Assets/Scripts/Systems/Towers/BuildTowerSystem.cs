@@ -1,7 +1,9 @@
 ﻿using Components;
 using Components.Core;
 using Components.Factory;
+using Components.Towers;
 using Enums;
+using Events;
 using Events.Enemies;
 using Leopotam.Ecs;
 using Scripts;
@@ -13,7 +15,6 @@ namespace Systems.Towers
 {
     public class BuildTowerSystem : IEcsRunSystem
     {
-        readonly StaticData _staticData = null;
         readonly SceneData _sceneData = null;
         readonly EcsWorld _world = null;
         readonly PlayerInputData _input = null;
@@ -22,6 +23,11 @@ namespace Systems.Towers
         public void Run()
         {
             if (!_input.leftMousePressed) return;
+            if (_input.rightMousePressed)
+            {
+                _sceneData.selectedTower = TowerType.None;
+                return;
+            }
             var ray = Camera.main.ScreenPointToRay(_input.mousePosition);
             if (!Physics.Raycast(ray, out RaycastHit hit)) return;
             var gameObject = hit.transform.gameObject;
@@ -43,6 +49,10 @@ namespace Systems.Towers
                 Parent = null
             };
 
+            _world.NewEntity().Get<CurrencyChangedEvent>() = new CurrencyChangedEvent
+            {
+                CurrencyChange = -prefab.GetEntity().Get<TowerInfoComponent>().towerPrice
+            };
             tileContent.content = TileContent.Tower;
             tile.Get<PathfindingComponent>().isWalkable = false;
 

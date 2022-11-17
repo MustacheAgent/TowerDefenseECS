@@ -5,7 +5,7 @@ using UnityComponents.UI;
 
 namespace Systems.UI
 {
-    public class HudSystem : IEcsInitSystem, IEcsRunSystem
+    public class TowerButtonClickSystem : IEcsInitSystem, IEcsRunSystem
     {
         readonly EcsFilter<EcsUiClickEvent> _clickEvents;
         readonly SceneData _sceneData = null;

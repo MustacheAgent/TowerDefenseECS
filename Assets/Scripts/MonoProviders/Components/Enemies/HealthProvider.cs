@@ -1,7 +1,7 @@
-﻿using Components;
+﻿using Components.Enemies;
 using Voody.UniLeo;
 
-namespace MonoProviders.Components
+namespace MonoProviders.Components.Enemies
 {
     public class HealthProvider : MonoProvider<HealthComponent> { }
 }

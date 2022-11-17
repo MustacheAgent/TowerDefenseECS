@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 2686443271260104964}
   - component: {fileID: 2686443271260104963}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

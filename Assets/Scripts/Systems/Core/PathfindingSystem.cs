@@ -15,7 +15,6 @@ namespace Systems.Core
     {
         readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> units = null;
         readonly EcsFilter<PositionComponent, DestinationTag> dest = null;
-        private SceneData _sceneData = null;
         private PathfindingData _pathfindingData = null;
 
         private const int MOVE_STRAIGHT_COST = 10;

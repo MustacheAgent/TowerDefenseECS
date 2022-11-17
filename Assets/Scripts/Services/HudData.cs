@@ -8,5 +8,7 @@ namespace Services
     {
         public Slider progressBar;
         public TextMeshProUGUI waveNumber;
+        public TextMeshProUGUI currency;
+        public TextMeshProUGUI baseHealth;
     }
 }

@@ -11,7 +11,6 @@ namespace Systems.Core
     public class TestSystem : IEcsRunSystem
     {
         private PlayerInputData _input = null;
-        private SceneData _sceneData = null;
         EcsFilter<EcsUiClickEvent> _clickEvents;
 
         public void Run()

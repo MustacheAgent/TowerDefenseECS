@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 8643393912866822878}
   - component: {fileID: 197426802280983143}
   - component: {fileID: 7968507972034044153}
+  - component: {fileID: 3626807494432346309}
   m_Layer: 0
   m_Name: MediumEnemy
   m_TagString: Untagged
@@ -193,6 +194,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     target: {fileID: 3092159403666388135}
+--- !u!114 &3626807494432346309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969407090528160754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28fabd0425b492f9b848a8f1b7da505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    killPrice: 20
 --- !u!1 &5992881336122866398
 GameObject:
   m_ObjectHideFlags: 0

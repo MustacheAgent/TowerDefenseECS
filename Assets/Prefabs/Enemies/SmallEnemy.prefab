@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -2386566668726182556}
   - component: {fileID: -4173117410760686239}
   - component: {fileID: 7519288543039283550}
+  - component: {fileID: 4750527174873652415}
   m_Layer: 0
   m_Name: SmallEnemy
   m_TagString: Untagged
@@ -162,6 +163,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     target: {fileID: 5402096209237246135}
+--- !u!114 &4750527174873652415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107806033709961604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28fabd0425b492f9b848a8f1b7da505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    killPrice: 10
 --- !u!1 &4644904666901379058
 GameObject:
   m_ObjectHideFlags: 0

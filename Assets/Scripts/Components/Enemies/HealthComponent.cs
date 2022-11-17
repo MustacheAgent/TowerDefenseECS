@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Components
+namespace Components.Enemies
 {
     [Serializable]
     public struct HealthComponent
