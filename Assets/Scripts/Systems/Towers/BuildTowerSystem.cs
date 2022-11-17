@@ -6,6 +6,7 @@ using Enums;
 using Events;
 using Events.Enemies;
 using Leopotam.Ecs;
+using MonoProviders.Components.Towers;
 using Scripts;
 using Services;
 using Tags;
@@ -51,7 +52,7 @@ namespace Systems.Towers
 
             _world.NewEntity().Get<CurrencyChangedEvent>() = new CurrencyChangedEvent
             {
-                CurrencyChange = -prefab.GetEntity().Get<TowerInfoComponent>().towerPrice
+                CurrencyChange = -prefab.GetComponent<TowerInfoProvider>().Value.towerPrice
             };
             tileContent.content = TileContent.Tower;
             tile.Get<PathfindingComponent>().isWalkable = false;
