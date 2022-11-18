@@ -1,5 +1,6 @@
 ﻿using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Components;
+using MonoProviders.Components.Towers;
 using Services;
 using UnityComponents.UI;
 
@@ -23,7 +24,10 @@ namespace Systems.UI
             foreach (var idx in _clickEvents)
             {
                 ref EcsUiClickEvent data = ref _clickEvents.Get1(idx);
-                _sceneData.selectedTower = data.Sender.GetComponentInParent<BuildTowerButton>().towerType;
+                var type = data.Sender.GetComponentInParent<BuildTowerButton>().towerType;
+                if (_sceneData.towerDictionary[type].GetComponent<TowerInfoProvider>().Value.towerPrice <=
+                    _sceneData.currency)
+                    _sceneData.selectedTower = type;
             }
         }
     }

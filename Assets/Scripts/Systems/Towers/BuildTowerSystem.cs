@@ -16,10 +16,10 @@ namespace Systems.Towers
 {
     public class BuildTowerSystem : IEcsRunSystem
     {
-        readonly SceneData _sceneData = null;
-        readonly EcsWorld _world = null;
-        readonly PlayerInputData _input = null;
-        readonly EcsFilter<EnemyTag> enemyFilter = null;
+        private readonly SceneData _sceneData = null;
+        private readonly EcsWorld _world = null;
+        private readonly PlayerInputData _input = null;
+        private readonly EcsFilter<EnemyTag> _enemyFilter = null;
 
         public void Run()
         {
@@ -38,10 +38,16 @@ namespace Systems.Towers
             ref var tileContent = ref tile.Get<TileContentComponent>();
             if (tileContent.content != TileContent.Empty) return;
             ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
+            
             GameObject prefab = null;
             if (_sceneData.selectedTower != TowerType.None) prefab = _sceneData.towerDictionary[_sceneData.selectedTower];
-
             if (prefab == null) return;
+            if (prefab.GetComponent<TowerInfoProvider>().Value.towerPrice > _sceneData.currency)
+            {
+                _sceneData.selectedTower = TowerType.None;
+                return;
+            }
+            
             _world.NewEntity().Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
             {
                 Prefab = prefab,
@@ -57,9 +63,9 @@ namespace Systems.Towers
             tileContent.content = TileContent.Tower;
             tile.Get<PathfindingComponent>().isWalkable = false;
 
-            foreach (var i in enemyFilter)
+            foreach (var i in _enemyFilter)
             {
-                enemyFilter.GetEntity(i).Get<FindPathEvent>();
+                _enemyFilter.GetEntity(i).Get<FindPathEvent>();
             }
         }
     }
