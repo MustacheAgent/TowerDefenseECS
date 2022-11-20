@@ -15,6 +15,7 @@ namespace Services
         public Scenario scenario;
         public TowerType selectedTower;
         public int currency;
+        public int baseHealth;
 
         #region Dictionaries
         public TowerDictionary towerDictionary;

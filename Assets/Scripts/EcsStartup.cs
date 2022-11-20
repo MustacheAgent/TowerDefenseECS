@@ -45,7 +45,7 @@ namespace Scripts
             
             _systems.InjectUi(emitter);
 
-            _systems.OneFrame<CurrencyChangedEvent>();
+            OneFrame(_systems);
 
             _systems.Init();
 
@@ -113,6 +113,14 @@ namespace Scripts
                 .Inject(staticData)
                 .Inject(pathfindingData)
                 .Inject(hudData)
+                ;
+        }
+
+        private void OneFrame(EcsSystems systems)
+        {
+            systems
+                .OneFrame<CurrencyChangedEvent>()
+                .OneFrame<PlayerHealthChangedEvent>()
                 ;
         }
 

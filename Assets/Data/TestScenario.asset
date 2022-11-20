@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ec68eec78c1a84d8e8fdba1aff1995, type: 3}
   m_Name: TestScenario
   m_EditorClassIdentifier: 
+  levelName: Testing
+  levelDescription: Testing purposes only.
   waves:
   - spawnSequences:
     - type: 1

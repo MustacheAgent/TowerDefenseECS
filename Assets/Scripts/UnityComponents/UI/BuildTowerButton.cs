@@ -13,6 +13,7 @@ namespace UnityComponents.UI
         public TowerType towerType;
         public TextMeshProUGUI price;
         public Image towerIcon;
+        public string towerName;
         public Button buyButton;
         public Image energyIcon;
         public Color energyDefaultColor;

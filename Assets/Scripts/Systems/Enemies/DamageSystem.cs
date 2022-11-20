@@ -24,7 +24,7 @@ namespace Systems.Enemies
                 {
                     _world.NewEntity().Get<CurrencyChangedEvent>() = new CurrencyChangedEvent
                     {
-                        CurrencyChange = entity.Get<CurrencyComponent>().killPrice
+                        CurrencyChanged = entity.Get<CurrencyComponent>().killPrice
                     };
                     entity.Get<DestroyEvent>();
                 }

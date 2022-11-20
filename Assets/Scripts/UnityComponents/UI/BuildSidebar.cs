@@ -11,7 +11,7 @@ namespace UnityComponents.UI
         [SerializeField] public SceneData sceneData;
         
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             foreach (var tower in sceneData.towerDictionary)
             {

@@ -11,6 +11,9 @@ namespace Scenarios
     [CreateAssetMenu(menuName = "Scriptable Objects/Scenario", fileName = "LevelScenario")]
     public class Scenario : ScriptableObject
     {
+        public string levelName;
+        public string levelDescription;
+        
         public Wave[] waves;
 
         public int WaveIndex

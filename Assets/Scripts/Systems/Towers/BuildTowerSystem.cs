@@ -58,7 +58,7 @@ namespace Systems.Towers
 
             _world.NewEntity().Get<CurrencyChangedEvent>() = new CurrencyChangedEvent
             {
-                CurrencyChange = -prefab.GetComponent<TowerInfoProvider>().Value.towerPrice
+                CurrencyChanged = -prefab.GetComponent<TowerInfoProvider>().Value.towerPrice
             };
             tileContent.content = TileContent.Tower;
             tile.Get<PathfindingComponent>().isWalkable = false;
