@@ -8,11 +8,16 @@ namespace UnityComponents.UI.MainMenu
     {
         private const string SceneName = "TestScene";
         
-        public Button PlayButton;
+        public Button playButton;
 
-        public void OnPlayPressed()
+        public void PlayPressed()
         {
             SceneManager.LoadScene(SceneName);
+        }
+
+        public void QuitPressed()
+        {
+            Application.Quit();
         }
     }
 }

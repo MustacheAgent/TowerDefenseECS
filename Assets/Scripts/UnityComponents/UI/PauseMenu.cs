@@ -33,6 +33,11 @@ namespace UnityComponents.UI
             levelDescription.text = levelScenario.levelDescription;
         }
 
+        public void RestartLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
         public void Pause()
         {
             OpenPauseMenu();
