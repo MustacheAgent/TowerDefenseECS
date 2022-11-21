@@ -1,5 +1,9 @@
 ﻿using System;
+using Components;
+using Events.Scenario;
+using Leopotam.Ecs;
 using UnityEngine;
+using Voody.UniLeo;
 
 namespace Scenarios
 {
@@ -7,37 +11,73 @@ namespace Scenarios
     [CreateAssetMenu(menuName = "Scriptable Objects/Scenario", fileName = "LevelScenario")]
     public class Scenario : ScriptableObject
     {
+        public string levelName;
+        public string levelDescription;
+        
         public Wave[] waves;
-        public float timeSpan;
 
-        private int _index;
+        public int WaveIndex
+        {
+            get => _waveIndex + 1;
+        }
+        
+        public int SeqLength => waves[_waveIndex].SeqLength;
+
+        private int _waveIndex;
         private float _timeScale;
-        private float _currentTime;
 
         public void Init()
         {
             Debug.Assert(waves.Length > 0, "Empty scenario!");
-            _index = 0;
-            waves[_index].Init();
+            _waveIndex = 0;
             _timeScale = 1f;
+        }
+
+        public void NextWave()
+        {
+            if (_waveIndex >= waves.Length)
+            {
+                // можно добавить событие завершения сценария
+                return;
+            }
+            waves[_waveIndex].Start();
+            WorldHandler.GetWorld().NewEntity().Get<WaveStartedEvent>() = new WaveStartedEvent
+            {
+                WaveNumber = _waveIndex + 1
+            };
+        }
+
+        public void PrepareNextWave()
+        {
+            _waveIndex++;
+            if (_waveIndex >= waves.Length)
+            {
+                // можно добавить событие завершения сценария
+                return;
+            }
+            var timer = new TimerComponent
+            {
+                Cooldown = waves[_waveIndex].delayBeforeNextWave
+            };
+            timer.Callback += NextWave;
+            WorldHandler.GetWorld().NewEntity().Get<TimerComponent>() = timer;
         }
 
         public bool Progress()
         {
-            if (_index >= waves.Length)
-			{
-				return false;
-			}
+            if (_waveIndex >= waves.Length) return false;
             
-            float deltaTime = waves[_index].Progress(_timeScale * Time.deltaTime);
+            float deltaTime = waves[_waveIndex].Progress(_timeScale * Time.deltaTime);
             while (deltaTime >= 0f)
             {
-                if (++_index >= waves.Length)
+                if (++_waveIndex >= waves.Length) return false;
+                
+                waves[_waveIndex].Start();
+                WorldHandler.GetWorld().NewEntity().Get<WaveStartedEvent>() = new WaveStartedEvent
                 {
-                    return false;
-                }
-                waves[_index].Init();
-                deltaTime = waves[_index].Progress(deltaTime);
+                    WaveNumber = _waveIndex + 1
+                };
+                deltaTime = waves[_waveIndex].Progress(deltaTime);
             }
             return true;
         }

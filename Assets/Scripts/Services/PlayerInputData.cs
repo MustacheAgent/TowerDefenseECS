@@ -8,5 +8,6 @@ namespace Services
         public Vector3 keyInput;
         public Vector3 mousePosition;
         public bool leftMousePressed;
+        public bool rightMousePressed;
     }
 }

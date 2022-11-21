@@ -1,10 +1,8 @@
 ﻿using Enums;
 using Factories;
-using Leopotam.Ecs;
 using Scenarios;
 using System;
 using Dictionaries;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Services
@@ -16,10 +14,12 @@ namespace Services
         
         public Scenario scenario;
         public TowerType selectedTower;
+        public int currency;
+        public int baseHealth;
 
         #region Dictionaries
         public TowerDictionary towerDictionary;
-        public EnemyDictionary enemies;
+        public EnemyDictionary enemiesDictionary;
         #endregion
     }
 }

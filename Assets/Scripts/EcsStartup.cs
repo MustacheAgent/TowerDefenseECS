@@ -1,3 +1,4 @@
+using Events;
 using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Systems;
 using Services;
@@ -21,8 +22,9 @@ namespace Scripts
         [SerializeField] private StaticData staticData;
         [SerializeField] private EcsUiEmitter emitter;
         [SerializeField] private PathfindingData pathfindingData;
+        [SerializeField] private HudData hudData;
 
-        void Start()
+        private void Start()
         {
             _world = new EcsWorld();
             _systems = new EcsSystems(_world);
@@ -43,6 +45,8 @@ namespace Scripts
             
             _systems.InjectUi(emitter);
 
+            OneFrame(_systems);
+
             _systems.Init();
 
             // register your systems here, for example:
@@ -58,18 +62,18 @@ namespace Scripts
             // .Inject (new NavMeshSupport ())
         }
 
-        void AddGameplaySystems(EcsSystems systems)
+        private void AddGameplaySystems(EcsSystems systems)
         {
             systems
                 .Add(new PlayerInputSystem())
                 .Add(new CameraMoveSystem())
-                .Add(new HudSystem())
+                .Add(new TowerButtonClickSystem())
                 .Add(new ScenarioSystem())
                 .Add(new PathfindingSystem())
                 ;
         }
 
-        void AddSpawnSystems(EcsSystems systems)
+        private void AddSpawnSystems(EcsSystems systems)
         {
             systems
                 .Add(new EnemySpawnSystem())
@@ -79,7 +83,7 @@ namespace Scripts
                 ;
         }
 
-        void AddTowerSystems(EcsSystems systems)
+        private void AddTowerSystems(EcsSystems systems)
         {
             systems
                 .Add(new TrackTargetSystem())
@@ -91,29 +95,41 @@ namespace Scripts
                 ;
         }
 
-        void AddMiscSystems(EcsSystems systems)
+        private void AddMiscSystems(EcsSystems systems)
         {
             systems
                 .Add(new EnemyMoveSystem())
                 .Add(new DamageSystem())
+                .Add(new TimerSystem())
+                .Add(new HudUpdateSystem())
                 ;
         }
 
-        void Inject(EcsSystems systems)
+        private void Inject(EcsSystems systems)
         {
             systems
                 .Inject(inputData)
                 .Inject(sceneData)
                 .Inject(staticData)
-                .Inject(pathfindingData);
+                .Inject(pathfindingData)
+                .Inject(hudData)
+                ;
         }
 
-        void Update() 
+        private void OneFrame(EcsSystems systems)
+        {
+            systems
+                .OneFrame<CurrencyChangedEvent>()
+                .OneFrame<PlayerHealthChangedEvent>()
+                ;
+        }
+
+        private void Update() 
         {
             _systems?.Run();
         }
 
-        void OnDestroy() 
+        private void OnDestroy() 
         {
             if (_systems != null) 
             {

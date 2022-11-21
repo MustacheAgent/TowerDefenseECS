@@ -5,6 +5,7 @@ using Events;
 using Events.Enemies;
 using Leopotam.Ecs;
 using System.Collections.Generic;
+using Components.Enemies;
 using Tags;
 using UnityEngine;
 

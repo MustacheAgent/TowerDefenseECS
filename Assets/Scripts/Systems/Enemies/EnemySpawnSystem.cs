@@ -39,7 +39,7 @@ namespace Systems.Enemies
                     var entity = _world.NewEntity();
                     entity.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                     {
-                        Prefab = _sceneData.enemies[spawnEvent.type],
+                        Prefab = _sceneData.enemiesDictionary[spawnEvent.type],
                         Position = spawnPosition,
                         Rotation = Quaternion.identity,
                         Parent = null

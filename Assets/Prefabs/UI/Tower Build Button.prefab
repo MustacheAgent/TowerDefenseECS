@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 19.7}
-  m_SizeDelta: {x: 75, y: 75}
+  m_AnchoredPosition: {x: 0, y: 12.2}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4606760290743377510
 CanvasRenderer:
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f9103c7c4bf0da43bc37ff6ca86ba4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerType: 0
   price: {fileID: 2686443271260104963}
   towerIcon: {fileID: 6278729644304822526}
   buyButton: {fileID: 1736421801246554874}
@@ -315,7 +316,7 @@ GameObject:
   - component: {fileID: 2686443271260104964}
   - component: {fileID: 2686443271260104963}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

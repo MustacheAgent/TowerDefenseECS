@@ -1,7 +1,8 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using Events.Enemies;
+using Events.Scenario;
 using Leopotam.Ecs;
-using System;
 using Voody.UniLeo;
 
 namespace Scenarios
@@ -11,7 +12,7 @@ namespace Scenarios
     {
         public EnemyType type;
         public int amount;
-        public float cooldown;
+        public float delayBeforeSpawn;
 
         private float _currentTime;
         private int _count;
@@ -22,18 +23,29 @@ namespace Scenarios
             _count = 0;
         }
 
+        public void Spawn()
+        {
+            WorldHandler.GetWorld().NewEntity().Get<SpawnEnemyEvent>() = new SpawnEnemyEvent
+            {
+                type = type
+            };
+        }
+
         public float Progress(float deltaTime)
         {
             _currentTime += deltaTime;
-            while(_currentTime >= cooldown)
+            while(_currentTime >= delayBeforeSpawn)
             {
-                _currentTime -= cooldown;
-                if (_count >= amount) return _currentTime;
+                _currentTime -= delayBeforeSpawn;
+                if (_count >= amount)
+                {
+                    return _currentTime;
+                }
                 _count += 1;
                 // создать противника
                 WorldHandler.GetWorld().NewEntity().Get<SpawnEnemyEvent>() = new SpawnEnemyEvent
                 {
-                    type = this.type
+                    type = type
                 };
             }
             return -1f;

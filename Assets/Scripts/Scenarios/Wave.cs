@@ -1,5 +1,10 @@
 ﻿using System;
+using Components;
+using Events.Enemies;
+using Events.Scenario;
+using Leopotam.Ecs;
 using UnityEngine;
+using Voody.UniLeo;
 
 namespace Scenarios
 {
@@ -7,27 +12,58 @@ namespace Scenarios
     public struct Wave
     {
         public Sequence[] spawnSequences;
+        public int delayBeforeNextWave;
 
-        private int _index;
+        private int _seqIndex;
+        
+        public int SeqLength => spawnSequences.Length;
 
-        public void Init()
+        public void Start()
         {
             Debug.Assert(spawnSequences.Length > 0, "Empty wave!");
-            _index = 0;
-            spawnSequences[_index].Init();
+            _seqIndex = 0;
+            spawnSequences[_seqIndex].Init();
+            Spawn();
+        }
+
+        public void Spawn()
+        {
+            spawnSequences[_seqIndex].Spawn();
+            WorldHandler.GetWorld().NewEntity().Get<SequenceCompletedEvent>() = new SequenceCompletedEvent
+            {
+                SequenceNumber = _seqIndex + 1
+            };
+            
+            if (++_seqIndex >= spawnSequences.Length)
+            {
+                WorldHandler.GetWorld().NewEntity().Get<WaveCompletedEvent>();
+                return;
+            }
+
+            var timer = new TimerComponent
+            {
+                Cooldown = spawnSequences[_seqIndex].delayBeforeSpawn
+            };
+            timer.Callback += Spawn;
+            WorldHandler.GetWorld().NewEntity().Get<TimerComponent>() = timer;
         }
 
         public float Progress(float deltaTime)
         {
-            deltaTime = spawnSequences[_index].Progress(deltaTime);
+            deltaTime = spawnSequences[_seqIndex].Progress(deltaTime);
             while(deltaTime >= 0f)
             {
-                if (++_index >= spawnSequences.Length)
-				{
-					return deltaTime;
-				}
-				spawnSequences[_index].Init();
-				deltaTime = spawnSequences[_index].Progress(deltaTime);
+                WorldHandler.GetWorld().NewEntity().Get<SequenceCompletedEvent>() = new SequenceCompletedEvent
+                {
+                    SequenceNumber = _seqIndex + 1
+                };
+                
+                if (++_seqIndex >= spawnSequences.Length)
+                {
+                    return deltaTime;
+                }
+				spawnSequences[_seqIndex].Init();
+				deltaTime = spawnSequences[_seqIndex].Progress(deltaTime);
             }
 
             return -1f;

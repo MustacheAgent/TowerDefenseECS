@@ -24,10 +24,7 @@ namespace Scripts
             {
                 return data.TryGetEntity().Value;
             }
-            else
-            {
-                throw new NullReferenceException("С данным объектом не ассоциировано ни одной сущности.");
-            }
+            throw new NullReferenceException("С данным объектом не ассоциировано ни одной сущности.");
         }
     }
 }
