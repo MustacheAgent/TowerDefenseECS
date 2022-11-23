@@ -16,3 +16,9 @@ MonoBehaviour:
     type: 3}
   rocketPrefab: {fileID: 6769745472993510325, guid: 2cabdd5c54f50884caa2559d343919c9,
     type: 3}
+  enemiesDictionary:
+    m_keys: 000000000100000002000000
+    m_values:
+    - {fileID: 3107806033709961604, guid: fece7d59100148745960b06bbc91a25a, type: 3}
+    - {fileID: 3969407090528160754, guid: 23f9d5361cf040443b420376980480b9, type: 3}
+    - {fileID: 3107806033709961604, guid: bf50876e011e0d64a901af63286fc089, type: 3}

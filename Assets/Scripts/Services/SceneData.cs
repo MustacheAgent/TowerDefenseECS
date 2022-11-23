@@ -19,7 +19,6 @@ namespace Services
 
         #region Dictionaries
         public TowerDictionary towerDictionary;
-        public EnemyDictionary enemiesDictionary;
         #endregion
     }
 }

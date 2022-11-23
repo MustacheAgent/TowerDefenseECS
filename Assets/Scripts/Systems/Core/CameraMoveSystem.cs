@@ -8,16 +8,24 @@ namespace Systems.Core
 {
     public class CameraMoveSystem : IEcsRunSystem
     {
-        readonly EcsFilter<CameraTag, PositionComponent, CameraSpeedComponent> cameraFilter = null;
-        PlayerInputData _input = null;
+        private readonly EcsFilter<CameraTag, PositionComponent, CameraSpeedComponent> _cameraFilter = null;
+        private readonly PlayerInputData _input = null;
 
         public void Run()
         {
-            foreach(var i in cameraFilter)
+            foreach(var i in _cameraFilter)
             {
-                ref var position = ref cameraFilter.Get2(i);
-                ref var speed = ref cameraFilter.Get3(i).cameraSpeed;
-                position.transform.Translate(speed * Time.deltaTime * new Vector3(_input.keyInput.x, 0.0f, _input.keyInput.z), Space.World);
+                ref var position = ref _cameraFilter.Get2(i).transform;
+                ref var speed = ref _cameraFilter.Get3(i).cameraSpeed;
+                ref var bounds = ref _cameraFilter.Get3(i).bounds;
+
+                Vector3 newPos = position.position;
+                newPos += new Vector3(_input.keyInput.x, 0.0f, _input.keyInput.z) * speed * Time.deltaTime;
+                newPos.x = Mathf.Clamp(newPos.x, bounds.xMin, bounds.xMax);
+                newPos.z = Mathf.Clamp(newPos.z, bounds.yMin, bounds.yMax);
+
+                position.position = newPos;
+                //position.Translate(speed * Time.deltaTime * newPos, Space.World);
             }
         }
     }

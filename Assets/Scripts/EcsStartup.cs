@@ -70,6 +70,7 @@ namespace Scripts
                 .Add(new TowerButtonClickSystem())
                 .Add(new ScenarioSystem())
                 .Add(new PathfindingSystem())
+                .Add(new GameProgressionSystem())
                 ;
         }
 
@@ -120,7 +121,7 @@ namespace Scripts
         {
             systems
                 .OneFrame<CurrencyChangedEvent>()
-                .OneFrame<PlayerHealthChangedEvent>()
+                .OneFrame<BaseHealthChangedEvent>()
                 ;
         }
 

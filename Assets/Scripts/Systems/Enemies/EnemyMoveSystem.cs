@@ -1,7 +1,7 @@
-using System.IO;
 using Components;
 using Components.Core;
 using Events;
+using Events.Enemies;
 using Leopotam.Ecs;
 using Scripts;
 using Services;
@@ -30,6 +30,7 @@ namespace Systems.Enemies
                 if (currentPathIndex >= path.path.Count)
                 {
                     _enemyFilter.GetEntity(i).Get<DestroyEvent>();
+                    _enemyFilter.GetEntity(i).Get<ReachedBaseEvent>();
                 }
                 else
                 {
@@ -40,12 +41,17 @@ namespace Systems.Enemies
                     var destination = nextOnPath.Get<PositionComponent>().transform.position;
                     destination.y = transform.localScale.y;
 
-                    if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z),
-                        new Vector2(destination.x, destination.z)) > 0.5f)
+                    if (CheckDistance(transform.position, destination))
                     {
-                        //Vector3 moveDir = (destination.position - transform.position);
-                        transform.position = 
-                            Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                        var position = transform.position;
+                        
+                        Vector3 relativePos = destination - position;
+                        Quaternion relativeRot = Quaternion.LookRotation(relativePos);
+                        Quaternion enemyRotation = transform.rotation;
+                        transform.rotation = Quaternion.Lerp(enemyRotation, relativeRot, 6 * Time.deltaTime);
+                        
+                        position = Vector3.MoveTowards(position, destination, speed * Time.deltaTime);
+                        transform.position = position;
                     }
                     else
                     {
@@ -53,6 +59,11 @@ namespace Systems.Enemies
                     }
                 }
             }
+        }
+
+        private bool CheckDistance(Vector3 position, Vector3 destination)
+        {
+            return Vector2.Distance(new Vector2(position.x, position.z), new Vector2(destination.x, destination.z)) > 0.1f;
         }
     }
 }

@@ -13,5 +13,25 @@ MonoBehaviour:
   m_Name: Level1Scenario
   m_EditorClassIdentifier: 
   levelName: Level 1
-  levelDescription: Don't let enemies get to your base.
-  waves: []
+  levelDescription: Do not let enemies to your base.
+  waves:
+  - spawnSequences:
+    - type: 1
+      amount: 1
+      delayBeforeSpawn: 3
+    - type: 1
+      amount: 1
+      delayBeforeSpawn: 3
+    - type: 1
+      amount: 1
+      delayBeforeSpawn: 3
+    - type: 1
+      amount: 1
+      delayBeforeSpawn: 3
+    - type: 1
+      amount: 1
+      delayBeforeSpawn: 3
+    - type: 1
+      amount: 1
+      delayBeforeSpawn: 3
+    delayBeforeNextWave: 5

@@ -10,21 +10,16 @@ using Services;
 
 namespace Systems.Enemies
 {
-    public class EnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
+    public class EnemySpawnSystem : IEcsRunSystem
     {
         private readonly EcsWorld _world = null;
-        private readonly SceneData _sceneData = null;
+        private readonly StaticData _staticData = null;
 
         private float _spawnDelay;
         private float _lastTime;
 
         private readonly EcsFilter<PositionComponent, SpawnTag>.Exclude<DestinationTag> _tileFilter = null;
         private readonly EcsFilter<SpawnEnemyEvent> _spawnEventFilter = null;
-
-        public void Init()
-        {
-            
-        }
 
         public void Run()
         {
@@ -39,7 +34,7 @@ namespace Systems.Enemies
                     var entity = _world.NewEntity();
                     entity.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
                     {
-                        Prefab = _sceneData.enemiesDictionary[spawnEvent.type],
+                        Prefab = _staticData.enemiesDictionary[spawnEvent.type],
                         Position = spawnPosition,
                         Rotation = Quaternion.identity,
                         Parent = null
@@ -48,25 +43,6 @@ namespace Systems.Enemies
 
                 _spawnEventFilter.GetEntity(eventIndex).Destroy();
             }
-            /*
-            _lastTime += Time.deltaTime;
-            if (_lastTime > _spawnDelay)
-            {
-                foreach (var i in tileFilter)
-                {
-                    ref Transform spawnPosition = ref tileFilter.Get1(i).transform;
-                    var entity = _world.NewEntity();
-                    entity.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
-                    {
-                        Prefab = _staticData.enemyPrefab,
-                        Position = spawnPosition.position,
-                        Rotation = Quaternion.identity,
-                        Parent = null
-                    };
-                }
-                _lastTime -= _spawnDelay;
-            }
-            */
         }
     }
 }

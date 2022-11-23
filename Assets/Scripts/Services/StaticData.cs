@@ -11,5 +11,7 @@ namespace Services
     {
         public GameObject mortarShellPrefab;
         public GameObject rocketPrefab;
+        
+        public EnemyDictionary enemiesDictionary;
     }
 }
