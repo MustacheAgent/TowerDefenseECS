@@ -10453,6 +10453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldBottomLeft: {fileID: 1679168590}
+  gridSizeX: 16
+  gridSizeZ: 16
 --- !u!1001 &988679696
 PrefabInstance:
   m_ObjectHideFlags: 0

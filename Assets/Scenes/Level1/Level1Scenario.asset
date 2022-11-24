@@ -18,20 +18,100 @@ MonoBehaviour:
   - spawnSequences:
     - type: 1
       amount: 1
-      delayBeforeSpawn: 3
+      delayBeforeSpawn: 2
     - type: 1
       amount: 1
-      delayBeforeSpawn: 3
+      delayBeforeSpawn: 2
     - type: 1
       amount: 1
-      delayBeforeSpawn: 3
+      delayBeforeSpawn: 2
     - type: 1
       amount: 1
-      delayBeforeSpawn: 3
+      delayBeforeSpawn: 2
     - type: 1
       amount: 1
-      delayBeforeSpawn: 3
+      delayBeforeSpawn: 2
     - type: 1
       amount: 1
-      delayBeforeSpawn: 3
+      delayBeforeSpawn: 2
     delayBeforeNextWave: 5
+  - spawnSequences:
+    - type: 1
+      amount: 2
+      delayBeforeSpawn: 2
+    - type: 1
+      amount: 2
+      delayBeforeSpawn: 2
+    - type: 1
+      amount: 2
+      delayBeforeSpawn: 2
+    - type: 1
+      amount: 2
+      delayBeforeSpawn: 2
+    - type: 1
+      amount: 2
+      delayBeforeSpawn: 2
+    - type: 1
+      amount: 2
+      delayBeforeSpawn: 2
+    delayBeforeNextWave: 3
+  - spawnSequences:
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    delayBeforeNextWave: 3
+  - spawnSequences:
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 3
+      delayBeforeSpawn: 1
+    delayBeforeNextWave: 1
+  - spawnSequences:
+    - type: 1
+      amount: 4
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 4
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 4
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 4
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 4
+      delayBeforeSpawn: 1
+    - type: 1
+      amount: 4
+      delayBeforeSpawn: 1
+    delayBeforeNextWave: 1

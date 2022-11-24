@@ -37,7 +37,7 @@ namespace Systems.Enemies
                     int2 currentPathXY = path.path[currentPathIndex];
 
                     EcsEntity nextOnPath =
-                        _pathfindingData.tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX)];
+                        _pathfindingData.Tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX)];
                     var destination = nextOnPath.Get<PositionComponent>().transform.position;
                     destination.y = transform.localScale.y;
 

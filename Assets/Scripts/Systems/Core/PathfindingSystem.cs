@@ -5,6 +5,7 @@ using Tags;
 using UnityEngine;
 using Unity.Mathematics;
 using System.Collections.Generic;
+using Enums;
 using Scripts;
 using Events.Enemies;
 using Services;
@@ -13,28 +14,28 @@ namespace Systems.Core
 {
     public class PathfindingSystem : IEcsInitSystem, IEcsRunSystem
     {
-        readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> units = null;
-        readonly EcsFilter<PositionComponent, DestinationTag> dest = null;
-        private PathfindingData _pathfindingData = null;
+        private readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> _units = null;
+        private readonly EcsFilter<PositionComponent, DestinationTag> _dest = null;
+        private readonly PathfindingData _pathfindingData = null;
 
         private const int MOVE_STRAIGHT_COST = 10;
         private const int MOVE_DIAGONAL_COST = 14;
 
         public void Init()
         {
-            SetGridSize();
-            SetInitialState();
+            //SetGridSize();
+            CreateGrid();
             //SetPathfindingValues(_sceneData.tiles);
         }
 
         public void Run()
         {
-            ref var pos = ref dest.Get1(0);
-            foreach(var i in units)
+            ref var pos = ref _dest.Get1(0);
+            foreach(var i in _units)
             {
-                units.GetEntity(i).Del<FindPathEvent>();
-                ref var unitPosition = ref units.Get1(i);
-                ref var unitPath = ref units.Get2(i);
+                _units.GetEntity(i).Del<FindPathEvent>();
+                ref var unitPosition = ref _units.Get1(i);
+                ref var unitPath = ref _units.Get2(i);
                 List<int2> path = FindPath(unitPosition.transform.position, pos.transform.position);
                 if (path != null)
                 {
@@ -44,7 +45,7 @@ namespace Systems.Core
                     var index = 
                         PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX);
                     unitPath.currentDestination =
-                        _pathfindingData.tiles[index].Get<PositionComponent>().transform.position;
+                        _pathfindingData.Tiles[index].Get<PositionComponent>().transform.position;
                 }
             }
         }
@@ -55,7 +56,7 @@ namespace Systems.Core
             int endNodeIndex = NodeFromPoint(end);
 
             EcsEntity[] tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
-            _pathfindingData.tiles.CopyTo(tiles, 0);
+            _pathfindingData.Tiles.CopyTo(tiles, 0);
             SetPathfindingValues(tiles);
 
             EcsEntity startNode = tiles[startNodeIndex];
@@ -203,23 +204,57 @@ namespace Systems.Core
                 ref var path = ref tiles[i].Get<PathfindingComponent>();
                 path.cameFromIndex = -1;
                 path.gCost = int.MaxValue;
-                path.hCost = CalculateDistanceCost(path.position, _pathfindingData.destination);
+                path.hCost = CalculateDistanceCost(path.position, _pathfindingData.Destination);
             }
         }
 
-        private void SetInitialState()
+        private void CreateGrid()
         {
-            EcsEntity entity;
-            RaycastHit hit;
-            Vector3 first;
-            Vector3 boxCastPos = first = _pathfindingData.worldBottomLeft.transform.position;
             GameObject obj = _pathfindingData.worldBottomLeft;
 
-            _pathfindingData.tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
+            Vector3 first = obj.transform.position;
+            Vector3 boxCastPos;
+            _pathfindingData.Tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
 
             for (int x = 0; x < _pathfindingData.gridSizeX; x++)
             {
-                entity = obj.GetEntity();
+                if (obj == null)
+                {
+                    var entity = SetEmptyEntity(x, 0);
+                    ref var path = ref entity.Get<PathfindingComponent>();
+                    _pathfindingData.Tiles[path.index] = entity;
+                }
+            }
+        }
+
+        private EcsEntity SetEmptyEntity(int x, int y)
+        {
+            var entity = new EcsEntity();
+            ref var path = ref entity.Get<PathfindingComponent>();
+            path.position.x = x;
+            path.position.y = y;
+            path.index = PathfindingExtensions.CalculateIndex(x, y, _pathfindingData.gridSizeX);
+            path.isWalkable = false;
+            entity.Get<TileContentComponent>().content = TileContent.NonBuildable;
+
+            return entity;
+        }
+
+        private void SetRelativeEntity()
+        {
+            
+        }
+        
+        /*
+        private void SetInitialState()
+        {
+            GameObject obj = _pathfindingData.worldBottomLeft;
+
+            _pathfindingData.Tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
+
+            for (int x = 0; x < _pathfindingData.gridSizeX; x++)
+            {
+                var entity = obj.GetEntity();
                 ref var path = ref entity.Get<PathfindingComponent>();
                 path.position.x = x;
                 path.position.y = 0;
@@ -227,18 +262,20 @@ namespace Systems.Core
 
                 if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == Enums.TileContent.SpawnPoint)
                 {
-                    _pathfindingData.spawn = new int2(path.position.x, path.position.y);
+                    _pathfindingData.Spawn = new int2(path.position.x, path.position.y);
                 }
                 if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == Enums.TileContent.Destination)
                 {
-                    _pathfindingData.destination = new int2(path.position.x, path.position.y);
+                    _pathfindingData.Destination = new int2(path.position.x, path.position.y);
                 }
 
                 ref var position = ref entity.Get<PositionComponent>();
-                boxCastPos = first = position.transform.position;
+                Vector3 first;
+                var boxCastPos = first = position.transform.position;
 
-                _pathfindingData.tiles[path.index] = entity;
+                _pathfindingData.Tiles[path.index] = entity;
 
+                RaycastHit hit;
                 for (int z = 1; z < _pathfindingData.gridSizeZ; z++)
                 {
                     if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 500), Vector3.forward, out hit,
@@ -250,7 +287,7 @@ namespace Systems.Core
                         path.position.y = z;
                         path.index = PathfindingExtensions.CalculateIndex(x, z, _pathfindingData.gridSizeX);
 
-                        _pathfindingData.tiles[path.index] = entity;
+                        _pathfindingData.Tiles[path.index] = entity;
 
                         position = ref entity.Get<PositionComponent>();
                         boxCastPos = position.transform.position;
@@ -264,6 +301,7 @@ namespace Systems.Core
                 }
             }
         }
+        */
 
         private List<int2> CalculatePath(PathfindingComponent endPath, EcsEntity[] tiles)
         {

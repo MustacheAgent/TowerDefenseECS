@@ -6,6 +6,7 @@
         Destination,
         Wall,
         SpawnPoint,
-        Tower
+        Tower,
+        NonBuildable
     }
 }
