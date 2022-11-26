@@ -18,6 +18,8 @@ namespace Systems.Core
         private readonly EcsFilter<PositionComponent, DestinationTag> _dest = null;
         private readonly PathfindingData _pathfindingData = null;
 
+        private readonly EcsWorld _world = null;
+
         private const int MOVE_STRAIGHT_COST = 10;
         private const int MOVE_DIAGONAL_COST = 14;
 
@@ -25,6 +27,7 @@ namespace Systems.Core
         {
             //SetGridSize();
             CreateGrid();
+            //SetInitialState();
             //SetPathfindingValues(_sceneData.tiles);
         }
 
@@ -213,39 +216,89 @@ namespace Systems.Core
             GameObject obj = _pathfindingData.worldBottomLeft;
 
             Vector3 first = obj.transform.position;
-            Vector3 boxCastPos;
             _pathfindingData.Tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
 
-            for (int x = 0; x < _pathfindingData.gridSizeX; x++)
+            for (var x = 0; x < _pathfindingData.gridSizeX; x++)
             {
                 if (obj == null)
                 {
-                    var entity = SetEmptyEntity(x, 0);
+                    var entity = _world.NewEntity();
                     ref var path = ref entity.Get<PathfindingComponent>();
+                    path.position.x = x;
+                    path.position.y = 0;
+                    path.index = PathfindingExtensions.CalculateIndex(x, 0, _pathfindingData.gridSizeX);
+                    path.isWalkable = false;
+                    entity.Get<TileContentComponent>().content = TileContent.NonBuildable;
                     _pathfindingData.Tiles[path.index] = entity;
+                }
+                else
+                {
+                    var entity = obj.GetEntity();
+                    ref var path = ref entity.Get<PathfindingComponent>();
+                    path.position.x = x;
+                    path.position.y = 0;
+                    path.index = PathfindingExtensions.CalculateIndex(x, 0, _pathfindingData.gridSizeX);
+
+                    if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == TileContent.SpawnPoint)
+                    {
+                        _pathfindingData.Spawn = new int2(path.position.x, path.position.y);
+                    }
+                    if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == TileContent.Destination)
+                    {
+                        _pathfindingData.Destination = new int2(path.position.x, path.position.y);
+                    }
+
+                    _pathfindingData.Tiles[path.index] = entity;
+                }
+
+                var boxCastPos = first;
+                RaycastHit hit;
+                
+                for (var z = 1; z < _pathfindingData.gridSizeZ; z++)
+                {
+                    if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 500), Vector3.forward, out hit,
+                            _pathfindingData.worldBottomLeft.transform.rotation))
+                    {
+                        var entity = hit.transform.gameObject.GetEntity();
+                        ref var path = ref entity.Get<PathfindingComponent>();
+                        path.position.x = x;
+                        path.position.y = z;
+                        path.index = PathfindingExtensions.CalculateIndex(x, z, _pathfindingData.gridSizeX);
+                        _pathfindingData.Tiles[path.index] = entity;
+                    }
+                    else
+                    {
+                        var entity = _world.NewEntity();
+                        ref var path = ref entity.Get<PathfindingComponent>();
+                        path.position.x = x;
+                        path.position.y = z;
+                        path.index = PathfindingExtensions.CalculateIndex(x, z, _pathfindingData.gridSizeX);
+                        path.isWalkable = false;
+                        entity.Get<TileContentComponent>().content = TileContent.NonBuildable;
+                        _pathfindingData.Tiles[path.index] = entity;
+                    }
+                    
+                    boxCastPos += Vector3.forward;
+                }
+
+                if (x <= _pathfindingData.gridSizeX - 1)
+                {
+                    if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 500), Vector3.right, out hit,
+                            _pathfindingData.worldBottomLeft.transform.rotation))
+                    {
+                        obj = hit.transform.gameObject;
+                        first = obj.transform.position;
+                    }
+                    else
+                    {
+                        obj = null;
+                        first += Vector3.right;
+                    }                    
                 }
             }
         }
 
-        private EcsEntity SetEmptyEntity(int x, int y)
-        {
-            var entity = new EcsEntity();
-            ref var path = ref entity.Get<PathfindingComponent>();
-            path.position.x = x;
-            path.position.y = y;
-            path.index = PathfindingExtensions.CalculateIndex(x, y, _pathfindingData.gridSizeX);
-            path.isWalkable = false;
-            entity.Get<TileContentComponent>().content = TileContent.NonBuildable;
-
-            return entity;
-        }
-
-        private void SetRelativeEntity()
-        {
-            
-        }
         
-        /*
         private void SetInitialState()
         {
             GameObject obj = _pathfindingData.worldBottomLeft;
@@ -289,9 +342,10 @@ namespace Systems.Core
 
                         _pathfindingData.Tiles[path.index] = entity;
 
-                        position = ref entity.Get<PositionComponent>();
-                        boxCastPos = position.transform.position;
+                        //position = ref entity.Get<PositionComponent>();
+                        //boxCastPos = position.transform.position;
                     }
+                    boxCastPos += Vector3.forward;
                 }
 
                 if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 500), Vector3.right, out hit,
@@ -301,7 +355,7 @@ namespace Systems.Core
                 }
             }
         }
-        */
+        
 
         private List<int2> CalculatePath(PathfindingComponent endPath, EcsEntity[] tiles)
         {
