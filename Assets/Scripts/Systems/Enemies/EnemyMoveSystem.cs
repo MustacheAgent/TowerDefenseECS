@@ -13,8 +13,8 @@ namespace Systems.Enemies
 {
     public class EnemyMoveSystem : IEcsRunSystem 
     {
-        readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> _enemyFilter = null;
-        readonly PathfindingData _pathfindingData = null;
+        private readonly EcsFilter<PositionComponent, MoveComponent, PathComponent, EnemyTag> _enemyFilter = null;
+        private readonly PathfindingData _pathfindingData = null;
 
         public void Run()
         {

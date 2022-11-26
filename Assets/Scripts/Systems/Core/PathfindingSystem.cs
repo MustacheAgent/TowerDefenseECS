@@ -97,16 +97,6 @@ namespace Systems.Core
                 }
 
                 openList.Remove(currentIndex);
-                /*
-                for (int i = 0; i < openList.Count; i++)
-                {
-                    if (openList[i] == currentIndex)
-                    {
-                        
-                        break;
-                    }
-                }
-                */
 
                 closedList.Add(currentIndex);
 
@@ -256,8 +246,8 @@ namespace Systems.Core
                 
                 for (var z = 1; z < _pathfindingData.gridSizeZ; z++)
                 {
-                    if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 500), Vector3.forward, out hit,
-                            _pathfindingData.worldBottomLeft.transform.rotation))
+                    if (Physics.BoxCast(boxCastPos, new Vector3(0.1f, 0.1f, 0.1f), Vector3.forward, out hit,
+                            _pathfindingData.worldBottomLeft.transform.rotation, 1))
                     {
                         var entity = hit.transform.gameObject.GetEntity();
                         ref var path = ref entity.Get<PathfindingComponent>();
@@ -283,7 +273,7 @@ namespace Systems.Core
 
                 if (x <= _pathfindingData.gridSizeX - 1)
                 {
-                    if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 500), Vector3.right, out hit,
+                    if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 0.1f), Vector3.right, out hit,
                             _pathfindingData.worldBottomLeft.transform.rotation))
                     {
                         obj = hit.transform.gameObject;
@@ -298,7 +288,6 @@ namespace Systems.Core
             }
         }
 
-        
         private void SetInitialState()
         {
             GameObject obj = _pathfindingData.worldBottomLeft;
