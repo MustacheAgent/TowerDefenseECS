@@ -68,6 +68,7 @@ namespace Systems.Core
             ref var endPath = ref endNode.Get<PathfindingComponent>();
             startPath.gCost = 0;
 
+            
             int2[] neighbours = new int2[]
             {
                 new int2(-1, 0),
@@ -79,6 +80,16 @@ namespace Systems.Core
                 new int2(+1, -1),
                 new int2(+1, +1)
             };
+            
+            /*
+            int2[] neighbours = new int2[]
+            {
+                new int2(-1, 0),
+                new int2(+1, 0),
+                new int2(0, -1),
+                new int2(0, +1)
+            };
+            */
 
             List<int> openList = new();
             List<int> closedList = new();
@@ -274,7 +285,7 @@ namespace Systems.Core
                 if (x <= _pathfindingData.gridSizeX - 1)
                 {
                     if (Physics.BoxCast(first, new Vector3(0.1f, 0.1f, 0.1f), Vector3.right, out hit,
-                            _pathfindingData.worldBottomLeft.transform.rotation))
+                            _pathfindingData.worldBottomLeft.transform.rotation, 1))
                     {
                         obj = hit.transform.gameObject;
                         first = obj.transform.position;
