@@ -30,13 +30,13 @@ namespace Systems.Towers
                 return;
             }
             var ray = Camera.main.ScreenPointToRay(_input.mousePosition);
-            if (!Physics.Raycast(ray, out RaycastHit hit)) return;
+            if (!Physics.Raycast(ray, out var hit)) return;
             var gameObject = hit.transform.gameObject;
             var tile = gameObject.GetEntity();
 
             if (!tile.Has<TileContentComponent>()) return;
             ref var tileContent = ref tile.Get<TileContentComponent>();
-            if (tileContent.content != TileContent.Empty) return;
+            if (tileContent.content is not TileContent.Empty or TileContent.NonBuildable) return;
             ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
             
             GameObject prefab = null;

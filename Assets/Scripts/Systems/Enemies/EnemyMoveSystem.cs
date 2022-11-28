@@ -26,15 +26,15 @@ namespace Systems.Enemies
 
                 ref float speed = ref moveComponent.speed;
 
-                ref int currentPathIndex = ref path.pathIndex;
-                if (currentPathIndex >= path.path.Count)
+                ref int currentPathIndex = ref path.PathIndex;
+                if (currentPathIndex >= path.Path.Count)
                 {
                     _enemyFilter.GetEntity(i).Get<DestroyEvent>();
                     _enemyFilter.GetEntity(i).Get<ReachedBaseEvent>();
                 }
                 else
                 {
-                    int2 currentPathXY = path.path[currentPathIndex];
+                    int2 currentPathXY = path.Path[currentPathIndex];
 
                     EcsEntity nextOnPath =
                         _pathfindingData.Tiles[PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX)];

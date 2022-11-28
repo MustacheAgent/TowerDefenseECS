@@ -36,16 +36,17 @@ namespace Systems.Core
             {
                 _units.GetEntity(i).Del<FindPathEvent>();
                 ref var unitPosition = ref _units.Get1(i);
+                var tilePosition = NodeFromWorldPointUnsafe(unitPosition.transform.position);
                 ref var unitPath = ref _units.Get2(i);
-                List<int2> path = FindPath(_pathfindingData.Spawn, _pathfindingData.Destination);
+                var path = FindPath(tilePosition, _pathfindingData.Destination);
                 if (path != null)
                 {
-                    unitPath.path = new List<int2>(path);
-                    unitPath.pathIndex = 1;
-                    var currentPathXY = unitPath.path[unitPath.pathIndex];
+                    unitPath.Path = new List<int2>(path);
+                    unitPath.PathIndex = 1;
+                    var currentPathXY = unitPath.Path[unitPath.PathIndex];
                     var index = 
                         PathfindingExtensions.CalculateIndex(currentPathXY.x, currentPathXY.y, _pathfindingData.gridSizeX);
-                    unitPath.currentDestination =
+                    unitPath.CurrentDestination =
                         _pathfindingData.Tiles[index].Get<PositionComponent>().transform.position;
                 }
             }
@@ -69,7 +70,7 @@ namespace Systems.Core
             ref var startPath = ref startNode.Get<PathfindingComponent>();
             ref var endPath = ref endNode.Get<PathfindingComponent>();
             startPath.gCost = 0;
-
+            /*
             var neighbours = new[]
             {
                 new int2(-1, 0),
@@ -81,8 +82,8 @@ namespace Systems.Core
                 new int2(+1, -1),
                 new int2(+1, +1)
             };
+            */
             
-            /*
             int2[] neighbours = new int2[]
             {
                 new int2(-1, 0),
@@ -90,8 +91,7 @@ namespace Systems.Core
                 new int2(0, -1),
                 new int2(0, +1)
             };
-            */
-
+            
             List<int> openList = new();
             List<int> closedList = new();
 
@@ -407,16 +407,30 @@ namespace Systems.Core
             return index;
         }
 
-        private int NodeFromPoint(Vector3 point)
+        private int2 NodeFromPoint(Vector3 point)
+        {
+            float percentX = (point.x + (float)_pathfindingData.gridSizeX / 2) / _pathfindingData.gridSizeX;
+            float percentY = (point.z + (float)_pathfindingData.gridSizeZ / 2) / _pathfindingData.gridSizeZ;
+            percentX = Mathf.Clamp01(percentX);
+            percentY = Mathf.Clamp01(percentY);
+
+            int x = Mathf.RoundToInt((_pathfindingData.gridSizeX - 1) * percentX);
+            int y = Mathf.RoundToInt((_pathfindingData.gridSizeZ - 1) * percentY);
+
+            return new int2(x, y);
+            //return CalculateIndex(x, y, _pathfindingData.gridSizeX);
+        }
+
+        private int2 NodeFromWorldPointUnsafe(Vector3 point)
         {
             int x = Mathf.RoundToInt(point.x);
             int y = Mathf.RoundToInt(point.z);
             //Debug.Log("Point: " + point + "\n" + "Got indexes. X: " + x + " Z: " + y);
             if (x >= 0 && x < _pathfindingData.gridSizeX && y >= 0 && y < _pathfindingData.gridSizeZ)
             {
-                int index = x + y * _pathfindingData.gridSizeX;
+                //int index = x + y * _pathfindingData.gridSizeX;
                 //Debug.Log("Index: " + index);
-                return index;
+                return new int2(x, y);
             }
             return -1;
         }
@@ -427,6 +441,11 @@ namespace Systems.Core
             int zDistance = math.abs(aPos.y - bPos.y);
             int remaining = math.abs(xDistance - zDistance);
             return MOVE_DIAGONAL_COST * math.min(xDistance, zDistance) + MOVE_STRAIGHT_COST * remaining;
+        }
+        
+        private int CalculateIndex(int x, int y, int width)
+        {
+            return x + y * width;
         }
     }
 }
