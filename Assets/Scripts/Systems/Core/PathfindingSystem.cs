@@ -15,7 +15,6 @@ namespace Systems.Core
     public class PathfindingSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsFilter<PositionComponent, PathComponent, FindPathEvent> _units = null;
-        private readonly EcsFilter<PositionComponent, DestinationTag> _dest = null;
         private readonly PathfindingData _pathfindingData = null;
 
         private readonly EcsWorld _world = null;
@@ -33,13 +32,12 @@ namespace Systems.Core
 
         public void Run()
         {
-            ref var pos = ref _dest.Get1(0);
             foreach(var i in _units)
             {
                 _units.GetEntity(i).Del<FindPathEvent>();
                 ref var unitPosition = ref _units.Get1(i);
                 ref var unitPath = ref _units.Get2(i);
-                List<int2> path = FindPath(unitPosition.transform.position, pos.transform.position);
+                List<int2> path = FindPath(_pathfindingData.Spawn, _pathfindingData.Destination);
                 if (path != null)
                 {
                     unitPath.path = new List<int2>(path);
@@ -53,10 +51,14 @@ namespace Systems.Core
             }
         }
 
-        private List<int2> FindPath(Vector3 start, Vector3 end)
+        private List<int2> FindPath(int2 start, int2 end)
         {
+            var startNodeIndex = PathfindingExtensions.CalculateIndex(start.x, start.y, _pathfindingData.gridSizeX);
+            var endNodeIndex = PathfindingExtensions.CalculateIndex(end.x, end.y, _pathfindingData.gridSizeX);
+            /*
             int startNodeIndex = NodeFromPoint(start);
             int endNodeIndex = NodeFromPoint(end);
+            */
 
             EcsEntity[] tiles = new EcsEntity[_pathfindingData.gridSizeX * _pathfindingData.gridSizeZ];
             _pathfindingData.Tiles.CopyTo(tiles, 0);
@@ -68,8 +70,7 @@ namespace Systems.Core
             ref var endPath = ref endNode.Get<PathfindingComponent>();
             startPath.gCost = 0;
 
-            
-            int2[] neighbours = new int2[]
+            var neighbours = new[]
             {
                 new int2(-1, 0),
                 new int2(+1, 0),
@@ -149,14 +150,7 @@ namespace Systems.Core
                 }
             }
 
-            if (endPath.cameFromIndex == -1)
-            {
-                return null;
-            }
-            else
-            {
-                return CalculatePath(endPath, tiles);
-            }
+            return endPath.cameFromIndex == -1 ? null : CalculatePath(endPath, tiles);
         }
 
         /// <summary>
@@ -265,6 +259,16 @@ namespace Systems.Core
                         path.position.x = x;
                         path.position.y = z;
                         path.index = PathfindingExtensions.CalculateIndex(x, z, _pathfindingData.gridSizeX);
+                        
+                        if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == TileContent.SpawnPoint)
+                        {
+                            _pathfindingData.Spawn = new int2(path.position.x, path.position.y);
+                        }
+                        if (entity.Has<TileContentComponent>() && entity.Get<TileContentComponent>().content == TileContent.Destination)
+                        {
+                            _pathfindingData.Destination = new int2(path.position.x, path.position.y);
+                        }
+                        
                         _pathfindingData.Tiles[path.index] = entity;
                     }
                     else
@@ -356,7 +360,6 @@ namespace Systems.Core
             }
         }
         
-
         private List<int2> CalculatePath(PathfindingComponent endPath, EcsEntity[] tiles)
         {
             if (endPath.cameFromIndex == -1)
