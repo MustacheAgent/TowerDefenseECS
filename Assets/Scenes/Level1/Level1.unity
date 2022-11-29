@@ -14060,7 +14060,7 @@ MonoBehaviour:
   gameObjectFactory: {fileID: 11400000, guid: da0bd480fe3d91542a0212aa12e3855c, type: 2}
   scenario: {fileID: 11400000, guid: aa975419733179f4982f1d811d09c262, type: 2}
   selectedTower: 0
-  currency: 100
+  currency: 150
   baseHealth: 10
   towerDictionary:
     m_keys: 0100000002000000
