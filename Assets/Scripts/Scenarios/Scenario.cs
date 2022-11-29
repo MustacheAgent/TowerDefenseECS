@@ -13,6 +13,7 @@ namespace Scenarios
     {
         public string levelName;
         public string levelDescription;
+        public string sceneName;
         
         public Wave[] waves;
 

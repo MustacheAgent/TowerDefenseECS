@@ -5,6 +5,7 @@ using Components.Towers;
 using Enums;
 using Events;
 using Events.Enemies;
+using Events.Scenario;
 using Leopotam.Ecs;
 using MonoProviders.Components.Towers;
 using Scripts;
@@ -20,6 +21,8 @@ namespace Systems.Towers
         private readonly EcsWorld _world = null;
         private readonly PlayerInputData _input = null;
         private readonly EcsFilter<EnemyTag> _enemyFilter = null;
+
+        private bool _isStarted = false;
 
         public void Run()
         {
@@ -67,6 +70,10 @@ namespace Systems.Towers
             {
                 _enemyFilter.GetEntity(i).Get<FindPathEvent>();
             }
+
+            if (_isStarted) return;
+            _world.NewEntity().Get<BeginScenarioEvent>();
+            _isStarted = true;
         }
     }
 }
