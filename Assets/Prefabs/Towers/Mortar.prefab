@@ -109,12 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    towerIcon: {fileID: 21300000, guid: fa91237b5487541158165bfce6ebfa0c, type: 3}
+    towerIcon: {fileID: 21300000, guid: 513d334ef78544f129afabc1ad5af28b, type: 3}
     towerPrice: 80
     energyIcon: {fileID: 21300000, guid: 3568b996ada474c18bb75841d1116d7e, type: 3}
     towerName: Mortar
-    defaultColor: {r: 0, g: 0, b: 0, a: 0}
-    invalidColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &908197608006237800
 GameObject:
   m_ObjectHideFlags: 0
