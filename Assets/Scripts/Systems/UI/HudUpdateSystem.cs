@@ -11,7 +11,7 @@ namespace Systems.UI
         private readonly HudData _hudData = null;
 
         private readonly EcsFilter<CurrencyChangedEvent> _currencyChanged = null;
-        private readonly EcsFilter<PlayerHealthChangedEvent> _healthChanged = null;
+        private readonly EcsFilter<BaseHealthChangedEvent> _healthChanged = null;
         
         public void Init()
         {
@@ -32,7 +32,7 @@ namespace Systems.UI
             {
                 ref var newHealth = ref _healthChanged.Get1(eventIndex).HealthChanged;
                 _sceneData.baseHealth += newHealth;
-                _hudData.baseHealth.text = _sceneData.baseHealth.ToString();
+                _hudData.baseHealth.text = _sceneData.baseHealth > 0 ? _sceneData.baseHealth.ToString() : 0.ToString();
             }
         }
     }

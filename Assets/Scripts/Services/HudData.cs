@@ -1,4 +1,5 @@
 using TMPro;
+using UnityComponents.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,5 +11,7 @@ namespace Services
         public TextMeshProUGUI waveNumber;
         public TextMeshProUGUI currency;
         public TextMeshProUGUI baseHealth;
+
+        public GameOverMenu gameOverMenu;
     }
 }

@@ -9,9 +9,9 @@ namespace Services
     {
         // параметры сетки
         public GameObject worldBottomLeft;
-        [NonSerialized] public int gridSizeX;
-        [NonSerialized] public int gridSizeZ;
-        [NonSerialized] public EcsEntity[] tiles;
-        [NonSerialized] public int2 spawn, destination;
+        public int gridSizeX;
+        public int gridSizeZ;
+        [NonSerialized] public EcsEntity[] Tiles;
+        [NonSerialized] public int2 Spawn, Destination;
     }
 }

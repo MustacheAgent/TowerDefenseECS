@@ -17,10 +17,7 @@ MonoBehaviour:
   waves:
   - spawnSequences:
     - type: 1
-      amount: 1
-      delayBeforeSpawn: 2
-    - type: 1
-      amount: 1
+      amount: 2
       delayBeforeSpawn: 2
     delayBeforeNextWave: 4
   - spawnSequences:

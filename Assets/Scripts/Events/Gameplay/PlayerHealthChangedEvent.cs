@@ -1,6 +1,6 @@
 ﻿namespace Events
 {
-    public struct PlayerHealthChangedEvent
+    public struct BaseHealthChangedEvent
     {
         public int HealthChanged;
     }

@@ -13,6 +13,7 @@ namespace Scenarios
     {
         public string levelName;
         public string levelDescription;
+        public string sceneName;
         
         public Wave[] waves;
 
@@ -26,11 +27,15 @@ namespace Scenarios
         private int _waveIndex;
         private float _timeScale;
 
+        private bool _isEventSent;
+
         public void Init()
         {
             Debug.Assert(waves.Length > 0, "Empty scenario!");
             _waveIndex = 0;
             _timeScale = 1f;
+
+            _isEventSent = false;
         }
 
         public void NextWave()
@@ -53,6 +58,9 @@ namespace Scenarios
             if (_waveIndex >= waves.Length)
             {
                 // можно добавить событие завершения сценария
+                if (_isEventSent) return;
+                _isEventSent = !_isEventSent;
+                WorldHandler.GetWorld().NewEntity().Get<ScenarioCompletedEvent>();
                 return;
             }
             var timer = new TimerComponent

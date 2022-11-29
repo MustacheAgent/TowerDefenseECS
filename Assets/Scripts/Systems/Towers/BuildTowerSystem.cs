@@ -5,6 +5,7 @@ using Components.Towers;
 using Enums;
 using Events;
 using Events.Enemies;
+using Events.Scenario;
 using Leopotam.Ecs;
 using MonoProviders.Components.Towers;
 using Scripts;
@@ -21,6 +22,8 @@ namespace Systems.Towers
         private readonly PlayerInputData _input = null;
         private readonly EcsFilter<EnemyTag> _enemyFilter = null;
 
+        private bool _isStarted = false;
+
         public void Run()
         {
             if (!_input.leftMousePressed) return;
@@ -30,13 +33,13 @@ namespace Systems.Towers
                 return;
             }
             var ray = Camera.main.ScreenPointToRay(_input.mousePosition);
-            if (!Physics.Raycast(ray, out RaycastHit hit)) return;
+            if (!Physics.Raycast(ray, out var hit)) return;
             var gameObject = hit.transform.gameObject;
             var tile = gameObject.GetEntity();
 
             if (!tile.Has<TileContentComponent>()) return;
             ref var tileContent = ref tile.Get<TileContentComponent>();
-            if (tileContent.content != TileContent.Empty) return;
+            if (tileContent.content is not TileContent.Empty or TileContent.NonBuildable) return;
             ref var spawnPosition = ref tile.Get<PositionComponent>().transform;
             
             GameObject prefab = null;
@@ -67,6 +70,10 @@ namespace Systems.Towers
             {
                 _enemyFilter.GetEntity(i).Get<FindPathEvent>();
             }
+
+            if (_isStarted) return;
+            _world.NewEntity().Get<BeginScenarioEvent>();
+            _isStarted = true;
         }
     }
 }

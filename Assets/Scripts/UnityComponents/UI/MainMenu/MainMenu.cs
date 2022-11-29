@@ -7,12 +7,15 @@ namespace UnityComponents.UI.MainMenu
     public class MainMenu : MonoBehaviour
     {
         private const string SceneName = "TestScene";
-        
-        public Button playButton;
+
+        public LevelSelect levels;
+
+        public Canvas mainMenuCanvas;
 
         public void PlayPressed()
         {
-            SceneManager.LoadScene(SceneName);
+            mainMenuCanvas.enabled = false;
+            levels.ShowMenu();
         }
 
         public void QuitPressed()

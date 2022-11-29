@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Components.Core
 {
@@ -6,5 +7,6 @@ namespace Components.Core
     public struct CameraSpeedComponent
     {
         public float cameraSpeed;
+        public Rect bounds;
     }
 }
