@@ -21,6 +21,16 @@
       "dependencies": {},
       "hash": "16f527e942e4c03efabff357d718c4ba0092a477"
     },
+    "com.peartreegames.blockyworldeditor": {
+      "version": "https://github.com/peartreegames/blocky-world-editor.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.uielements": "0.1.0",
+        "com.unity.editorcoroutines": "1.0.0"
+      },
+      "hash": "919cdeefe0c2893e24a53df1788ea966a5803ce8"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,
@@ -37,6 +47,13 @@
       "dependencies": {
         "com.unity.mathematics": "1.2.1"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.editorcoroutines": {
+      "version": "1.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
