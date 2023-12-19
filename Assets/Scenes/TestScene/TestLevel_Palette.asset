@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839369e8ae584271aa171fc25aa744f5, type: 3}
+  m_Name: TestLevel_Palette
+  m_EditorClassIdentifier: 
+  blocks:
+  - {fileID: 1427646034110418024, guid: 49ec1eb6b606aa546a0e56b83c243271, type: 3}
+  - {fileID: 7940904369050108573, guid: 023133d1332042646826703441d1a3e0, type: 3}
+  - {fileID: 441631077122309218, guid: 697206b6f2ee8ac479833571aa8ca4d3, type: 3}
