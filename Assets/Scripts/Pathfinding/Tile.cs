@@ -9,8 +9,8 @@ namespace Pathfinding
         [Header("Breadth-First Search")]
         [HideInInspector] public bool processed;
         public bool walkable = true;
-        //public List<Tile> neighbourTiles;
-        //[HideInInspector] 
+        [HideInInspector] public bool alternative;
+        
         public Tile north, west, east, south, next;
         public int distance;
 
@@ -23,6 +23,7 @@ namespace Pathfinding
         {
             next = null;
             distance = 0;
+            alternative = false;
         }
 
         private void GetNeighbors()
@@ -74,6 +75,14 @@ namespace Pathfinding
                 next == east ? eastRotation :
                 next == south ? southRotation :
                 westRotation;
+        }
+
+        public void InvertNeighbors()
+        {
+            if (north) north.alternative = !alternative;
+            if (east) east.alternative = !alternative;
+            if (south) south.alternative = !alternative;
+            if (west) west.alternative = !alternative;
         }
     }
 }

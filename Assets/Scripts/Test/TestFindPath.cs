@@ -5,12 +5,11 @@ namespace Test
 {
     public class TestFindPath : MonoBehaviour
     {
-        public Tile destination;
+        public Tile[] destinations;
         
         private void Start()
         {
-            var BFS = new BreadthFirstSearch();
-            BFS.FindPath(destination);
+            new BreadthFirstSearch().FindPath(destinations);
         }
     }
 }
