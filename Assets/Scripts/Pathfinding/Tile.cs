@@ -9,20 +9,18 @@ namespace Pathfinding
         [Header("Breadth-First Search")]
         [HideInInspector] public bool processed;
         public bool walkable = true;
-        public bool visited = false;
         //public List<Tile> neighbourTiles;
         //[HideInInspector] 
         public Tile north, west, east, south, next;
         public int distance;
 
-        private void Start()
+        private void Awake()
         {
             GetNeighbors();
         }
 
         public void Reset()
         {
-            visited = false;
             next = null;
             distance = 0;
         }
@@ -54,6 +52,28 @@ namespace Pathfinding
             }
 
             return null;
+        }
+        
+        static Quaternion
+            northRotation = Quaternion.Euler(90f, 0f, 0f),
+            eastRotation = Quaternion.Euler(90f, 90f, 0f),
+            southRotation = Quaternion.Euler(90f, 180f, 0f),
+            westRotation = Quaternion.Euler(90f, 270f, 0f);
+        
+        public void ShowPath() 
+        {
+            if (distance == 0 || !walkable) 
+            {
+                arrow.gameObject.SetActive(false);
+                return;
+            }
+            
+            arrow.gameObject.SetActive(true);
+            arrow.localRotation =
+                next == north ? northRotation :
+                next == east ? eastRotation :
+                next == south ? southRotation :
+                westRotation;
         }
     }
 }
