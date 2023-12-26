@@ -1,7 +1,6 @@
 ﻿using Components;
 using Components.Core;
 using Leopotam.Ecs;
-using Tags;
 using UnityEngine;
 using Unity.Mathematics;
 using System.Collections.Generic;
