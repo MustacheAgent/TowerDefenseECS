@@ -1,11 +1,7 @@
-﻿using Components;
-using Components.Core;
-using Components.Factory;
+﻿using Components.Factory;
 using Leopotam.Ecs;
 using Events.Enemies;
-using Tags;
 using UnityEngine;
-using Dictionaries;
 using Services;
 
 namespace Systems.Enemies
@@ -14,11 +10,11 @@ namespace Systems.Enemies
     {
         private readonly EcsWorld _world = null;
         private readonly StaticData _staticData = null;
+        private readonly GridData _gridData = null;
 
         private float _spawnDelay;
         private float _lastTime;
 
-        private readonly EcsFilter<PositionComponent, SpawnTag>.Exclude<DestinationTag> _tileFilter = null;
         private readonly EcsFilter<SpawnEnemyEvent> _spawnEventFilter = null;
 
         public void Run()
@@ -27,12 +23,13 @@ namespace Systems.Enemies
             {
                 ref var spawnEvent = ref _spawnEventFilter.Get1(eventIndex);
                 
-                foreach (var i in _tileFilter)
+                foreach (var tile in _gridData.spawnTiles)
                 {
-                    var spawnPosition = _tileFilter.Get1(i).transform.position;
-                    spawnPosition.y += 0.2f;
+                    var spawnPosition = tile.transform.position;
+                    //spawnPosition.y += 0.2f;
                     var entity = _world.NewEntity();
-                    entity.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
+                    ref var spawn = ref entity.Get<SpawnPrefabComponent>();
+                    spawn = new SpawnPrefabComponent
                     {
                         Prefab = _staticData.enemiesDictionary[spawnEvent.type],
                         Position = spawnPosition,

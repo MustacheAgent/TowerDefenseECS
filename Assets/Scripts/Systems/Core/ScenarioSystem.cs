@@ -26,7 +26,7 @@ namespace Systems.Core
             _hudData.waveNumber.text = string.Format("{0}/{1}", _levelScenario.WaveIndex, _levelScenario.waves.Length);
             _hudData.progressBar.value = 0;
             _hudData.progressBar.maxValue = _levelScenario.SeqLength;
-            //WorldHandler.GetWorld().NewEntity().Get<BeginScenarioEvent>();
+            WorldHandler.GetWorld().NewEntity().Get<BeginScenarioEvent>();
         }
 
         public void Run()

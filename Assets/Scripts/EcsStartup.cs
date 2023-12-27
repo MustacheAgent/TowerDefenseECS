@@ -21,6 +21,7 @@ sealed class EcsStartup : MonoBehaviour
     [SerializeField] private EcsUiEmitter emitter;
     [SerializeField] private PathfindingData pathfindingData;
     [SerializeField] private HudData hudData;
+    [SerializeField] private GridData gridData;
 
     private void Start()
     {
@@ -112,6 +113,7 @@ sealed class EcsStartup : MonoBehaviour
             .Inject(staticData)
             .Inject(pathfindingData)
             .Inject(hudData)
+            .Inject(gridData)
             ;
     }
 

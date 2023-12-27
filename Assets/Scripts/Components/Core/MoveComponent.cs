@@ -1,4 +1,5 @@
 ﻿using System;
+using Pathfinding;
 using UnityEngine;
 
 namespace Components.Core
@@ -9,5 +10,6 @@ namespace Components.Core
         public CharacterController controller;
         public Rigidbody rigidbody;
         public float speed;
+        public Tile nextTile;
     }
 }

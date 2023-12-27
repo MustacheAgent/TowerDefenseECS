@@ -1,9 +1,7 @@
 ﻿using Components.Factory;
 using Factories;
 using Leopotam.Ecs;
-using System;
 using Services;
-using UnityEngine;
 using Voody.UniLeo;
 
 namespace Systems.Factory
@@ -12,7 +10,7 @@ namespace Systems.Factory
     {
 		private readonly SceneData _sceneData;
 
-		private EcsFilter<SpawnPrefabComponent> _spawnFilter = null;
+		private readonly EcsFilter<SpawnPrefabComponent> _spawnFilter = null;
 
 		private GameObjectFactory _factory;
 

@@ -10,12 +10,16 @@ namespace Pathfinding
         [HideInInspector] public bool processed;
         public bool walkable = true;
         [HideInInspector] public bool alternative;
+        public TileType type = TileType.Tile;
         
         public Tile north, west, east, south, next;
         public int distance;
 
         private void Awake()
         {
+            if (type is TileType.Spawn or TileType.Destination)
+                arrow.gameObject.SetActive(false);
+            
             GetNeighbors();
         }
 
@@ -63,7 +67,7 @@ namespace Pathfinding
         
         public void ShowPath() 
         {
-            if (distance == 0 || !walkable) 
+            if (distance == 0 || !walkable || type is TileType.Spawn or TileType.Destination) 
             {
                 arrow.gameObject.SetActive(false);
                 return;
