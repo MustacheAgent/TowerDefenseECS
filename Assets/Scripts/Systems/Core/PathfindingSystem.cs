@@ -8,15 +8,16 @@ namespace Systems.Core
     public class PathfindingSystem : IEcsInitSystem, IEcsRunSystem
     {
         private BreadthFirstSearch _bfs;
+        private readonly EcsWorld _world = null;
 
         private readonly GridData _gridData = null;
 
         private readonly EcsFilter<FindPathEvent> _findPathFilter = null;
-        private readonly EcsWorld _world = null;
         
         public void Init()
         {
             _bfs = new BreadthFirstSearch();
+            _world.NewEntity().Get<FindPathEvent>();
         }
         
         public void Run()

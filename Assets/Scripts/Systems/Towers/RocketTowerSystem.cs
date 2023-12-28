@@ -9,7 +9,7 @@ namespace Systems.Towers
     public class RocketTowerSystem : IEcsRunSystem
     {
         readonly EcsWorld _world = null;
-        readonly StaticData _staticData = null;
+        readonly FactoryData _staticData = null;
 
         private readonly EcsFilter<RocketTowerComponent, FireProgressComponent, TrackTargetComponent> _rocketFilter = null;
         

@@ -10,6 +10,6 @@ namespace Components.Core
         public CharacterController controller;
         public Rigidbody rigidbody;
         public float speed;
-        public Tile nextTile;
+        [HideInInspector] public Tile nextTile;
     }
 }

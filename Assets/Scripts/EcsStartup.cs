@@ -17,7 +17,7 @@ sealed class EcsStartup : MonoBehaviour
 
     [SerializeField] private PlayerInputData inputData;
     [SerializeField] private SceneData sceneData;
-    [SerializeField] private StaticData staticData;
+    [SerializeField] private FactoryData factoryData;
     [SerializeField] private EcsUiEmitter emitter;
     [SerializeField] private PathfindingData pathfindingData;
     [SerializeField] private HudData hudData;
@@ -27,6 +27,7 @@ sealed class EcsStartup : MonoBehaviour
     {
         _world = new EcsWorld();
         _systems = new EcsSystems(_world);
+        WorldHandler.Init(_world);
         _systems.ConvertScene();
 
 #if UNITY_EDITOR
@@ -110,7 +111,7 @@ sealed class EcsStartup : MonoBehaviour
         systems
             .Inject(inputData)
             .Inject(sceneData)
-            .Inject(staticData)
+            .Inject(factoryData)
             .Inject(pathfindingData)
             .Inject(hudData)
             .Inject(gridData)

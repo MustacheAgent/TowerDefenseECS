@@ -15,7 +15,7 @@ namespace Systems.Towers
     public class MortarTowerSystem : IEcsRunSystem
     {
         readonly EcsWorld _world = null;
-        readonly StaticData _staticData = null;
+        readonly FactoryData _staticData = null;
 
         readonly EcsFilter<PositionComponent, MortarTurretComponent, FireProgressComponent> mortarFilter = null;
         readonly EcsFilter<PositionComponent, HealthComponent, EnemyTag> enemyFilter = null;

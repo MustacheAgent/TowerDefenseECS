@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2da779be5550254bbb774a3dd4a899f, type: 3}
-  m_Name: StaticData
+  m_Name: FactoryData
   m_EditorClassIdentifier: 
   mortarShellPrefab: {fileID: 495508834088660506, guid: b837f03bd465fbb4282d9e2e63189c23,
     type: 3}
   rocketPrefab: {fileID: 6769745472993510325, guid: 2cabdd5c54f50884caa2559d343919c9,
     type: 3}
+  factory: {fileID: 11400000, guid: da0bd480fe3d91542a0212aa12e3855c, type: 2}
   enemiesDictionary:
     m_keys: 000000000100000002000000
     m_values:

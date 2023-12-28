@@ -27,7 +27,7 @@ namespace Systems.Factory
                 foreach (int index in _destroyFilter)
                 {
                     ref var destroyObject = ref _destroyFilter.Get1(index).gameObject;
-                    _factory.Reclaim(destroyObject);
+                    _factory.Destroy(destroyObject);
                     _destroyFilter.GetEntity(index).Destroy();
                 }
             }
