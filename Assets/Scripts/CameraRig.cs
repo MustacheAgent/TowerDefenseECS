@@ -6,6 +6,9 @@ namespace UnityComponents
     public class CameraRig : MonoBehaviour
     {
         private Transform _swivel, _stick;
+        
+        [HideInInspector]
+        public Rect mapSize = new Rect(-10, -10, 20, 20);
 
         [Header("Zoom")] 
         public float stickMinZoom = -250f;
@@ -59,7 +62,17 @@ namespace UnityComponents
             
             var position = transform.localPosition;
             position += direction * distance;
-            transform.localPosition = position;
+            transform.localPosition = ClampPosition(position);
+        }
+
+        private Vector3 ClampPosition(Vector3 position)
+        {
+            var xMax = mapSize.x + mapSize.width;
+            var zMax = mapSize.y + mapSize.height;
+
+            position.x = Mathf.Clamp(position.x, mapSize.x, xMax);
+            position.z = Mathf.Clamp(position.z, mapSize.y, zMax);
+            return position;
         }
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8617036937724746504}
-  - component: {fileID: 7495145257063696038}
+  - component: {fileID: 6932073347189590745}
   m_Layer: 0
   m_Name: Camera Rig
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 8486826016169734691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7495145257063696038
+--- !u!114 &6932073347189590745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 148178406561458746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c61d5d9e5ae2f374798809aa72b40c7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6eb80516455e8124980b5823f26fb5e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapSize:
+    serializedVersion: 2
+    x: -10
+    y: -10
+    width: 20
+    height: 20
   stickMinZoom: -20
   stickMaxZoom: -10
   swivelMinZoom: 60
