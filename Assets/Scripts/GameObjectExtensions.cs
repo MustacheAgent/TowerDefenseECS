@@ -13,18 +13,15 @@ namespace Scripts
         /// <param name="gameObject"></param>
         /// <returns>Сущность.</returns>
         /// <exception cref="NullReferenceException">У данного объекта нет сущности.</exception>
-        public static EcsEntity GetEntity(this GameObject gameObject)
+        public static EcsEntity? GetEntity(this GameObject gameObject)
         {
             var data = gameObject.GetComponent<ConvertToEntity>();
             if (data == null)
             {
                 data = gameObject.GetComponentInParent<ConvertToEntity>();
             }
-            if (data.TryGetEntity().HasValue)
-            {
-                return data.TryGetEntity().Value;
-            }
-            throw new NullReferenceException("С данным объектом не ассоциировано ни одной сущности.");
+
+            return data != null ? data.TryGetEntity() : null;
         }
     }
 }

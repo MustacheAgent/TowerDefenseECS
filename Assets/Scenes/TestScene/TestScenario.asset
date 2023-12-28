@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Testing
   levelDescription: Testing purposes only.
+  sceneName: 
   waves:
   - spawnSequences:
-    - type: 1
+    - type: 2
       amount: 2
       delayBeforeSpawn: 2
     delayBeforeNextWave: 4

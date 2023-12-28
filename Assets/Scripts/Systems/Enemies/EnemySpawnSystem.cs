@@ -3,6 +3,7 @@ using Components.Factory;
 using Leopotam.Ecs;
 using Events.Enemies;
 using Factories;
+using Scripts;
 using UnityEngine;
 using Services;
 using Voody.UniLeo;
@@ -44,7 +45,7 @@ namespace Systems.Enemies
                     };
 
                     var enemy = _factory.CreateObjectAndEntity(spawn);
-                    var enemyEntity = enemy.GetComponent<ConvertToEntity>().TryGetEntity();
+                    var enemyEntity = enemy.GetEntity();
                     if (enemyEntity != null)
                         enemyEntity.Value.Get<MoveComponent>().nextTile = tile;
                 }

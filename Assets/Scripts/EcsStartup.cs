@@ -19,7 +19,6 @@ sealed class EcsStartup : MonoBehaviour
     [SerializeField] private SceneData sceneData;
     [SerializeField] private FactoryData factoryData;
     [SerializeField] private EcsUiEmitter emitter;
-    [SerializeField] private PathfindingData pathfindingData;
     [SerializeField] private HudData hudData;
     [SerializeField] private GridData gridData;
 
@@ -28,7 +27,7 @@ sealed class EcsStartup : MonoBehaviour
         _world = new EcsWorld();
         _systems = new EcsSystems(_world);
         WorldHandler.Init(_world);
-        _systems.ConvertScene();
+        //_systems.ConvertScene();
 
 #if UNITY_EDITOR
         Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
@@ -65,9 +64,6 @@ sealed class EcsStartup : MonoBehaviour
     private void AddGameplaySystems(EcsSystems systems)
     {
         systems
-            .Add(new PlayerInputSystem())
-            .Add(new CameraMoveSystem())
-            .Add(new TowerButtonClickSystem())
             .Add(new ScenarioSystem())
             .Add(new PathfindingSystem())
             .Add(new GameProgressionSystem())
@@ -112,7 +108,6 @@ sealed class EcsStartup : MonoBehaviour
             .Inject(inputData)
             .Inject(sceneData)
             .Inject(factoryData)
-            .Inject(pathfindingData)
             .Inject(hudData)
             .Inject(gridData)
             ;

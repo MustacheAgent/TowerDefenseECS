@@ -26,6 +26,7 @@ namespace Systems.Towers
 
         public void Run()
         {
+            /*
             if (!_input.leftMousePressed) return;
             if (_input.rightMousePressed)
             {
@@ -74,6 +75,7 @@ namespace Systems.Towers
             if (_isStarted) return;
             _world.NewEntity().Get<BeginScenarioEvent>();
             _isStarted = true;
+            */
         }
     }
 }
