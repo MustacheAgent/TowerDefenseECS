@@ -47,10 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSize:
     serializedVersion: 2
-    x: -10
-    y: -10
-    width: 20
-    height: 20
+    x: 13.78357
+    y: 13.000164
+    width: 6.9649973
+    height: 6.9770317
   stickMinZoom: -20
   stickMaxZoom: -10
   swivelMinZoom: 60
@@ -82,7 +82,7 @@ Transform:
   m_GameObject: {fileID: 1577079346346038018}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

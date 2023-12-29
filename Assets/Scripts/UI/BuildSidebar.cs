@@ -1,8 +1,9 @@
+using ECS.MonoProviders.Components.Towers;
 using MonoProviders.Components.Towers;
 using Services;
 using UnityEngine;
 
-namespace UnityComponents.UI
+namespace UI
 {
     public class BuildSidebar : MonoBehaviour
     {
@@ -16,7 +17,7 @@ namespace UnityComponents.UI
             foreach (var tower in sceneData.towerDictionary)
             {
                 var button = Instantiate(towerButton, transform);
-                button.InitButton(tower.Value.GetComponent<TowerInfoProvider>().Value, tower.Key);
+                //button.InitButton(tower.Value.GetComponent<TowerInfoProvider>().Value, tower.Key);
             }
         }
     }

@@ -1,13 +1,18 @@
-﻿using Events.Enemies;
+﻿using System.Collections.Generic;
+using Events.Enemies;
 using Leopotam.Ecs;
 using Pathfinding;
 using Services;
+using UnityEditor.Rendering.Universal.ShaderGUI;
+using UnityEngine;
 
 namespace Systems.Core
 {
     public class PathfindingSystem : IEcsInitSystem, IEcsRunSystem
     {
         private BreadthFirstSearch _bfs;
+        private Tile[] _tiles;
+        
         private readonly EcsWorld _world = null;
 
         private readonly GridData _gridData = null;
@@ -16,6 +21,7 @@ namespace Systems.Core
         
         public void Init()
         {
+            _tiles = GameObject.FindObjectsOfType<Tile>();
             _bfs = new BreadthFirstSearch();
             _world.NewEntity().Get<FindPathEvent>();
         }
@@ -25,6 +31,12 @@ namespace Systems.Core
             foreach (var i in _findPathFilter)
             {
                 _findPathFilter.GetEntity(i).Del<FindPathEvent>();
+
+                foreach (var tile in _tiles)
+                {
+                    tile.Reset();
+                }
+                
                 if (!_bfs.FindPath(_gridData.destinationTiles))
                 {
                     _bfs.FindPath(_gridData.destinationTiles, true);

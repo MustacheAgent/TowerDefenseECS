@@ -10,8 +10,6 @@ namespace Services
     [Serializable]
     public class SceneData : MonoBehaviour
     {
-        public GameObjectFactory gameObjectFactory;
-        
         public Scenario scenario;
         public TowerType selectedTower;
         public int currency;

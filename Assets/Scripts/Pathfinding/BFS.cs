@@ -1,24 +1,22 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Pathfinding
 {
     public class BreadthFirstSearch
     {
-        private Queue<Tile> _searchFrontier;
+        private Queue<Tile> _searchFrontier = new();
         
         public bool FindPath(Tile[] destinations, bool ignoreWalkable = false)
         {
-            _searchFrontier = new Queue<Tile>();
-
+            _searchFrontier.Clear();
+            
             for (var i = 0; i < destinations.Length; i++)
             {
                 _searchFrontier.Enqueue(destinations[i]);
             }
 
-            if (_searchFrontier.Count == 0)
-            {
-                return false;
-            }
+            if (_searchFrontier.Count == 0) return false;
 
             while (_searchFrontier.Count > 0)
             {
@@ -27,21 +25,25 @@ namespace Pathfinding
                 {
                     tile.InvertNeighbors();
 
-                    if (tile.alternative)
+                    switch (tile.walkable)
                     {
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
+                        case true when tile.alternative:
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
+                            break;
+                        case true:
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
+                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
+                            break;
+                        case false:
+                            Debug.Log("found unwalkable tile!" + tile);
+                            break;
                     }
-                    else
-                    {
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
-                    }
-                    
+
                     tile.processed = true;
                     tile.ShowPath();
                 }
@@ -55,9 +57,9 @@ namespace Pathfinding
             if (neighbor == null || neighbor.processed)
                 return null;
 
-            if (!ignoreWalkable)
+            if (ignoreWalkable == false)
             {
-                if (!neighbor.walkable)
+                if (neighbor.walkable == false)
                     return null;
             }
             
@@ -67,5 +69,6 @@ namespace Pathfinding
             
             return neighbor;
         }
+
     }
 }

@@ -10,7 +10,7 @@ namespace Factories
     {
         public GameObject CreateObjectAndEntity(SpawnPrefabComponent spawnInfo)
         {
-            var gameObject = Instantiate(spawnInfo.Prefab, spawnInfo.Position, spawnInfo.Rotation, spawnInfo.Parent);
+            var gameObject = CreateObject(spawnInfo);
             CreateEntity(gameObject);
 
             return gameObject;
@@ -26,7 +26,7 @@ namespace Factories
             Object.Destroy(destroyObject);
         }
         
-        public void CreateEntity(GameObject gameObject)
+        public EcsEntity CreateEntity(GameObject gameObject)
         {
             // Creating new Entity
             var world = WorldHandler.GetWorld();
@@ -58,6 +58,8 @@ namespace Factories
                         break;
                 }
             }
+
+            return entity;
         }
     }
 }

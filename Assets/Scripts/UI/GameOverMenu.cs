@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace UnityComponents.UI
+namespace UI
 {
     public class GameOverMenu : MonoBehaviour
     {
@@ -36,11 +36,13 @@ namespace UnityComponents.UI
 
         public void MainMenuPressed()
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(MainMenu);
         }
         
         public void RestartPressed()
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

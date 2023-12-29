@@ -46,6 +46,7 @@ namespace UnityComponents.UI
 
         public void MainMenu()
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(MainMenuScene);
         }
 

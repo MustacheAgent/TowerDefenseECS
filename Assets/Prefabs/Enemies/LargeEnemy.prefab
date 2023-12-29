@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3071280697027819602}
   - component: {fileID: 6555146262029277057}
   - component: {fileID: 5245776890531141781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LargeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,8 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    controller: {fileID: 0}
-    rigidbody: {fileID: 3222177682514851770}
     speed: 2
     nextTile: {fileID: 0}
 --- !u!114 &3697241541988780924
@@ -178,7 +176,7 @@ GameObject:
   - component: {fileID: 7507573160055338558}
   - component: {fileID: 5623998374440851433}
   - component: {fileID: 3222177682514851770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 511735966249641644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

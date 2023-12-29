@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5415919266378061842}
   - component: {fileID: 1241343895349220663}
   - component: {fileID: 8781912123009524806}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,6 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4732683586919912502}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 1.121}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,7 +35,6 @@ Transform:
   m_Children:
   - {fileID: 3049716848203606713}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8884364995197595194
 MonoBehaviour:
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  convertMode: 2
+  convertMode: 0
 --- !u!114 &5415919266378061842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +79,7 @@ MonoBehaviour:
     towerIcon: {fileID: 21300000, guid: d6c11b9a43dfb413b86a3ff8908088db, type: 3}
     towerPrice: 25
     energyIcon: {fileID: 21300000, guid: 10f6c8d03930b4a449f543633892e711, type: 3}
-    defaultColor: {r: 0.3647059, g: 0.7058824, b: 1, a: 1}
-    invalidColor: {r: 1, g: 0.3647059, b: 0.3647059, a: 1}
+    towerName: Wall
 --- !u!114 &8781912123009524806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +106,7 @@ GameObject:
   - component: {fileID: 4086912048379767992}
   - component: {fileID: 8913900555679666814}
   - component: {fileID: 6756886919748168374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,13 +120,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6727229602774817623}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6783523133646982056}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4086912048379767992
 MeshFilter:
@@ -187,8 +186,16 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6727229602774817623}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

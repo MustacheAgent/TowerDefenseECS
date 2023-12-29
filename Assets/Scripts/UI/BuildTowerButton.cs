@@ -1,29 +1,48 @@
-using System;
 using Components.Towers;
 using Enums;
-using Leopotam.Ecs.Ui.Actions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityComponents.UI
+namespace UI
 {
     public class BuildTowerButton : MonoBehaviour
     {
-        public TowerType towerType;
-        public TextMeshProUGUI price;
+        [HideInInspector] public TowerType towerType;
+        [HideInInspector] public string towerName;
+        [HideInInspector] public int towerPrice;
+        
         public Image towerIcon;
-        public string towerName;
-        public Button buyButton;
-        public Image energyIcon;
+        public TextMeshProUGUI towerPriceText;
+        public TextMeshProUGUI towerNameText;
+        public Sprite energyIcon;
         public Color energyDefaultColor;
         public Color energyInvalidColor;
 
-        public void InitButton(TowerInfoComponent info, TowerType type)
+        private BuildManager _buildManager;
+
+        public void InitButton(TowerInfoComponent info, TowerType type, BuildManager buildManager)
         {
-            price.text = info.towerPrice.ToString();
+            towerPrice = info.towerPrice;
+            towerPriceText.text = towerPrice.ToString();
+            
             towerIcon.sprite = info.towerIcon;
             towerType = type;
+            
+            towerName = info.towerName;
+            towerNameText.text = towerName;
+
+            _buildManager = buildManager;
+
+            gameObject.GetComponent<Button>().onClick.AddListener(() => buildManager.BuildTower(type));
+        }
+
+        public void SetAvalaibility(bool isAvalaible)
+        {
+            if (isAvalaible)
+            {
+                
+            }
         }
     }
 }

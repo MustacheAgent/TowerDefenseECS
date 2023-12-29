@@ -1,7 +1,9 @@
-﻿using Leopotam.Ecs;
+﻿using ECS.MonoProviders.Components.Towers;
+using Leopotam.Ecs;
 using Leopotam.Ecs.Ui.Components;
 using MonoProviders.Components.Towers;
 using Services;
+using UI;
 using UnityComponents.UI;
 
 namespace Systems.UI

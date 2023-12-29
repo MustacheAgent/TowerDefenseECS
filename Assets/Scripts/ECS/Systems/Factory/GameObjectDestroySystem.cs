@@ -8,7 +8,7 @@ namespace Systems.Factory
 {
     public class GameObjectDestroySystem : IEcsPreInitSystem, IEcsRunSystem
     {
-        private readonly SceneData _sceneData;
+        private readonly FactoryData _factoryData;
 
         private GameObjectFactory _factory;
 
@@ -17,7 +17,7 @@ namespace Systems.Factory
 
         public void PreInit()
         {
-            _factory = _sceneData.gameObjectFactory;
+            _factory = _factoryData.factory;
         }
 
         public void Run()

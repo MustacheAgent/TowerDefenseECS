@@ -9,13 +9,13 @@ namespace Systems.Factory
 {
     public class GameObjectSpawnSystem : IEcsPreInitSystem
     {
-		private readonly SceneData _sceneData;
+		private readonly FactoryData _factoryData;
 
 		private GameObjectFactory _factory;
 
 		public void PreInit()
 		{
-			_factory = _sceneData.gameObjectFactory;
+			_factory = _factoryData.factory;
 			
 			var convertableGameObjects =
 				GameObject.FindObjectsOfType<ConvertToEntity>();

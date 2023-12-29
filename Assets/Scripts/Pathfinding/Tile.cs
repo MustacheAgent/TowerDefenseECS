@@ -8,12 +8,15 @@ namespace Pathfinding
         
         [Header("Breadth-First Search")]
         [HideInInspector] public bool processed;
-        public bool walkable = true;
         [HideInInspector] public bool alternative;
         public TileType type = TileType.Tile;
+
+        [Header("Buildable/Walkable")]
+        public bool walkable = true;
+        public bool isBuildable = true;
         
-        public Tile north, west, east, south, next;
-        public int distance;
+        [HideInInspector] public Tile north, west, east, south, next;
+        [HideInInspector] public int distance;
 
         private void Awake()
         {
@@ -28,6 +31,7 @@ namespace Pathfinding
             next = null;
             distance = 0;
             alternative = false;
+            processed = false;
         }
 
         private void GetNeighbors()

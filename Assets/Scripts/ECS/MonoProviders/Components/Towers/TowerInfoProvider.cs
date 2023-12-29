@@ -1,7 +1,7 @@
 ﻿using Components.Towers;
 using Voody.UniLeo;
 
-namespace MonoProviders.Components.Towers
+namespace ECS.MonoProviders.Components.Towers
 {
     internal class TowerInfoProvider : MonoProvider<TowerInfoComponent> { }
 }
