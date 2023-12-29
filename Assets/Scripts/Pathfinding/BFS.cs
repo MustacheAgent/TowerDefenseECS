@@ -23,28 +23,23 @@ namespace Pathfinding
                 var tile = _searchFrontier.Dequeue();
                 if (tile != null)
                 {
-                    tile.InvertNeighbors();
+                    //tile.InvertNeighbors();
 
-                    switch (tile.walkable)
+                    if (tile.alternative)
                     {
-                        case true when tile.alternative:
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
-                            break;
-                        case true:
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
-                            _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
-                            break;
-                        case false:
-                            Debug.Log("found unwalkable tile!" + tile);
-                            break;
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
+                    }
+                    else
+                    {
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
+                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
                     }
 
-                    tile.processed = true;
                     tile.ShowPath();
                 }
             }
@@ -54,18 +49,13 @@ namespace Pathfinding
 
         private Tile GrowPathTo(Tile tile, Tile neighbor, bool ignoreWalkable)
         {
-            if (neighbor == null || neighbor.processed)
+            if (!tile.HasPath || neighbor == null || neighbor.HasPath)
                 return null;
-
-            if (ignoreWalkable == false)
-            {
-                if (neighbor.walkable == false)
-                    return null;
-            }
             
             neighbor.distance = tile.distance + 1;
             neighbor.next = tile;
-            neighbor.processed = true;
+
+            if (!ignoreWalkable) return neighbor.walkable ? neighbor : null;
             
             return neighbor;
         }

@@ -15,22 +15,22 @@ namespace Pathfinding
         public bool walkable = true;
         public bool isBuildable = true;
         
-        [HideInInspector] public Tile north, west, east, south, next;
-        [HideInInspector] public int distance;
+        public Tile north, west, east, south, next;
+        public int distance;
+        public bool HasPath => distance != int.MaxValue;
 
         private void Awake()
         {
             if (type is TileType.Spawn or TileType.Destination)
                 arrow.gameObject.SetActive(false);
-            
+
             GetNeighbors();
         }
 
         public void Reset()
         {
             next = null;
-            distance = 0;
-            alternative = false;
+            distance = type == TileType.Destination ? 0 : int.MaxValue;
             processed = false;
         }
 

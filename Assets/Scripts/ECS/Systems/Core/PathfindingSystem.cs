@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using Events.Enemies;
+﻿using Events.Enemies;
 using Leopotam.Ecs;
 using Pathfinding;
 using Services;
-using UnityEditor.Rendering.Universal.ShaderGUI;
 using UnityEngine;
 
-namespace Systems.Core
+namespace ECS.Systems.Core
 {
     public class PathfindingSystem : IEcsInitSystem, IEcsRunSystem
     {
@@ -22,6 +20,12 @@ namespace Systems.Core
         public void Init()
         {
             _tiles = GameObject.FindObjectsOfType<Tile>();
+            
+            foreach (var tile in _tiles)
+            {
+                tile.InvertNeighbors();
+            }
+            
             _bfs = new BreadthFirstSearch();
             _world.NewEntity().Get<FindPathEvent>();
         }
