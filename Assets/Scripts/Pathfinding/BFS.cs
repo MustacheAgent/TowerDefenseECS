@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace Pathfinding
 {
@@ -21,26 +20,22 @@ namespace Pathfinding
             while (_searchFrontier.Count > 0)
             {
                 var tile = _searchFrontier.Dequeue();
-                if (tile != null)
+                
+                if (tile == null) continue;
+                
+                if (tile.alternative)
                 {
-                    //tile.InvertNeighbors();
-
-                    if (tile.alternative)
-                    {
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
-                    }
-                    else
-                    {
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
-                        _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
-                    }
-
-                    tile.ShowPath();
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
+                }
+                else
+                {
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.west, ignoreWalkable));
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.east, ignoreWalkable));
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.south, ignoreWalkable));
+                    _searchFrontier.Enqueue(GrowPathTo(tile, tile.north, ignoreWalkable));
                 }
             }
 
@@ -55,7 +50,8 @@ namespace Pathfinding
             neighbor.distance = tile.distance + 1;
             neighbor.next = tile;
 
-            if (!ignoreWalkable) return neighbor.walkable ? neighbor : null;
+            if (!ignoreWalkable) 
+                return neighbor.walkable ? neighbor : null;
             
             return neighbor;
         }

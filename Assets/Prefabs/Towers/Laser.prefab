@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4917819632340816248}
   - component: {fileID: 3956123152997621384}
   - component: {fileID: 3336989233589570727}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2238646052350222947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.711, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 0.5, y: 0.8, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 7950021165329023040}
   - component: {fileID: 8781051059567182942}
   - component: {fileID: 7438682535471860477}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 3613829933662101719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.311, z: 0}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 3051819038287634050}
   - component: {fileID: 5748536841235064709}
   - component: {fileID: 3154634611395396611}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ Transform:
   m_GameObject: {fileID: 4663362042846667174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.311, z: 0}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,20 +306,21 @@ GameObject:
   - component: {fileID: 2530906151828333301}
   - component: {fileID: 910557051279097407}
   - component: {fileID: 5029407361063781655}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4578710179115681995
-RectTransform:
+--- !u!4 &4578710179115681995
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4808321949195822956}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -331,11 +332,6 @@ RectTransform:
   - {fileID: 7950021165329023040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5554008052064052957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +406,7 @@ GameObject:
   - component: {fileID: 2053040497603297593}
   - component: {fileID: 4954166116775219466}
   - component: {fileID: 87996443803915917}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Foundation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +422,7 @@ Transform:
   m_GameObject: {fileID: 7226352533017766791}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16100001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 0.9, y: 0.3, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children: []

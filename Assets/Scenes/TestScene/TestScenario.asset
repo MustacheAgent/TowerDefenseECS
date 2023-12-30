@@ -23,9 +23,21 @@ MonoBehaviour:
     delayBeforeNextWave: 4
   - spawnSequences:
     - type: 2
-      amount: 1
+      amount: 2
       delayBeforeSpawn: 2
+    delayBeforeNextWave: 4
+  - spawnSequences:
     - type: 2
-      amount: 1
+      amount: 2
+      delayBeforeSpawn: 2
+    delayBeforeNextWave: 4
+  - spawnSequences:
+    - type: 2
+      amount: 2
+      delayBeforeSpawn: 2
+    delayBeforeNextWave: 4
+  - spawnSequences:
+    - type: 2
+      amount: 2
       delayBeforeSpawn: 2
     delayBeforeNextWave: 4

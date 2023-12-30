@@ -35,16 +35,45 @@ namespace ECS.Systems.Core
             foreach (var i in _findPathFilter)
             {
                 _findPathFilter.GetEntity(i).Del<FindPathEvent>();
+               
+                ResetPath();
+
+                _bfs.FindPath(_gridData.destinationTiles);
 
                 foreach (var tile in _tiles)
                 {
-                    tile.Reset();
+                    if (tile.HasPath) continue;
+                    
+                    ResetPath();
+                    _bfs.FindPath(_gridData.destinationTiles, true);
+                    break;
                 }
                 
-                if (!_bfs.FindPath(_gridData.destinationTiles))
-                {
-                    _bfs.FindPath(_gridData.destinationTiles, true);
-                }
+                ShowPath();
+            }
+        }
+
+        private void ResetPath()
+        {
+            foreach (var tile in _tiles)
+            {
+                tile.Reset();
+            }
+        }
+
+        private void ShowPath()
+        {
+            foreach (var tile in _tiles)
+            {
+                tile.ShowPath();
+            }
+        }
+        
+        private void HidePath()
+        {
+            foreach (var tile in _tiles)
+            {
+                tile.HidePath();
             }
         }
     }

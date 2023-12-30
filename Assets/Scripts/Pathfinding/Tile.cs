@@ -85,6 +85,11 @@ namespace Pathfinding
                 westRotation;
         }
 
+        public void HidePath()
+        {
+            arrow.gameObject.SetActive(false);
+        }
+
         public void InvertNeighbors()
         {
             if (north) north.alternative = !alternative;
