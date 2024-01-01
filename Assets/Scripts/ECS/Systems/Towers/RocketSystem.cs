@@ -1,5 +1,4 @@
-﻿using Components;
-using Components.Core;
+﻿using Components.Core;
 using Components.Enemies;
 using Components.Towers;
 using Events;
@@ -8,7 +7,7 @@ using Leopotam.Ecs;
 using Tags;
 using UnityEngine;
 
-namespace Systems.Towers
+namespace ECS.Systems.Towers
 {
     public class RocketSystem : IEcsRunSystem
     {

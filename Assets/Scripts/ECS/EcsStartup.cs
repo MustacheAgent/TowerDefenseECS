@@ -1,11 +1,11 @@
 using ECS.Systems.Core;
+using ECS.Systems.Towers;
 using Events;
 using Leopotam.Ecs;
 using Services;
 using Systems.Core;
 using Systems.Enemies;
 using Systems.Factory;
-using Systems.Towers;
 using Systems.UI;
 using UnityEngine;
 using Voody.UniLeo;
@@ -73,7 +73,6 @@ namespace ECS
         {
             systems
                 .Add(new EnemySpawnSystem())
-                .Add(new BuildTowerSystem())
                 .Add(new GameObjectSpawnSystem())
                 .Add(new GameObjectDestroySystem())
                 ;
@@ -84,6 +83,7 @@ namespace ECS
             systems
                 .Add(new TrackTargetSystem())
                 .Add(new LaserSystem())
+                .Add(new MachineGunSystem())
                 .Add(new MortarTowerSystem())
                 .Add(new MortarShellSystem())
                 .Add(new RocketTowerSystem())

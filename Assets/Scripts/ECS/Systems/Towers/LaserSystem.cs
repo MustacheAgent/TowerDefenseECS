@@ -1,15 +1,14 @@
-﻿using Components;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Components.Core;
+using Components.Enemies;
 using Components.Towers;
 using Events.Enemies;
 using Leopotam.Ecs;
-using System.Collections.Generic;
-using System.Linq;
-using Components.Enemies;
 using Tags;
 using UnityEngine;
 
-namespace Systems.Towers
+namespace ECS.Systems.Towers
 {
     public class LaserSystem : IEcsRunSystem
     {

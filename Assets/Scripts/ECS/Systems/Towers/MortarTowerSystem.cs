@@ -1,16 +1,15 @@
-﻿using Components;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Components.Core;
+using Components.Enemies;
 using Components.Factory;
 using Components.Towers;
 using Leopotam.Ecs;
-using System.Collections.Generic;
-using System.Linq;
-using Components.Enemies;
 using Services;
 using Tags;
 using UnityEngine;
 
-namespace Systems.Towers
+namespace ECS.Systems.Towers
 {
     public class MortarTowerSystem : IEcsRunSystem
     {

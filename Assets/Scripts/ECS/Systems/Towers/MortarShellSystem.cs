@@ -1,13 +1,13 @@
 ﻿using Components.Core;
+using Components.Enemies;
 using Components.Towers;
 using Events;
 using Events.Enemies;
 using Leopotam.Ecs;
-using Components.Enemies;
 using Tags;
 using UnityEngine;
 
-namespace Systems.Towers
+namespace ECS.Systems.Towers
 {
     public class MortarShellSystem : IEcsRunSystem
     {
