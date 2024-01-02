@@ -64,7 +64,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.26",
+      "version": "3.0.27",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -190,7 +190,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4fd0493301029a6f97c31c243fd75a7febd4f9d6"
+      "hash": "9eb05b565287fb39e305c1ba9fb44541f527d1a7"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
