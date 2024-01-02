@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Components.Enemies
+namespace ECS.Components.Enemies
 {
     [Serializable]
     public struct CurrencyComponent

@@ -1,7 +1,8 @@
-﻿using Tags;
+﻿using ECS.Tags;
+using Tags;
 using Voody.UniLeo;
 
-namespace MonoProviders.Tags
+namespace ECS.MonoProviders.Tags
 {
     public class EmptyTileProvider : MonoProvider<EmptyTileTag> { }
 }

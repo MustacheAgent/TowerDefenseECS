@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Components.Towers
+namespace ECS.Components.Enemies
 {
     [Serializable]
     public struct TargetComponent

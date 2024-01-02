@@ -1,4 +1,6 @@
 ﻿using Components.Core;
+using ECS.Components.Core;
+using ECS.Tags;
 using Leopotam.Ecs;
 using Services;
 using Tags;

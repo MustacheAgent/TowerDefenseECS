@@ -1,4 +1,5 @@
 ﻿using Components.Enemies;
+using ECS.Components.Enemies;
 using Events;
 using Events.Enemies;
 using Leopotam.Ecs;

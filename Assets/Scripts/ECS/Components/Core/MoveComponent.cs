@@ -2,7 +2,7 @@
 using Pathfinding;
 using UnityEngine;
 
-namespace Components.Core
+namespace ECS.Components.Core
 {
     [Serializable]
     public struct MoveComponent

@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    transform: {fileID: 6902534886618746300}
+    transform: {fileID: 4578710179115681995}
 --- !u!114 &910557051279097407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +390,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
+    damage: 2
+    attackSpeed: 1
+    attackRadius: 3
+    innerRadius: 0
     towerIcon: {fileID: 21300000, guid: 53652022b1d444a5c9e9630488e44e13, type: 3}
     towerPrice: 50
     energyIcon: {fileID: 21300000, guid: 10f6c8d03930b4a449f543633892e711, type: 3}

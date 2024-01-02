@@ -1,4 +1,5 @@
 ﻿using Components.Core;
+using ECS.Components.Core;
 using Events;
 using Factories;
 using Leopotam.Ecs;

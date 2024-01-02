@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    transform: {fileID: 9092754229469066842}
+    transform: {fileID: 0}
 --- !u!114 &4726383606016314591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    speed: 4
+    speed: 0
     nextTile: {fileID: 0}
 --- !u!114 &8643393912866822878
 MonoBehaviour:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    gameObject: {fileID: 3969407090528160754}
+    gameObject: {fileID: 0}
 --- !u!114 &197426802280983143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    target: {fileID: 3092159403666388135}
+    target: {fileID: 0}
 --- !u!114 &3626807494432346309
 MonoBehaviour:
   m_ObjectHideFlags: 0

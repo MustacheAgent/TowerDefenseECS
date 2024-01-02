@@ -92,6 +92,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5582693419552107459}
+  - component: {fileID: 8699770850485496964}
+  - component: {fileID: 8176527349381315057}
+  - component: {fileID: 1644624008810108262}
+  - component: {fileID: 6020641518448556055}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Untagged
@@ -115,6 +119,65 @@ Transform:
   - {fileID: 3882616880432266182}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8699770850485496964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508133078299604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  convertMode: 2
+--- !u!114 &8176527349381315057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508133078299604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7102c097bcb437292f9aeefe6c53d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    towerIcon: {fileID: 21300000, guid: 3631244dc04164d079a3302a39dbc0c6, type: 3}
+    towerPrice: 50
+    energyIcon: {fileID: 21300000, guid: 3568b996ada474c18bb75841d1116d7e, type: 3}
+    towerName: Machine Gun
+--- !u!114 &1644624008810108262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508133078299604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5545813c74571745844c439f15ed2e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    transform: {fileID: 5582693419552107459}
+--- !u!114 &6020641518448556055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508133078299604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75debe02dd2a4f1b8fb90b7d904911fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    attackRadius: 2
+    innerRadius: 0
 --- !u!1 &9157199483437496865
 GameObject:
   m_ObjectHideFlags: 0

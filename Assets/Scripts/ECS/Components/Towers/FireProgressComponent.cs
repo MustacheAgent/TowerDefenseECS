@@ -1,4 +1,4 @@
-﻿namespace Components.Towers
+﻿namespace ECS.Components.Towers
 {
     public struct FireProgressComponent
     {

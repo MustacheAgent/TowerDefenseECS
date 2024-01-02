@@ -1,7 +1,7 @@
-﻿using Components.Towers;
+﻿using ECS.Components.Enemies;
 using Voody.UniLeo;
 
-namespace MonoProviders.Components.Towers
+namespace ECS.MonoProviders.Components.Enemies
 {
     public class TargetProvider : MonoProvider<TargetComponent> { }
 }

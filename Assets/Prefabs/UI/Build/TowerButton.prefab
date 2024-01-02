@@ -558,7 +558,7 @@ MonoBehaviour:
   towerType: 0
   towerName: 
   towerPrice: 0
-  towerIcon: {fileID: 5019991470479960041}
+  towerIcon: {fileID: 7203951389551058367}
   towerPriceText: {fileID: 8659286362375138812}
   towerNameText: {fileID: 862856139353585290}
   energyIcon: {fileID: 21300000, guid: 3568b996ada474c18bb75841d1116d7e, type: 3}

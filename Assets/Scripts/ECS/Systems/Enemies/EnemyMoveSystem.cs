@@ -1,4 +1,6 @@
 using Components.Core;
+using ECS.Components.Core;
+using ECS.Tags;
 using Events;
 using Events.Enemies;
 using Leopotam.Ecs;

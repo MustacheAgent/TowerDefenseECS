@@ -2,7 +2,11 @@
 using System.Linq;
 using Components.Core;
 using Components.Towers;
+using ECS.Components.Core;
+using ECS.Components.Towers;
+using ECS.Tags;
 using Leopotam.Ecs;
+using Scripts;
 using Tags;
 using UnityEngine;
 
@@ -11,20 +15,27 @@ namespace ECS.Systems.Towers
     public class TrackTargetSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PositionComponent, EnemyTag> _enemyFilter = null;
-        private readonly EcsFilter<PositionComponent, TowerRadiusComponent> _towerFilter = null;
+
+        private const int EnemyLayerMask = 1 << 9;
+        
+        private readonly EcsFilter<PositionComponent, TrackTargetComponent> _towerFilter = null;
         
         public void Run()
         {
             foreach (var towerIndex in _towerFilter)
             {
-                ref var target = ref _towerFilter.GetEntity(towerIndex).Get<TrackTargetComponent>();
-                
+                ref var target = ref _towerFilter.Get2(towerIndex);
                 ref var tower = ref _towerFilter.Get1(towerIndex);
-                ref var radius = ref _towerFilter.Get2(towerIndex);
-                int enemyIndex = GetClosestEnemy(tower.transform, radius.attackRadius, radius.innerRadius);
+                
+                if (CheckValidTarget(target, tower))
+                {
+                    continue;
+                }
+                
+                var enemy = GetTarget(tower.transform, target.attackRadius, target.innerRadius);
 
-                if (enemyIndex > -1)
-                    target.entity = _enemyFilter.GetEntity(enemyIndex);
+                if (enemy != null && enemy.Value.IsAlive())
+                    target.entity = enemy;
                 else
                     target.entity = null;
             }
@@ -32,9 +43,27 @@ namespace ECS.Systems.Towers
             Physics.SyncTransforms();
         }
 
-        private int GetClosestEnemy(Transform towerPosition, float outerRadius, float innerRadius)
+        private bool CheckValidTarget(TrackTargetComponent target, PositionComponent tower)
         {
-            int closestEnemyIndex = -1;
+            if (target.entity == null || !target.entity.Value.IsAlive())
+            {
+                return false;
+            }
+
+            var targetPosition = target.entity.Value.Get<PositionComponent>();
+            
+            var distance = Vector3.Distance(tower.transform.position, targetPosition.transform.position);
+            if (distance > target.attackRadius || distance < target.innerRadius)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private EcsEntity? GetTarget(Transform towerPosition, float outerRadius, float innerRadius)
+        {
+            var closestEnemyIndex = -1;
             List<int> enemiesInRange = new();
             foreach (var enemyIndex in _enemyFilter)
             {
@@ -46,7 +75,13 @@ namespace ECS.Systems.Towers
                 }
             }
             if (enemiesInRange.Count > 0) closestEnemyIndex = enemiesInRange.Min();
-            return closestEnemyIndex;
+            
+            if (closestEnemyIndex != -1)
+            {
+                return _enemyFilter.GetEntity(closestEnemyIndex);
+            }
+            
+            return null;
         }
     }
 }

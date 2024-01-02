@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Components.Towers
+namespace ECS.Components.Towers
 {
     [Serializable]
     public struct TowerInfoComponent
     {
+        [Header("Build Parameters")]
         public Sprite towerIcon;
         public int towerPrice;
         public Sprite energyIcon;

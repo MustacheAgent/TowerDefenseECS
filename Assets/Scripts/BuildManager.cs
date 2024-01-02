@@ -27,7 +27,7 @@ public class BuildManager : MonoBehaviour
     private void HandleClick()
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit))
+        if (Physics.Raycast(ray, out var hit, float.MaxValue, 1))
         {
             var tile = hit.transform.GetComponent<Tile>();
             if (tile != null && tile.isBuildable)

@@ -21,7 +21,7 @@ namespace Scripts
                 data = gameObject.GetComponentInParent<ConvertToEntity>();
             }
 
-            return data != null ? data.TryGetEntity() : null;
+            return data.TryGetEntity();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Leopotam.Ecs;
 
-namespace Tags
+namespace ECS.Tags
 {
     public struct DestinationTag : IEcsIgnoreInFilter { }
 }

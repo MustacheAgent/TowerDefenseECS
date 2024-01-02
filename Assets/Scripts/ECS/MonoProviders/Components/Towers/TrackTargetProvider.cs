@@ -3,5 +3,5 @@ using Voody.UniLeo;
 
 namespace ECS.MonoProviders.Components.Towers
 {
-    public class LaserTurretProvider : MonoProvider<LaserTurretComponent> { }
+    public class TrackTargetProvider : MonoProvider<TrackTargetComponent> { }
 }

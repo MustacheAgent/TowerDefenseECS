@@ -1,7 +1,7 @@
-﻿using Components.Core;
+﻿using ECS.Components.Core;
 using Voody.UniLeo;
 
-namespace Components.Core
+namespace ECS.MonoProviders.Components.Core
 {
     public class PositionProvider : MonoProvider<PositionComponent> { }
 }

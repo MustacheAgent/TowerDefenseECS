@@ -1,5 +1,6 @@
 ﻿using Components.Core;
 using Components.Factory;
+using ECS.Components.Core;
 using Leopotam.Ecs;
 using Events.Enemies;
 using Factories;
