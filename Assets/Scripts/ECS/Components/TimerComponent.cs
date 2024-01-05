@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Components
+namespace ECS.Components
 {
     public struct TimerComponent
     {

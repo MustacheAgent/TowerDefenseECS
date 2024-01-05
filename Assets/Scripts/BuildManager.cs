@@ -1,8 +1,10 @@
 ﻿using Components.Factory;
+using ECS.Components.Towers;
 using Enums;
 using Events.Enemies;
 using Leopotam.Ecs;
 using Pathfinding;
+using Scripts;
 using Services;
 using UI;
 using UnityEngine;
@@ -48,7 +50,12 @@ public class BuildManager : MonoBehaviour
             Position = _selectedTile.transform.position
         };
         
-        factoryData.factory.CreateObjectAndEntity(spawn);
+        var tower = factoryData.factory.CreateObjectAndEntity(spawn);
+        if (tower.GetEntity().HasValue && tower.GetEntity().Value.Has<TrackTargetComponent>())
+        {
+            tower.GetEntity().Value.Get<TrackTargetComponent>().canAttack = false;
+        }
+        
         _selectedTile.walkable = false;
         _selectedTile.isBuildable = false;
         WorldHandler.GetWorld().NewEntity().Get<FindPathEvent>();

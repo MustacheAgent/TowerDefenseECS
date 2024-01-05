@@ -23,7 +23,7 @@ namespace ECS.Systems.Towers
                 ref var tower = ref _rocketFilter.Get1(towerIndex);
                 fireProgress.progress += tower.attackSpeed * Time.deltaTime;
 
-                ref var enemy = ref _rocketFilter.Get3(towerIndex).entity;
+                ref var enemy = ref _rocketFilter.Get3(towerIndex).Target;
 
                 var fire = false;
                 var enemyPos = Vector3.forward;

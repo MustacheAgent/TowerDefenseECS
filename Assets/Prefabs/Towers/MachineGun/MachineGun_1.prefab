@@ -96,8 +96,9 @@ GameObject:
   - component: {fileID: 8176527349381315057}
   - component: {fileID: 1644624008810108262}
   - component: {fileID: 6020641518448556055}
+  - component: {fileID: -7373034161175290154}
   m_Layer: 0
-  m_Name: MachineGun
+  m_Name: MachineGun_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,6 +179,24 @@ MonoBehaviour:
   value:
     attackRadius: 2
     innerRadius: 0
+    turret: {fileID: 2599395561839759405}
+    rotateSpeed: 250
+--- !u!114 &-7373034161175290154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508133078299604921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f99049c6a54edf883282756085778c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    effectOrigin: {fileID: 0}
+    damage: 5
+    attacksPerSecond: 4
 --- !u!1 &9157199483437496865
 GameObject:
   m_ObjectHideFlags: 0

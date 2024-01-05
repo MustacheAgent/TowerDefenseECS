@@ -6,6 +6,7 @@
         Wall,
         Laser,
         Mortar,
-        Rocket
+        Rocket,
+        MachineGun
     }
 }

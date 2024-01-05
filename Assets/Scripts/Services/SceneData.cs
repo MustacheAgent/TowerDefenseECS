@@ -1,6 +1,4 @@
-﻿using Enums;
-using Factories;
-using Scenarios;
+﻿using Scenarios;
 using System;
 using Dictionaries;
 using UnityEngine;
@@ -11,7 +9,6 @@ namespace Services
     public class SceneData : MonoBehaviour
     {
         public Scenario scenario;
-        public TowerType selectedTower;
         public int currency;
         public int baseHealth;
 

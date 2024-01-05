@@ -2,6 +2,7 @@
 using Components.Enemies;
 using Components.Towers;
 using ECS.Components.Core;
+using ECS.Events.Enemies;
 using ECS.Tags;
 using Events;
 using Events.Enemies;
@@ -52,8 +53,8 @@ namespace ECS.Systems.Towers
                 {
                     _world.NewEntity().Get<DamageEvent>() = new DamageEvent
                     {
-                        entity = _enemyFilter.GetEntity(enemyIndex),
-                        damage = projectile.Damage
+                        Target = _enemyFilter.GetEntity(enemyIndex),
+                        Damage = projectile.Damage
                     };
                 }
             }

@@ -4,11 +4,10 @@ using UnityEngine;
 namespace ECS.Components.Towers
 {
     [Serializable]
-    public struct LaserTurretComponent
+    public struct MachineGunComponent
     {
-        public Transform laser;
-
-        public float damage;
+        public Transform effectOrigin;
+        public int damage;
         public float attacksPerSecond;
     }
 }

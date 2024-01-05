@@ -1,8 +1,8 @@
-﻿using Components;
+﻿using ECS.Components;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Systems.Core
+namespace ECS.Systems.Core
 {
     public class TimerSystem : IEcsRunSystem
     {
@@ -15,11 +15,10 @@ namespace Systems.Core
                 ref var timer = ref _timers.Get1(timerIdx);
                 if (!timer.IsPaused) timer.Current += Time.deltaTime;
 
-                if (timer.Current >= timer.Cooldown)
-                {
-                    timer.Callback.Invoke();
-                    _timers.GetEntity(timerIdx).Destroy();
-                }
+                if (!(timer.Current >= timer.Cooldown)) continue;
+
+                timer.Callback?.Invoke();
+                _timers.GetEntity(timerIdx).Del<TimerComponent>();
             }
         }
     }

@@ -15,8 +15,6 @@ namespace ECS.Systems.Towers
     public class TrackTargetSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PositionComponent, EnemyTag> _enemyFilter = null;
-
-        private const int EnemyLayerMask = 1 << 9;
         
         private readonly EcsFilter<PositionComponent, TrackTargetComponent> _towerFilter = null;
         
@@ -27,30 +25,40 @@ namespace ECS.Systems.Towers
                 ref var target = ref _towerFilter.Get2(towerIndex);
                 ref var tower = ref _towerFilter.Get1(towerIndex);
                 
-                if (CheckValidTarget(target, tower))
+                if (!CheckValidTarget(target, tower))
                 {
-                    continue;
-                }
-                
-                var enemy = GetTarget(tower.transform, target.attackRadius, target.innerRadius);
+                    var newTarget = GetTarget(tower.transform, target.attackRadius, target.innerRadius);
 
-                if (enemy != null && enemy.Value.IsAlive())
-                    target.entity = enemy;
-                else
-                    target.entity = null;
+                    if (newTarget.HasValue && newTarget.Value.IsAlive())
+                        target.Target = newTarget;
+                    else
+                        target.Target = null;
+                    
+                    target.canAttack = false;
+                }
+
+                if (!target.Target.HasValue) continue;
+                
+                var enemy = target.Target.Value.Get<PositionComponent>().transform;
+                var turret = target.turret;
+
+                var rotation = enemy.position - turret.position;
+
+                target.canAttack = CheckFacing(turret, enemy);
+                
+                turret.rotation =
+                    Quaternion.RotateTowards(turret.rotation, Quaternion.LookRotation(rotation), target.rotateSpeed * Time.deltaTime);
             }
-            
-            Physics.SyncTransforms();
         }
 
         private bool CheckValidTarget(TrackTargetComponent target, PositionComponent tower)
         {
-            if (target.entity == null || !target.entity.Value.IsAlive())
+            if (target.Target == null || !target.Target.Value.IsAlive())
             {
                 return false;
             }
 
-            var targetPosition = target.entity.Value.Get<PositionComponent>();
+            var targetPosition = target.Target.Value.Get<PositionComponent>();
             
             var distance = Vector3.Distance(tower.transform.position, targetPosition.transform.position);
             if (distance > target.attackRadius || distance < target.innerRadius)
@@ -74,6 +82,7 @@ namespace ECS.Systems.Towers
                     enemiesInRange.Add(enemyIndex);
                 }
             }
+            
             if (enemiesInRange.Count > 0) closestEnemyIndex = enemiesInRange.Min();
             
             if (closestEnemyIndex != -1)
@@ -82,6 +91,14 @@ namespace ECS.Systems.Towers
             }
             
             return null;
+        }
+
+        private bool CheckFacing(Transform tower, Transform enemy)
+        {
+            var direction = (enemy.position - tower.position).normalized;
+            var dot = Vector3.Dot(direction, tower.forward);
+
+            return dot > 0.9f;
         }
     }
 }

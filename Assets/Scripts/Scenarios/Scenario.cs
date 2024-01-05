@@ -1,5 +1,6 @@
 ﻿using System;
 using Components;
+using ECS.Components;
 using Events.Scenario;
 using Leopotam.Ecs;
 using UnityEngine;

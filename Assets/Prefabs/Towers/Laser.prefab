@@ -304,8 +304,9 @@ GameObject:
   - component: {fileID: 4578710179115681995}
   - component: {fileID: 5554008052064052957}
   - component: {fileID: 2530906151828333301}
-  - component: {fileID: 910557051279097407}
   - component: {fileID: 5029407361063781655}
+  - component: {fileID: -1893324062310732479}
+  - component: {fileID: -1898812250093650729}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -359,24 +360,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     transform: {fileID: 4578710179115681995}
---- !u!114 &910557051279097407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4808321949195822956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f1dc931dfe26c40b13df38221cc628, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    turret: {fileID: 6168981837166751726}
-    laser: {fileID: 7950021165329023040}
-    damage: 2
-    attackSpeed: 1
-    attackRadius: 3
 --- !u!114 &5029407361063781655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,14 +373,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    damage: 2
-    attackSpeed: 1
-    attackRadius: 3
-    innerRadius: 0
     towerIcon: {fileID: 21300000, guid: 53652022b1d444a5c9e9630488e44e13, type: 3}
     towerPrice: 50
     energyIcon: {fileID: 21300000, guid: 10f6c8d03930b4a449f543633892e711, type: 3}
     towerName: Laser
+--- !u!114 &-1893324062310732479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808321949195822956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75debe02dd2a4f1b8fb90b7d904911fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    attackRadius: 2
+    innerRadius: 0
+    turret: {fileID: 6168981837166751726}
+    rotateSpeed: 360
+--- !u!114 &-1898812250093650729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808321949195822956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f1dc931dfe26c40b13df38221cc628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    laser: {fileID: 7950021165329023040}
+    damage: 5
+    attacksPerSecond: 4
 --- !u!1 &7226352533017766791
 GameObject:
   m_ObjectHideFlags: 0

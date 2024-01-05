@@ -1,10 +1,10 @@
 ﻿using Leopotam.Ecs;
 
-namespace Events.Enemies
+namespace ECS.Events.Enemies
 {
     public struct DamageEvent
     {
-        public EcsEntity entity;
-        public float damage;
+        public EcsEntity Target;
+        public float Damage;
     }
 }
