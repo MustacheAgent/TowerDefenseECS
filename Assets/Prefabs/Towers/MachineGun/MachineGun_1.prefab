@@ -180,7 +180,8 @@ MonoBehaviour:
     attackRadius: 2
     innerRadius: 0
     turret: {fileID: 2599395561839759405}
-    rotateSpeed: 250
+    rotateSpeed: 360
+    canAttack: 0
 --- !u!114 &-7373034161175290154
 MonoBehaviour:
   m_ObjectHideFlags: 0

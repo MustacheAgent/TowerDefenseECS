@@ -6,8 +6,12 @@ namespace ECS.Components.Towers
     [Serializable]
     public struct MachineGunComponent
     {
-        public Transform effectOrigin;
+        [Header("Parameters")]
         public int damage;
         public float attacksPerSecond;
+        
+        [Header("VFX")]
+        public Transform effectOrigin;
+        public ParticleSystem bulletTrail;
     }
 }
