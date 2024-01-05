@@ -16,11 +16,11 @@ namespace ECS.Systems.Towers
                 ref var tower = ref _machineGunFilter.GetEntity(towerIndex);
                 ref var target = ref tower.Get<TrackTargetComponent>();
                 
-                if (target.Target == null || tower.Has<TimerComponent>())
+                if (!target.Target.HasValue || tower.Has<TimerComponent>() || !target.canAttack)
                 {
                     continue;
                 }
-
+                
                 ref var towerInfo = ref tower.Get<MachineGunComponent>();
                 var damage = towerInfo.damage;
                 var attackSpeed = towerInfo.attacksPerSecond;
@@ -31,7 +31,7 @@ namespace ECS.Systems.Towers
                     Damage = damage
                 };
 
-                tower.Get<TimerComponent>() = new TimerComponent()
+                tower.Get<TimerComponent>() = new TimerComponent
                 {
                     Cooldown = 1 / attackSpeed
                 };

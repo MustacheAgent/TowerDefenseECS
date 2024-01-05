@@ -49,7 +49,7 @@ namespace ECS.Systems.Core
                     break;
                 }
                 
-                ShowPath();
+                HidePath();
             }
         }
 

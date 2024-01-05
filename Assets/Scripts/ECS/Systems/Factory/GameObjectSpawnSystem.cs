@@ -1,5 +1,4 @@
-﻿using Components.Factory;
-using Factories;
+﻿using Factories;
 using Leopotam.Ecs;
 using Services;
 using UnityEngine;

@@ -1,4 +1,5 @@
 ﻿using System;
+using ECS.Events.Enemies;
 using Enums;
 using Events.Enemies;
 using Events.Scenario;
@@ -27,7 +28,7 @@ namespace Scenarios
         {
             WorldHandler.GetWorld().NewEntity().Get<SpawnEnemyEvent>() = new SpawnEnemyEvent
             {
-                type = type
+                Type = type
             };
         }
 
@@ -45,7 +46,7 @@ namespace Scenarios
                 // создать противника
                 WorldHandler.GetWorld().NewEntity().Get<SpawnEnemyEvent>() = new SpawnEnemyEvent
                 {
-                    type = type
+                    Type = type
                 };
             }
             return -1f;

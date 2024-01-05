@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Components.Towers
+namespace ECS.Components.Towers.Rocket
 {
     public struct RocketComponent
     {

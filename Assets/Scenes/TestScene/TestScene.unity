@@ -1490,14 +1490,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenario: {fileID: 11400000, guid: eb52b6d12d3ff8347b42f38031bd78d0, type: 2}
-  selectedTower: 0
   currency: 500
   baseHealth: 5
   towerDictionary:
-    m_keys: 0500000002000000
+    m_keys: 050000000200000004000000
     m_values:
     - {fileID: 8508133078299604921, guid: 51a20d4c407c76d468b5c6716e69b21d, type: 3}
     - {fileID: 4808321949195822956, guid: 6c516b66c4e93dd48bfbe4502354ac9c, type: 3}
+    - {fileID: 532509460035736700, guid: 9b37a66763b173c4dadc9861d1b7002d, type: 3}
 --- !u!4 &455675496
 Transform:
   m_ObjectHideFlags: 0

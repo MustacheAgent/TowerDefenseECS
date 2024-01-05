@@ -20,13 +20,7 @@ namespace ECS.Systems.Towers
                 ref var target = ref tower.Get<TrackTargetComponent>();
                 ref var towerInfo = ref tower.Get<LaserTurretComponent>();
 
-                if (target.Target == null)
-                { 
-                    towerInfo.laser.localScale = Vector3.zero;
-                    continue;
-                }
-
-                if (target.canAttack)
+                if (target.canAttack || target.Target.HasValue)
                 {
                     LaserBeam(towerInfo, target.Target.Value, target.turret);
                 

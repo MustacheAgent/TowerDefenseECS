@@ -1,14 +1,15 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Components.Factory
+namespace ECS.Components.Factory
 {
     [Serializable]
     public struct SpawnPrefabComponent
     {
-        public GameObject Prefab;
-        public Vector3 Position;
-        public Quaternion Rotation;
-        public Transform Parent;
+        public GameObject prefab;
+        public Vector3 position;
+        public Quaternion rotation;
+        public Transform parent;
     }
 }

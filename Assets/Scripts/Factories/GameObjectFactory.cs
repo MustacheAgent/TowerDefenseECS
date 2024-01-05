@@ -1,4 +1,4 @@
-﻿using Components.Factory;
+﻿using ECS.Components.Factory;
 using Leopotam.Ecs;
 using UnityEngine;
 using Voody.UniLeo;
@@ -18,7 +18,7 @@ namespace Factories
         
         public GameObject CreateObject(SpawnPrefabComponent spawnInfo)
         {
-            return Instantiate(spawnInfo.Prefab, spawnInfo.Position, spawnInfo.Rotation, spawnInfo.Parent);
+            return Instantiate(spawnInfo.prefab, spawnInfo.position, spawnInfo.rotation, spawnInfo.parent);
         }
 
         public void Destroy(GameObject destroyObject)

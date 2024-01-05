@@ -2,9 +2,9 @@
 using System.Linq;
 using Components.Core;
 using Components.Enemies;
-using Components.Factory;
 using Components.Towers;
 using ECS.Components.Core;
+using ECS.Components.Factory;
 using ECS.Components.Towers;
 using ECS.Tags;
 using Leopotam.Ecs;
@@ -106,10 +106,10 @@ namespace ECS.Systems.Towers
             var projectile = _world.NewEntity();
             projectile.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
              {
-                 Prefab = _staticData.mortarShellPrefab,
-                 Position = track.launchPoint,
-                 Rotation = tower.turret.localRotation,
-                 Parent = null
+                 prefab = _staticData.mortarShellPrefab,
+                 position = track.launchPoint,
+                 rotation = tower.turret.localRotation,
+                 parent = null
              };
 
             projectile.Get<MortarShellComponent>() = new MortarShellComponent

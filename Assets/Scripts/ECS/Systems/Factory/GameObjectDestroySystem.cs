@@ -1,11 +1,10 @@
-﻿using Components.Core;
-using ECS.Components.Core;
+﻿using ECS.Components.Core;
 using Events;
 using Factories;
 using Leopotam.Ecs;
 using Services;
 
-namespace Systems.Factory
+namespace ECS.Systems.Factory
 {
     public class GameObjectDestroySystem : IEcsPreInitSystem, IEcsRunSystem
     {
@@ -13,8 +12,7 @@ namespace Systems.Factory
 
         private GameObjectFactory _factory;
 
-        //private EcsFilter<DestroyPrefabComponent> _destroyFilter = null;
-        readonly EcsFilter<GameObjectComponent, DestroyEvent> _destroyFilter = null;
+        private readonly EcsFilter<GameObjectComponent, DestroyEvent> _destroyFilter = null;
 
         public void PreInit()
         {
@@ -23,14 +21,11 @@ namespace Systems.Factory
 
         public void Run()
         {
-            if (!_destroyFilter.IsEmpty())
+            foreach (var index in _destroyFilter)
             {
-                foreach (int index in _destroyFilter)
-                {
-                    ref var destroyObject = ref _destroyFilter.Get1(index).gameObject;
-                    _factory.Destroy(destroyObject);
-                    _destroyFilter.GetEntity(index).Destroy();
-                }
+                ref var destroyObject = ref _destroyFilter.Get1(index).gameObject;
+                _factory.Destroy(destroyObject);
+                _destroyFilter.GetEntity(index).Destroy();
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using Components.Factory;
+﻿using ECS.Components.Factory;
 using ECS.Components.Towers;
 using Enums;
 using Events.Enemies;
@@ -44,10 +44,10 @@ public class BuildManager : MonoBehaviour
     {
         var spawn = new SpawnPrefabComponent
         {
-            Prefab = sceneData.towerDictionary[type],
-            Parent = null,
-            Rotation = Quaternion.identity,
-            Position = _selectedTile.transform.position
+            prefab = sceneData.towerDictionary[type],
+            parent = null,
+            rotation = Quaternion.identity,
+            position = _selectedTile.transform.position
         };
         
         var tower = factoryData.factory.CreateObjectAndEntity(spawn);

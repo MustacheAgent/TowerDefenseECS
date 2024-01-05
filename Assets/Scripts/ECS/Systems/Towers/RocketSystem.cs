@@ -1,13 +1,9 @@
-﻿using Components.Core;
-using Components.Enemies;
-using Components.Towers;
+﻿using Components.Enemies;
 using ECS.Components.Core;
+using ECS.Components.Towers.Rocket;
 using ECS.Events.Enemies;
-using ECS.Tags;
 using Events;
-using Events.Enemies;
 using Leopotam.Ecs;
-using Tags;
 using UnityEngine;
 
 namespace ECS.Systems.Towers
@@ -15,8 +11,7 @@ namespace ECS.Systems.Towers
     public class RocketSystem : IEcsRunSystem
     {
         private readonly EcsFilter<PositionComponent, RocketComponent> _rocketFilter = null;
-        private readonly EcsFilter<PositionComponent, HealthComponent, EnemyTag> _enemyFilter = null;
-        private EcsWorld _world = null;
+        private readonly EcsFilter<PositionComponent, HealthComponent> _enemyFilter = null;
         
         public void Run()
         {
@@ -49,14 +44,14 @@ namespace ECS.Systems.Towers
                 ref var projectile = ref _rocketFilter.Get2(index);
 
                 var distance = Vector3.Distance(transform.position, enemyPosition.position);
-                if (distance < projectile.ExplosionRadius)
+                
+                if (!(distance < projectile.ExplosionRadius)) continue;
+                var hit = _enemyFilter.GetEntity(enemyIndex);
+                hit.Get<DamageEvent>() = new DamageEvent
                 {
-                    _world.NewEntity().Get<DamageEvent>() = new DamageEvent
-                    {
-                        Target = _enemyFilter.GetEntity(enemyIndex),
-                        Damage = projectile.Damage
-                    };
-                }
+                    Target = hit,
+                    Damage = projectile.Damage
+                };
             }
         }
     }

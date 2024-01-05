@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Components.Factory
+namespace ECS.Components.Factory
 {
     public struct DestroyPrefabComponent
     {
-        public GameObject gameObject;
+        public GameObject GameObject;
     }
 }

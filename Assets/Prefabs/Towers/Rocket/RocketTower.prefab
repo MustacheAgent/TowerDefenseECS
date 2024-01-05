@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7947457165370769288}
   - component: {fileID: 4787338679044698867}
   - component: {fileID: 5217454702029098531}
-  - component: {fileID: -2381963115688907443}
   m_Layer: 0
   m_Name: RocketTower
   m_TagString: Untagged
@@ -97,11 +96,9 @@ MonoBehaviour:
   value:
     damage: 30
     explosionRadius: 2
-    attackSpeed: 0.5
-    rotationSpeed: 5
+    attacksPerSecond: 1
     rocketVelocity: 10
     projectilePoint: {fileID: 1520003738122706623}
-    turret: {fileID: 2158764151078356471}
 --- !u!114 &5217454702029098531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,20 +112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    attackRadius: 4
-    innerRadius: 1
---- !u!114 &-2381963115688907443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532509460035736700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8dfb506c9071b04b98db18f0d1baeee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+    attackRadius: 3
+    innerRadius: 2
+    turret: {fileID: 2158764151078356471}
+    rotateSpeed: 360
+    canAttack: 0
 --- !u!1 &2097931642941130371
 GameObject:
   m_ObjectHideFlags: 0

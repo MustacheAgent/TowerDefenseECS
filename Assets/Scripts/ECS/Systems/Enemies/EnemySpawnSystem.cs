@@ -1,15 +1,14 @@
-﻿using Components.Core;
-using Components.Factory;
-using ECS.Components.Core;
-using Leopotam.Ecs;
+﻿using ECS.Components.Core;
+using ECS.Components.Factory;
+using ECS.Events.Enemies;
 using Events.Enemies;
 using Factories;
+using Leopotam.Ecs;
 using Scripts;
-using UnityEngine;
 using Services;
-using Voody.UniLeo;
+using UnityEngine;
 
-namespace Systems.Enemies
+namespace ECS.Systems.Enemies
 {
     public class EnemySpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
@@ -39,15 +38,15 @@ namespace Systems.Enemies
                     //spawnPosition.y += 0.2f;
                     var spawn = new SpawnPrefabComponent
                     {
-                        Prefab = _staticData.enemiesDictionary[spawnEvent.type],
-                        Position = spawnPosition,
-                        Rotation = Quaternion.identity,
-                        Parent = null
+                        prefab = _staticData.enemiesDictionary[spawnEvent.Type],
+                        position = spawnPosition,
+                        rotation = Quaternion.identity,
+                        parent = null
                     };
 
                     var enemy = _factory.CreateObjectAndEntity(spawn);
                     var enemyEntity = enemy.GetEntity();
-                    if (enemyEntity != null)
+                    if (enemyEntity.HasValue)
                         enemyEntity.Value.Get<MoveComponent>().nextTile = tile;
                 }
 

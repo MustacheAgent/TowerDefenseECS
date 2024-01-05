@@ -1,9 +1,9 @@
 ﻿using Enums;
 
-namespace Events.Enemies
+namespace ECS.Events.Enemies
 {
     public struct SpawnEnemyEvent
     {
-        public EnemyType type;
+        public EnemyType Type;
     }
 }

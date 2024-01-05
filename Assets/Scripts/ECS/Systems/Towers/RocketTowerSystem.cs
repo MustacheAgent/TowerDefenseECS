@@ -1,81 +1,76 @@
-﻿using Components.Factory;
-using Components.Towers;
-using ECS.Components.Enemies;
+﻿using ECS.Components;
+using ECS.Components.Core;
+using ECS.Components.Factory;
 using ECS.Components.Towers;
+using ECS.Components.Towers.Rocket;
+using Factories;
 using Leopotam.Ecs;
+using Scripts;
 using Services;
 using UnityEngine;
 
 namespace ECS.Systems.Towers
 {
-    public class RocketTowerSystem : IEcsRunSystem
+    public class RocketTowerSystem : IEcsInitSystem, IEcsRunSystem
     {
-        readonly EcsWorld _world = null;
-        readonly FactoryData _staticData = null;
+        private readonly FactoryData _factoryData = null;
+        private GameObjectFactory _factory;
 
-        private readonly EcsFilter<RocketTowerComponent, FireProgressComponent, TrackTargetComponent> _rocketFilter = null;
+        private readonly EcsFilter<RocketTowerComponent, TrackTargetComponent> _rocketTowerFilter = null;
+        
+        public void Init()
+        {
+            _factory = _factoryData.factory;
+        }
         
         public void Run()
         {
-            foreach (var towerIndex in _rocketFilter)
+            foreach (var towerIndex in _rocketTowerFilter)
             {
-                ref var fireProgress = ref _rocketFilter.Get2(towerIndex);
-                ref var tower = ref _rocketFilter.Get1(towerIndex);
-                fireProgress.progress += tower.attackSpeed * Time.deltaTime;
-
-                ref var enemy = ref _rocketFilter.Get3(towerIndex).Target;
-
-                var fire = false;
-                var enemyPos = Vector3.forward;
-                if (enemy.HasValue && enemy.Value.IsAlive())
+                ref var tower = ref _rocketTowerFilter.GetEntity(towerIndex);
+                ref var target = ref tower.Get<TrackTargetComponent>();
+                
+                if (!target.Target.HasValue || tower.Has<TimerComponent>() || !target.canAttack)
                 {
-                    enemyPos = enemy.Value.Get<TargetComponent>().target.position;
-                    fire = true;
+                    continue;
                 }
                 
-                TrackTarget(tower, enemyPos);
-                while (fireProgress.progress >= 1f)
+                ref var towerInfo = ref tower.Get<RocketTowerComponent>();
+                var attackSpeed = towerInfo.attacksPerSecond;
+                
+                Shoot(towerInfo, target.Target.Value.Get<PositionComponent>().transform.position);
+                
+                tower.Get<TimerComponent>() = new TimerComponent
                 {
-                    if (fireProgress.progress >= 1f && fire)
-                    {
-                        Shoot(tower, enemyPos);
-                        fireProgress.progress -= 1f;
-                    }
-                    else
-                    {
-                        fireProgress.progress = 0.999f;
-                    }
-                }
+                    Cooldown = 1 / attackSpeed
+                };
             }
-        }
-
-        private void TrackTarget(RocketTowerComponent tower, Vector3 enemyPos)
-        {
-            Vector3 relativePos = enemyPos - tower.turret.position;
-            Quaternion relativeRot = Quaternion.LookRotation(relativePos);
-            Quaternion turretRotation = tower.turret.rotation;
-            tower.turret.rotation = Quaternion.Lerp(turretRotation, relativeRot, tower.rotationSpeed * Time.deltaTime);
         }
 
         private void Shoot(RocketTowerComponent tower, Vector3 enemyPos)
         {
-            var rocket = _world.NewEntity();
+            var spawn = new SpawnPrefabComponent
+            {
+                prefab = _factoryData.rocketPrefab,
+                position = tower.projectilePoint.position,
+                rotation = tower.projectilePoint.rotation,
+                parent = null
+            };
 
-            rocket.Get<SpawnPrefabComponent>() = new SpawnPrefabComponent
+            var rocket = _factory.CreateObjectAndEntity(spawn);
+
+            var entity = rocket.GetEntity();
+            if (entity.HasValue)
             {
-                Prefab = _staticData.rocketPrefab,
-                Position = tower.projectilePoint.position,
-                Rotation = tower.projectilePoint.rotation,
-                Parent = null
-            };
-            rocket.Get<RocketComponent>() = new RocketComponent()
-            {
-                Damage = tower.damage,
-                ExplosionRadius = tower.explosionRadius,
-                Velocity = tower.rocketVelocity,
-                LaunchPoint = tower.projectilePoint.position,
-                TargetPoint = enemyPos
-            };
+                entity.Value.Get<RocketComponent>() = new RocketComponent
+                {
+                    Damage = tower.damage,
+                    ExplosionRadius = tower.explosionRadius,
+                    Velocity = tower.rocketVelocity,
+                    LaunchPoint = tower.projectilePoint.position,
+                    TargetPoint = enemyPos
+                };
+            }
         }
     }
 }
