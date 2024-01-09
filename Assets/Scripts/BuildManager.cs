@@ -53,7 +53,7 @@ public class BuildManager : MonoBehaviour
         var tower = factoryData.factory.CreateObjectAndEntity(spawn);
         if (tower.GetEntity().HasValue && tower.GetEntity().Value.Has<TrackTargetComponent>())
         {
-            tower.GetEntity().Value.Get<TrackTargetComponent>().canAttack = false;
+            //tower.GetEntity().Value.Get<TrackTargetComponent>().canAttack = false;
         }
         
         _selectedTile.walkable = false;

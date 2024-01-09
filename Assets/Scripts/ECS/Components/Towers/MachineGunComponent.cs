@@ -1,4 +1,5 @@
 ﻿using System;
+using Effects;
 using UnityEngine;
 
 namespace ECS.Components.Towers
@@ -12,6 +13,6 @@ namespace ECS.Components.Towers
         
         [Header("VFX")]
         public Transform effectOrigin;
-        public ParticleSystem bulletTrail;
+        public GameObject bulletTrail;
     }
 }

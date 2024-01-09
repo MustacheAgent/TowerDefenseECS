@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Components.Core;
-using Components.Towers;
 using ECS.Components.Core;
 using ECS.Components.Towers;
 using ECS.Tags;
 using Leopotam.Ecs;
-using Scripts;
-using Tags;
 using UnityEngine;
 
 namespace ECS.Systems.Towers
@@ -28,26 +24,13 @@ namespace ECS.Systems.Towers
                 if (!CheckValidTarget(target, tower))
                 {
                     var newTarget = GetTarget(tower.transform, target.attackRadius, target.innerRadius);
-
-                    if (newTarget.HasValue && newTarget.Value.IsAlive())
-                        target.Target = newTarget;
-                    else
-                        target.Target = null;
-                    
-                    target.canAttack = false;
+                    target.Target = newTarget;
                 }
 
                 if (!target.Target.HasValue) continue;
-                
-                var enemy = target.Target.Value.Get<PositionComponent>().transform;
-                var turret = target.turret;
 
-                var rotation = enemy.position - turret.position;
-
-                target.canAttack = CheckFacing(turret, enemy);
-                
-                turret.rotation =
-                    Quaternion.RotateTowards(turret.rotation, Quaternion.LookRotation(rotation), target.rotateSpeed * Time.deltaTime);
+                target.canAttack = CheckFacing(target.turret, target.Target.Value.Get<PositionComponent>().transform);
+                RotateTurret(target);
             }
         }
 
@@ -55,6 +38,7 @@ namespace ECS.Systems.Towers
         {
             if (target.Target == null || !target.Target.Value.IsAlive())
             {
+                target.canAttack = false;
                 return false;
             }
 
@@ -67,6 +51,15 @@ namespace ECS.Systems.Towers
             }
 
             return true;
+        }
+        
+        private bool CheckFacing(Transform turret, Transform enemy)
+        {
+            var direction = (enemy.position - turret.position).normalized;
+            var dot = Vector3.Dot(direction, turret.forward);
+            //Debug.Log("dot value is: " + dot);
+
+            return dot > 0.9f;
         }
 
         private EcsEntity? GetTarget(Transform towerPosition, float outerRadius, float innerRadius)
@@ -93,12 +86,19 @@ namespace ECS.Systems.Towers
             return null;
         }
 
-        private bool CheckFacing(Transform tower, Transform enemy)
+        private void RotateTurret(TrackTargetComponent target)
         {
-            var direction = (enemy.position - tower.position).normalized;
-            var dot = Vector3.Dot(direction, tower.forward);
+            if (target.turret == null) return;
+            
+            var enemy = target.Target.Value.Get<PositionComponent>().transform;
+            var turret = target.turret;
 
-            return dot > 0.9f;
+            var rotation = enemy.position - turret.position;
+            
+            turret.rotation = Quaternion.RotateTowards(
+                    turret.rotation, 
+                    Quaternion.LookRotation(rotation), 
+                    target.rotateSpeed * Time.deltaTime);
         }
     }
 }

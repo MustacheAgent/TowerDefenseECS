@@ -83,6 +83,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6380341041813181178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90853671510293776}
+  m_Layer: 0
+  m_Name: Effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &90853671510293776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380341041813181178}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.14418179, z: 1.1727272}
+  m_LocalScale: {x: 1.8181818, y: 1.8181818, z: 1.8181818}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2599395561839759405}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8508133078299604921
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    attackRadius: 2
+    attackRadius: 4
     innerRadius: 0
     turret: {fileID: 2599395561839759405}
     rotateSpeed: 360
@@ -195,9 +226,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    effectOrigin: {fileID: 0}
     damage: 5
     attacksPerSecond: 4
+    effectOrigin: {fileID: 90853671510293776}
+    bulletTrail: {fileID: 2628862326924411133, guid: d4d7f5e64907d844e98fad9d385e8a29,
+      type: 3}
 --- !u!1 &9157199483437496865
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +294,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.177, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 90853671510293776}
   m_Father: {fileID: 3882616880432266182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8529551589556440474
