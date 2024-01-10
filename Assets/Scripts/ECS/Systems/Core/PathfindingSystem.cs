@@ -42,7 +42,7 @@ namespace ECS.Systems.Core
 
                 foreach (var tile in _tiles)
                 {
-                    if (tile.HasPath) continue;
+                    if (tile.hasPath) continue;
                     
                     ResetPath();
                     _bfs.FindPath(_gridData.destinationTiles, true);

@@ -7,7 +7,6 @@ namespace Pathfinding
         public Transform arrow;
         
         [Header("Breadth-First Search")]
-        [HideInInspector] public bool processed;
         [HideInInspector] public bool alternative;
         public TileType type = TileType.Tile;
 
@@ -15,9 +14,9 @@ namespace Pathfinding
         public bool walkable = true;
         public bool isBuildable = true;
         
-        public Tile north, west, east, south, next;
-        public int distance;
-        public bool HasPath => distance != int.MaxValue;
+        [HideInInspector] public Tile north, west, east, south, next;
+        [HideInInspector] public int distance;
+        public bool hasPath => distance != int.MaxValue;
 
         private void Awake()
         {
@@ -31,7 +30,6 @@ namespace Pathfinding
         {
             next = null;
             distance = type == TileType.Destination ? 0 : int.MaxValue;
-            processed = false;
         }
 
         private void GetNeighbors()

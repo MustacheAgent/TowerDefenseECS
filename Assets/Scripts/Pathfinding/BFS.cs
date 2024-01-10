@@ -44,7 +44,7 @@ namespace Pathfinding
 
         private Tile GrowPathTo(Tile tile, Tile neighbor, bool ignoreWalkable)
         {
-            if (!tile.HasPath || neighbor == null || neighbor.HasPath)
+            if (!tile.hasPath || neighbor == null || neighbor.hasPath)
                 return null;
             
             neighbor.distance = tile.distance + 1;
