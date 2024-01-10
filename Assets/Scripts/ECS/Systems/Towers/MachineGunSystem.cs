@@ -45,7 +45,7 @@ namespace ECS.Systems.Towers
                     Damage = damage
                 };
                 
-                SpawnTrail(towerInfo.bulletTrail, towerInfo.effectOrigin, target.Target.Value.Get<PositionComponent>().transform);
+                ShootVFX(towerInfo, target);
 
                 tower.Get<TimerComponent>() = new TimerComponent
                 {
@@ -54,6 +54,12 @@ namespace ECS.Systems.Towers
             }
         }
 
+        private void ShootVFX(MachineGunComponent towerInfo, TrackTargetComponent target)
+        {
+            towerInfo.muzzleFlash.Play();
+            SpawnTrail(towerInfo.bulletTrail, towerInfo.effectOrigin, target.Target.Value.Get<PositionComponent>().transform);
+        }
+        
         private void SpawnTrail(GameObject trail, Transform start, Transform end)
         {
             var spawn = new SpawnPrefabComponent

@@ -14,5 +14,6 @@ namespace ECS.Components.Towers
         [Header("VFX")]
         public Transform effectOrigin;
         public GameObject bulletTrail;
+        public ParticleSystem muzzleFlash;
     }
 }
