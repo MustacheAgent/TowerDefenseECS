@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     damage: 5
-    attacksPerSecond: 4
+    attacksPerSecond: 10
     effectOrigin: {fileID: 90853671510293776}
     bulletTrail: {fileID: 2628862326924411133, guid: d4d7f5e64907d844e98fad9d385e8a29,
       type: 3}
