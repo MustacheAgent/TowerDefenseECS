@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657832, g: 0.49641526, b: 0.5748154, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657862, g: 0.49641532, b: 0.57481533, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1490,8 +1490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenario: {fileID: 11400000, guid: eb52b6d12d3ff8347b42f38031bd78d0, type: 2}
-  currency: 500
-  baseHealth: 5
+  currency: 300
+  baseHealth: 100
   towerDictionary:
     m_keys: 050000000200000004000000
     m_values:
