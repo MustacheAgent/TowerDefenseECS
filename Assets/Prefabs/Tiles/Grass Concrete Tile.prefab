@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db7dec2e8036d746bd001651cf93582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 0}
+  arrow: {fileID: 832971241810771665}
   alternative: 0
   type: 0
   walkable: 1

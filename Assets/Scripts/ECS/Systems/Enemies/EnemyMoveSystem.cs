@@ -1,17 +1,15 @@
-using Components.Core;
 using ECS.Components.Core;
 using ECS.Tags;
 using Events;
 using Events.Enemies;
 using Leopotam.Ecs;
-using Tags;
 using UnityEngine;
 
-namespace Systems.Enemies
+namespace ECS.Systems.Enemies
 {
     public class EnemyMoveSystem : IEcsRunSystem 
     {
-        private readonly EcsFilter<PositionComponent, MoveComponent, EnemyTag> _enemyFilter = null;
+        private readonly EcsFilter<PositionComponent, MoveComponent> _enemyFilter = null;
 
         public void Run()
         {

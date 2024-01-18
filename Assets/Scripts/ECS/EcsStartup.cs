@@ -6,7 +6,6 @@ using Events;
 using Leopotam.Ecs;
 using Services;
 using Systems.Core;
-using Systems.Enemies;
 using Systems.Factory;
 using Systems.UI;
 using UnityEngine;

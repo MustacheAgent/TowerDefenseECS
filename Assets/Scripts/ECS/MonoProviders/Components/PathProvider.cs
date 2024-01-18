@@ -1,7 +1,7 @@
 ﻿using Components;
 using Voody.UniLeo;
 
-namespace MonoProviders.Components
+namespace ECS.MonoProviders.Components
 {
     public class PathProvider : MonoProvider<PathComponent> { }
 }

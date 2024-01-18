@@ -1,4 +1,5 @@
-﻿using Events.Enemies;
+﻿using System.Linq;
+using Events.Enemies;
 using Leopotam.Ecs;
 using Pathfinding;
 using Services;
@@ -10,6 +11,7 @@ namespace ECS.Systems.Core
     {
         private BreadthFirstSearch _bfs;
         private Tile[] _tiles;
+        private Tile[] _destinations;
         
         private readonly EcsWorld _world = null;
 

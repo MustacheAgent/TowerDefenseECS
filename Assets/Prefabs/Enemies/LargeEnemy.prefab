@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3071280697027819602}
   - component: {fileID: 6555146262029277057}
   - component: {fileID: 5245776890531141781}
-  - component: {fileID: 5969444023658338722}
+  - component: {fileID: 1411054609655167785}
   m_Layer: 0
   m_Name: LargeEnemy
   m_TagString: Untagged
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    health: 25
+    health: 45
 --- !u!114 &6555146262029277057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
     killPrice: 40
---- !u!114 &5969444023658338722
+--- !u!114 &1411054609655167785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,8 +179,8 @@ Transform:
   m_GameObject: {fileID: 3486611540155686586}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 511735966249641644}
